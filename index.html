@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kensington | Executive CX & Business Opportunity Analysis</title>
+  <!-- Google Fonts: Piazzolla & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,600;0,8..30,700;1,8..30,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --dark-moss: #001705;
+      --soft-grey: #F3F1E5;
+      --hot-green: #4CE467;
+      --summer-yellow: #FFC844;
+      --lavender: #766DFA;
+      --white: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --border-subtle: #E2DFD2;
+      --text-muted: #536357;
+      --danger: #FF5A5F;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--soft-grey);
+      color: var(--dark-moss);
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+      padding: 32px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .report-wrapper {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* Header & Branding */
+    header {
+      background: var(--dark-moss);
+      color: var(--white);
+      padding: 28px 32px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 23, 5, 0.12);
+    }
+
+    .header-titles h1 {
+      font-family: 'Piazzolla', serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .header-titles p {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--border-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .badge-scope {
+      background: rgba(76, 228, 103, 0.15);
+      border: 1px solid var(--hot-green);
+      color: var(--hot-green);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Section Headings */
+    h2.section-title {
+      font-family: 'Piazzolla', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark-moss);
+      margin: 28px 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2.section-title::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 18px;
+      background: var(--lavender);
+      border-radius: 4px;
+    }
+
+    .sub-heading {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* KPI Summary Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--white);
+      border: 1px solid var(--border-subtle);
+      padding: 18px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--lavender);
+    }
+
+    .kpi-card.green::after { background: var(--hot-green); }
+    .kpi-card.yellow::after { background: var(--summer-yellow); }
+    .kpi-card.moss::after { background: var(--dark-moss); }
+
+    .kpi-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .kpi-value {
+      font-family: 'Piazzolla', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--dark-moss);
+      line-height: 1.1;
+    }
+
+    .kpi-subtext {
+      font-size: 11px;
+      margin-top: 6px;
+      color: var(--text-muted);
+    }
+
+    /* Charts Row */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .chart-container {
+      background: var(--white);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .chart-title {
+      font-family: 'Piazzolla', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark-moss);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 220px;
+      width: 100%;
+    }
+
+    /* Comparison Tables */
+    .table-container {
+      background: var(--white);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    thead th {
+      background-color: var(--dark-moss);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      padding: 12px 16px;
+      border: none;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color 0.15s ease;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(243, 241, 229, 0.5);
+    }
+
+    td {
+      padding: 12px 16px;
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .pill-green { background: #E3FBE7; color: #0C6B22; }
+    .pill-yellow { background: #FEF7DE; color: #8A6400; }
+    .pill-red { background: #FDE8E8; color: #9B1C1C; }
+    .pill-lavender { background: #EDEBFD; color: #4338CA; }
+
+    /* Visual Grid: Red & Green Flags */
+    .signals-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .signal-card {
+      background: var(--white);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .signal-card.red-flag {
+      border-top: 4px solid var(--danger);
+    }
+
+    .signal-card.green-flag {
+      border-top: 4px solid var(--hot-green);
+    }
+
+    .signal-item {
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border-subtle);
+    }
+
+    .signal-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .signal-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .signal-item-title {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--dark-moss);
+    }
+
+    .verbatim-quote {
+      font-style: italic;
+      background: var(--soft-grey);
+      padding: 8px 12px;
+      border-left: 3px solid var(--lavender);
+      border-radius: 0 6px 6px 0;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--dark-moss);
+    }
+
+    /* EPOS Callout Container */
+    .epos-banner {
+      background: #FFFFFF;
+      border: 1px solid var(--lavender);
+      border-left: 6px solid var(--lavender);
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1.5fr 2fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .epos-stat-cluster {
+      display: flex;
+      gap: 20px;
+    }
+
+    .epos-stat-item h4 {
+      font-family: 'Piazzolla', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark-moss);
+    }
+
+    .epos-stat-item p {
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="report-wrapper">
+    <!-- Header -->
+    <header>
+      <div class="header-titles">
+        <p>InTouch Strategic Performance Intelligence</p>
+        <h1>Kensington CX & Business Opportunity Analysis</h1>
+        <p>Audit Period: October 26–31, 2026 &bull; Verified Contact Dataset</p>
+      </div>
+      <div>
+        <span class="badge-scope">Audited Conversations: 93 (Core) + 17 (EPOS)</span>
+      </div>
+    </header>
+
+    <!-- Top KPI Grid -->
+    <div class="kpi-grid">
+      <div class="kpi-card green">
+        <div class="kpi-label">Chat CSAT (Peak Channel)</div>
+        <div class="kpi-value">60.7%</div>
+        <div class="kpi-subtext">57.1% Resolution Rate driven by SKU upgrades</div>
+      </div>
+      <div class="kpi-card moss">
+        <div class="kpi-label">Voice Volume Share</div>
+        <div class="kpi-value">80.6%</div>
+        <div class="kpi-subtext">75 of 93 Interactions | 50.9% CSAT</div>
+      </div>
+      <div class="kpi-card yellow">
+        <div class="kpi-label">Strategic Opportunity Volume</div>
+        <div class="kpi-value">19.4%</div>
+        <div class="kpi-subtext">18+ Core interactions addressing key operational gaps</div>
+      </div>
+      <div class="kpi-card" style="border-top-color: var(--danger);">
+        <div class="kpi-label">Email First-Contact Resolution</div>
+        <div class="kpi-value">0.0%</div>
+        <div class="kpi-subtext">27.5% CSAT due to RMA backorders & auto-closure</div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-row">
+      <!-- Volume Distribution Donut -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div class="chart-title">Core Channel Volume Distribution</div>
+          <span class="pill pill-lavender">93 Total</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="volumeChart"></canvas>
+        </div>
+      </div>
+
+      <!-- CX Performance by Channel Bar Chart -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div class="chart-title">Channel Health Scorecard: QA, CSAT & Resolution</div>
+          <span class="pill pill-green">Comparative View</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="channelPerfChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cross-Channel Benchmark Matrix -->
+    <h2 class="section-title">Channel Performance & Strategic Metrics</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Channel Campaign</th>
+            <th>Volume</th>
+            <th>Share (%)</th>
+            <th>QA Score</th>
+            <th>CSAT</th>
+            <th>Resolution Rate</th>
+            <th>Primary Contact Drivers</th>
+            <th>Operational Health</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Kensington – Voice</strong></td>
+            <td>75</td>
+            <td>80.6%</td>
+            <td>63.6%</td>
+            <td>50.9%</td>
+            <td>28.0%</td>
+            <td>Video Configuration, Docks, Cases, Headset Audio</td>
+            <td><span class="pill pill-yellow">Moderate Friction</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kensington – Chat</strong></td>
+            <td>14</td>
+            <td>15.1%</td>
+            <td>57.7%</td>
+            <td>60.7%</td>
+            <td>57.1%</td>
+            <td>Dock Backorders, Warranty Validation, Lock Specs</td>
+            <td><span class="pill pill-green">High Agility</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kensington – Email</strong></td>
+            <td>4</td>
+            <td>4.3%</td>
+            <td>65.3%</td>
+            <td>27.5%</td>
+            <td>0.0%</td>
+            <td>Privacy Screens, RMA Backlog, Driver Updates</td>
+            <td><span class="pill pill-red">Critical Focus</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cross-Campaign Opportunity Matrix -->
+    <h2 class="section-title">High-Impact Cross-Campaign Opportunities</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Opportunity Theme</th>
+            <th>Total Impact</th>
+            <th>Affected Channels</th>
+            <th>Root Cause Signal</th>
+            <th>High-Leverage Business Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Display & Multi-Monitor Self-Service</strong></td>
+            <td><span class="pill pill-lavender">12 Contacts (12.9%)</span></td>
+            <td>Voice (6), Chat (5), Email (1)</td>
+            <td>Customers verifying video spec mappings & monitor dimensional fit</td>
+            <td>Deploy interactive <strong>Compatibility Finder</strong> on Kensington.com to deflect repetitive specs inquiry</td>
+          </tr>
+          <tr>
+            <td><strong>Warranty Stock-Outs & Unified Inventory</strong></td>
+            <td><span class="pill pill-yellow">5 Contacts (5.4%)</span></td>
+            <td>Voice (2), Chat (2), Email (1)</td>
+            <td>Warranty stock delays while items appear in-stock on web store</td>
+            <td>Create cross-channel fulfillment bridge allowing RMA dispatch from D2C retail pools</td>
+          </tr>
+          <tr>
+            <td><strong>CRM Auto-Solve Synchronization Logic</strong></td>
+            <td><span class="pill pill-red">3 Contacts (3.2%)</span></td>
+            <td>Voice (1), Chat (1), Email (1)</td>
+            <td>System triggers "Resolved" notices while customer photos/media remain queued</td>
+            <td>Refactor ticket state triggers to keep claims in "Validation Review" until dispatch</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Visual Signals: Red Flags & Green Flags -->
+    <h2 class="section-title">Customer Experience Signals: Red & Green Flags</h2>
+    <div class="signals-grid">
+      <!-- Red Flags -->
+      <div class="signal-card red-flag">
+        <div class="sub-heading" style="color: var(--danger);">Critical Friction Signals (Red Flags)</div>
+        
+        <div class="signal-item">
+          <div class="signal-item-header">
+            <span class="signal-item-title">1. Warranty Delays vs Commercial Stock</span>
+            <span class="pill pill-red">Email / Chat</span>
+          </div>
+          <p style="font-size: 11px;">Prolonged backorders while storefront reflects stock generates severe churn & threats of negative reviews.</p>
+          <div class="verbatim-quote">
+            "I don't understand how it's in stock online but you are telling me you are out of stock?... I am going to write a review about my experience."
+          </div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-item-header">
+            <span class="signal-item-title">2. Voice Telephony Audio Dropouts</span>
+            <span class="pill pill-red">Voice (2.7%)</span>
+          </div>
+          <p style="font-size: 11px;">Agent headsets dropping out mid-troubleshooting forces customers to disconnect and call back.</p>
+          <div class="verbatim-quote">
+            "Why are you cutting? Your voice is cutting... about every 3rd word... Is there someone else whose headset is working?"
+          </div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-item-header">
+            <span class="signal-item-title">3. Unresponsive Auto-Closure Logic</span>
+            <span class="pill pill-red">Email / Chat</span>
+          </div>
+          <p style="font-size: 11px;">Automated "Resolved" triggers sent before customer verification evidence is reviewed.</p>
+        </div>
+      </div>
+
+      <!-- Green Flags -->
+      <div class="signal-card green-flag">
+        <div class="sub-heading" style="color: #0C6B22;">Value-Driving Behaviors (Green Flags)</div>
+
+        <div class="signal-item">
+          <div class="signal-item-header">
+            <span class="signal-item-title">1. Proactive Model Upgrades on Backorders</span>
+            <span class="pill pill-green">Chat (14.3%)</span>
+          </div>
+          <p style="font-size: 11px;">Agents salvage churn by immediately offering current-gen docking models (e.g., SD4790P for SD4750P).</p>
+          <div class="verbatim-quote">
+            "Thanks for the quick reply! We are comfortable with the SD4790P as a replacement due to the backorder."
+          </div>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-item-header">
+            <span class="signal-item-title">2. High-Accuracy Dimensional Guidance</span>
+            <span class="pill pill-green">Voice & Chat</span>
+          </div>
+          <p style="font-size: 11px;">Fast, seamless lock pairing (MicroSaver 2.0) and screen sizing eliminates pre-purchase hesitation.</p>
+        </div>
+
+        <div class="signal-item">
+          <div class="signal-item-header">
+            <span class="signal-item-title">3. EPOS Diagnostic Scripting Adherence</span>
+            <span class="pill pill-green">100% Success</span>
+          </div>
+          <p style="font-size: 11px;">Methodical driver and firmware conflict isolation (VPN bypass, USB hubs) yields 100% resolution.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specialized Callout: Kensington EPOS Program -->
+    <div class="epos-banner">
+      <div>
+        <div class="sub-heading" style="color: var(--lavender);">Program Focus</div>
+        <h3 style="font-family: 'Piazzolla', serif; font-size: 17px; margin-bottom: 6px;">Kensington EPOS Operational Deep Dive</h3>
+        <p style="font-size: 11px; color: var(--text-muted);">
+          17 interactions audited across Kensington EPOS – Voice (100% voice distribution). High unresolved rate driven by End-of-Life gaming headset friction and multi-month RMA backlog.
+        </p>
+      </div>
+      <div class="epos-stat-cluster">
+        <div class="epos-stat-item">
+          <h4>35.3%</h4>
+          <p>Resolution Rate</p>
+        </div>
+        <div class="epos-stat-item">
+          <h4>64.7%</h4>
+          <p>Unresolved Rate</p>
+        </div>
+        <div class="epos-stat-item">
+          <h4>11.9m</h4>
+          <p>Avg Handle Time</p>
+        </div>
+        <div class="epos-stat-item">
+          <h4>35.3%</h4>
+          <p>EOL Inquiries</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Four Strategic Action Pillars -->
+    <h2 class="section-title">Strategic Action Roadmap</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Initiative</th>
+            <th>Primary Business Area</th>
+            <th>Recommended Action</th>
+            <th>Target KPI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: var(--danger);">P1</strong></td>
+            <td><strong>EOL & Discontinued Accommodation</strong></td>
+            <td>Process & Policy</td>
+            <td>Deploy trade-in vouchers and retailer return paths for discontinued gaming lines</td>
+            <td>Reduce EPOS Unresolved Rate to &lt;30%</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--summer-yellow);">P2</strong></td>
+            <td><strong>Unified Warranty Buffer Pool</strong></td>
+            <td>Supply Chain & Ops</td>
+            <td>Bridge support RMA allocation with D2C commercial inventory stock</td>
+            <td>Zero review churn threats on out-of-stock items</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--lavender);">P3</strong></td>
+            <td><strong>Interactive Self-Service Compatibility</strong></td>
+            <td>Knowledge Base / Web</td>
+            <td>Launch web-based sizing and multi-monitor setup finder for docks and screens</td>
+            <td>Deflect 12%+ routine display setup calls</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--dark-moss);">P4</strong></td>
+            <td><strong>CRM Auto-Solve Validation Rules</strong></td>
+            <td>Data & Systems</td>
+            <td>Update ticketing state rules so tickets do not auto-close while photos are queued</td>
+            <td>Eliminate repeat contact loop on evidence upload</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      Generated for Kensington Executive Leadership &bull; InTouch Brand Intelligence &bull; Verified October 26–31 Performance Data
+    </footer>
+  </div>
+
+  <!-- Chart Configuration Script -->
+  <script>
+    // InTouch Palette Definitions
+    const colors = {
+      darkMoss: '#001705',
+      softGrey: '#F3F1E5',
+      hotGreen: '#4CE467',
+      summerYellow: '#FFC844',
+      lavender: '#766DFA',
+      danger: '#FF5A5F'
+    };
+
+    // 1. Core Volume Donut Chart
+    const ctxVolume = document.getElementById('volumeChart').getContext('2d');
+    new Chart(ctxVolume, {
+      type: 'doughnut',
+      data: {
+        labels: ['Voice (75)', 'Chat (14)', 'Email (4)'],
+        datasets: [{
+          data: [75, 14, 4],
+          backgroundColor: [colors.darkMoss, colors.lavender, colors.summerYellow],
+          borderWidth: 2,
+          borderColor: '#FFFFFF'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 12,
+              font: { family: 'Poppins', size: 11 }
+            }
+          }
+        },
+        cutout: '68%'
+      }
+    });
+
+    // 2. Channel Performance Comparative Bar Chart
+    const ctxPerf = document.getElementById('channelPerfChart').getContext('2d');
+    new Chart(ctxPerf, {
+      type: 'bar',
+      data: {
+        labels: ['Kensington Voice', 'Kensington Chat', 'Kensington Email'],
+        datasets: [
+          {
+            label: 'CSAT %',
+            data: [50.9, 60.7, 27.5],
+            backgroundColor: colors.hotGreen,
+            borderRadius: 4
+          },
+          {
+            label: 'Resolution Rate %',
+            data: [28.0, 57.1, 0.0],
+            backgroundColor: colors.lavender,
+            borderRadius: 4
+          },
+          {
+            label: 'QA Score %',
+            data: [63.6, 57.7, 65.3],
+            backgroundColor: colors.darkMoss,
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              callback: value => value + '%',
+              font: { family: 'Poppins', size: 10 }
+            },
+            grid: { color: '#E2DFD2' }
+          },
+          x: {
+            ticks: { font: { family: 'Poppins', size: 11, weight: '500' } },
+            grid: { display: false }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              boxWidth: 12,
+              font: { family: 'Poppins', size: 10 }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
