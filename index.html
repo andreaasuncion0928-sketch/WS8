@@ -1,1055 +1,668 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andy &amp; Lance — Our Wedding Journal</title>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts: Script, Vintage Serif & Spaced Sans -->
+  <title>Andy & Lance — Our Wedding Journal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@400;500;600&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  
   <style>
-    /* Typography Classes */
-    .font-script {
-      font-family: 'Alex Brush', cursive;
-    }
-    .font-hand {
-      font-family: 'Caveat', cursive;
-    }
-    .font-serif-title {
-      font-family: 'Cinzel', serif;
-    }
-    .font-serif-vintage {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-    }
-    .font-sans-clean {
-      font-family: 'Montserrat', sans-serif;
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Base Journal Section: Locked aspect canvas container */
-    .journal-page {
+    html, body {
       width: 100%;
+      height: 100%;
+      background-color: #2b2528;
+      color: #382c2a;
+      font-family: 'Cormorant Garamond', serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Outer wrapper centers the page book in any viewport */
+    .page-stage {
+      width: 100vw;
       min-height: 100vh;
-      position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
-      overflow: hidden;
-      background-color: #1f1124;
+      align-items: center;
+      padding: 0;
+      overflow-x: hidden;
     }
 
-    /* Scaled coordinate container locked to the exact photo composition */
-    .canvas-frame {
+    /* Fixed aspect-ratio canvas locking all elements strictly onto the photo artwork */
+    .journal-canvas {
       position: relative;
-      width: 100%;
-      max-width: 1600px;
+      width: 100vw;
+      max-width: 1920px;
       aspect-ratio: 16 / 9;
+      background-size: 100% 100%;
       background-position: center center;
       background-repeat: no-repeat;
-      background-size: cover;
     }
 
-    @media (max-width: 768px) {
-      .journal-page {
-        min-height: 100vh;
+    /* Responsive Background switching (* p.jpg for mobile, * b.jpg for browser) */
+    @media (min-width: 769px) {
+      .journal-canvas {
+        aspect-ratio: 16 / 9;
         height: auto;
       }
-      .canvas-frame {
+      #page-1 { background-image: url('intro b.jpg'); }
+      #page-2 { background-image: url('2nd page b.jpg'); }
+      #page-3 { background-image: url('3rd page b.jpg'); }
+      #page-4 { background-image: url('4th page b.jpg'); }
+      #page-5 { background-image: url('5th page b.jpg'); }
+      #page-6 { background-image: url('6th page b.jpg'); }
+    }
+
+    @media (max-width: 768px) {
+      .journal-canvas {
         aspect-ratio: 9 / 16;
-        min-height: 100vh;
+        width: 100vw;
+        height: auto;
       }
+      #page-1 { background-image: url('intro p.jpg'); }
+      #page-2 { background-image: url('2nd page p.jpg'); }
+      #page-3 { background-image: url('3rd page p.jpg'); }
+      #page-4 { background-image: url('4th page p.jpg'); }
+      #page-5 { background-image: url('5th page p.jpg'); }
+      #page-6 { background-image: url('6th page p.jpg'); }
     }
 
-    /* -------------------------------------------------------------
-       RESPONSIVE BACKGROUND IMAGES
-       Mobile (<= 768px): * p.jpg
-       Browser / Desktop (> 768px): * b.jpg
-       ------------------------------------------------------------- */
+    /* ========================================================
+       PAGE 1: COVER LAYOUT
+       Exact pixel-calibrated placement relative to the photo
+       ======================================================== */
+    
+    /* Parchment Card Area (strictly clear of ribbon & flowers) */
+    .cover-card-text {
+      position: absolute;
+      top: 18.5%;
+      left: 51.5%;
+      width: 29%;
+      height: 48%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+    }
 
-    /* Page 1: Intro Cover */
+    .cover-names {
+      font-family: 'Alex Brush', cursive;
+      font-size: 5.4vw;
+      line-height: 0.95;
+      color: #3b2b2f;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.08));
+    }
+
+    .cover-names .ampersand {
+      font-size: 3.4vw;
+      font-family: 'Alex Brush', cursive;
+      margin-left: 0.3vw;
+      vertical-align: 0.8vw;
+    }
+
+    .cover-names .lance {
+      display: block;
+      margin-top: -0.2vw;
+      margin-left: 1.2vw;
+    }
+
+    .cover-subheading {
+      margin-top: 1.8vw;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82vw;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #55444a;
+    }
+
+    .cover-date {
+      margin-top: 0.4vw;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85vw;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #55444a;
+    }
+
+    /* Lower Purple Book Cover Text */
+    .cover-quote {
+      position: absolute;
+      top: 73.5%;
+      left: 53.5%;
+      width: 26%;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72vw;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      line-height: 1.7;
+      text-transform: uppercase;
+      color: #e0d0e6;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+    }
+
+    /* "OPEN JOURNAL" Link at the bottom */
+    .cover-open-btn {
+      position: absolute;
+      top: 89%;
+      left: 53.5%;
+      width: 26%;
+      text-align: center;
+    }
+
+    .cover-open-btn a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8vw;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.74vw;
+      font-weight: 400;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: #e8dbe8;
+      padding-bottom: 0.4vw;
+      border-bottom: 1px solid rgba(232, 219, 232, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .cover-open-btn a:hover {
+      color: #ffffff;
+      border-bottom-color: #ffffff;
+      letter-spacing: 0.42em;
+    }
+
+    /* Mobile overrides for Page 1 */
     @media (max-width: 768px) {
-      #page-1 .canvas-frame { background-image: url('intro p.jpg'), radial-gradient(circle, #614668 0%, #2f1d35 100%); }
-    }
-    @media (min-width: 769px) {
-      #page-1 .canvas-frame { background-image: url('intro b.jpg'), radial-gradient(circle, #614668 0%, #2f1d35 100%); }
-    }
-
-    /* Page 2: To our favorite people */
-    @media (max-width: 768px) {
-      #page-2 .canvas-frame { background-image: url('2nd page p.jpg'), linear-gradient(135deg, #f7efe7 0%, #e8dbce 100%); }
-    }
-    @media (min-width: 769px) {
-      #page-2 .canvas-frame { background-image: url('2nd page b.jpg'), linear-gradient(135deg, #f7efe7 0%, #e8dbce 100%); }
-    }
-
-    /* Page 3: Our Story */
-    @media (max-width: 768px) {
-      #page-3 .canvas-frame { background-image: url('3rd page p.jpg'), linear-gradient(180deg, #f8f1e8 0%, #ebdccc 100%); }
-    }
-    @media (min-width: 769px) {
-      #page-3 .canvas-frame { background-image: url('3rd page b.jpg'), linear-gradient(180deg, #f8f1e8 0%, #ebdccc 100%); }
-    }
-
-    /* Page 4: The Details */
-    @media (max-width: 768px) {
-      #page-4 .canvas-frame { background-image: url('4th page p.jpg'), linear-gradient(145deg, #faf4ed 0%, #eae0d3 100%); }
-    }
-    @media (min-width: 769px) {
-      #page-4 .canvas-frame { background-image: url('4th page b.jpg'), linear-gradient(145deg, #faf4ed 0%, #eae0d3 100%); }
-    }
-
-    /* Page 5: Our Entourage */
-    @media (max-width: 768px) {
-      #page-5 .canvas-frame { background-image: url('5th page p.jpg'), linear-gradient(180deg, #f6eee5 0%, #e6d8c7 100%); }
-    }
-    @media (min-width: 769px) {
-      #page-5 .canvas-frame { background-image: url('5th page b.jpg'), linear-gradient(180deg, #f6eee5 0%, #e6d8c7 100%); }
-    }
-
-    /* Page 6: Our Gallery & RSVP */
-    @media (max-width: 768px) {
-      #page-6 .canvas-frame { background-image: url('6th page p.jpg'), linear-gradient(160deg, #faf4ed 0%, #eadfcb 100%); }
-    }
-    @media (min-width: 769px) {
-      #page-6 .canvas-frame { background-image: url('6th page b.jpg'), linear-gradient(160deg, #faf4ed 0%, #eadfcb 100%); }
-    }
-
-    /* Precise positioning for Page 1 Cream Label in Desktop Browser */
-    @media (min-width: 769px) {
-      .cover-label-box {
-        position: absolute;
-        top: 22%;
-        left: 45%;
-        width: 38%;
-        height: 48%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        pointer-events: none;
+      .cover-card-text {
+        top: 24%;
+        left: 20%;
+        width: 60%;
+        height: 38%;
       }
-      .cover-quote-box {
-        position: absolute;
-        top: 72%;
-        left: 45%;
-        width: 38%;
-        text-align: center;
+      .cover-names { font-size: 13vw; }
+      .cover-names .ampersand { font-size: 8vw; }
+      .cover-subheading { font-size: 2.3vw; margin-top: 3vw; }
+      .cover-date { font-size: 2.3vw; }
+      .cover-quote {
+        top: 67%;
+        left: 15%;
+        width: 70%;
+        font-size: 2.1vw;
       }
-      .cover-cta-box {
-        position: absolute;
-        top: 86%;
-        left: 45%;
-        width: 38%;
-        text-align: center;
+      .cover-open-btn {
+        top: 82%;
+        left: 15%;
+        width: 70%;
       }
+      .cover-open-btn a { font-size: 2.2vw; }
     }
 
-    /* Page 1 Mobile Positions */
-    @media (max-width: 768px) {
-      .cover-label-box {
-        position: absolute;
-        top: 26%;
-        left: 10%;
-        width: 80%;
-        text-align: center;
-      }
-      .cover-quote-box {
-        position: absolute;
-        top: 72%;
-        left: 8%;
-        width: 84%;
-        text-align: center;
-      }
-      .cover-cta-box {
-        position: absolute;
-        top: 86%;
-        left: 0;
-        width: 100%;
-        text-align: center;
-      }
+    /* ========================================================
+       TOP NAVIGATION (Tabs visible on inner pages)
+       ======================================================== */
+    .top-journal-nav {
+      position: absolute;
+      top: 4.8%;
+      left: 5%;
+      width: 90%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 2.5vw;
+      z-index: 20;
     }
 
-    /* Subtle Navigation Links across top margin */
-    .nav-link {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+    .top-journal-nav a {
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      color: #534033;
-      transition: color 0.2s ease, transform 0.2s ease;
+      font-size: 1.15vw;
+      color: #6a535f;
       letter-spacing: 0.05em;
+      transition: color 0.2s;
     }
-    .nav-link:hover {
-      color: #794d82;
-      transform: translateY(-1px);
-    }
-    .nav-link.active {
-      color: #794d82;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 4px;
+
+    .top-journal-nav a:hover, .top-journal-nav a.active {
+      color: #3b2034;
       font-weight: 600;
+    }
+
+    /* ========================================================
+       PAGE 2: FAVORITE PEOPLE LETTER
+       ======================================================== */
+    .letter-container {
+      position: absolute;
+      top: 13%;
+      left: 15%;
+      width: 44%;
+      text-align: left;
+    }
+
+    .script-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.4vw;
+      color: #3a2b2f;
+      line-height: 1.2;
+      margin-bottom: 1.5vw;
+    }
+
+    .letter-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2vw;
+      line-height: 1.6;
+      color: #4b3d3f;
+    }
+
+    .letter-sign {
+      margin-top: 1.5vw;
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.6vw;
+      color: #3a2b2f;
+    }
+
+    /* ========================================================
+       PAGE 3: OUR STORY
+       ======================================================== */
+    .story-content {
+      position: absolute;
+      top: 15%;
+      left: 45%;
+      width: 42%;
+    }
+
+    .story-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25vw;
+      color: #55444a;
+      margin-bottom: 1.5vw;
+    }
+
+    .story-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15vw;
+      line-height: 1.6;
+      color: #433538;
+    }
+
+    .story-text p {
+      margin-bottom: 1vw;
+    }
+
+    /* ========================================================
+       PAGE 4: THE DETAILS
+       ======================================================== */
+    .details-wrap {
+      position: absolute;
+      top: 15%;
+      left: 12%;
+      width: 76%;
+      text-align: center;
+    }
+
+    .details-columns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2vw;
+    }
+
+    .venue-col {
+      width: 45%;
+      text-align: center;
+      font-size: 1.1vw;
+    }
+
+    .venue-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.6vw;
+      color: #3a2b2f;
+      margin-top: 0.6vw;
+    }
+
+    .venue-sub {
+      font-size: 1.05vw;
+      color: #55444a;
+      margin-bottom: 0.8vw;
+    }
+
+    /* ========================================================
+       PAGE 5: OUR ENTOURAGE
+       ======================================================== */
+    .entourage-wrap {
+      position: absolute;
+      top: 14%;
+      left: 10%;
+      width: 52%;
+      text-align: center;
+    }
+
+    .entourage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5vw;
+      margin-top: 1.5vw;
+      font-size: 1.05vw;
+      line-height: 1.5;
+    }
+
+    .role-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25vw;
+      color: #3a2b2f;
+      font-weight: 600;
+      margin-bottom: 0.4vw;
+    }
+
+    /* ========================================================
+       PAGE 6: GALLERY & RSVP
+       ======================================================== */
+    .rsvp-column {
+      position: absolute;
+      top: 20%;
+      left: 56%;
+      width: 34%;
+      text-align: center;
+    }
+
+    .rsvp-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: 5.5vw;
+      color: #382436;
+      line-height: 1;
+      margin-bottom: 1.5vw;
+    }
+
+    .rsvp-btn {
+      display: inline-block;
+      margin-top: 1.8vw;
+      padding: 0.8vw 2vw;
+      border: 1px solid #634d5d;
+      background: rgba(255, 255, 255, 0.4);
+      color: #382436;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8vw;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .rsvp-btn:hover {
+      background: #462c43;
+      color: #fff;
+    }
+
+    /* Modal Form for RSVP */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(20, 15, 20, 0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .rsvp-form-card {
+      background: #fbf7f2;
+      border: 1px solid #d4c5c2;
+      padding: 2.5rem;
+      width: 90%;
+      max-width: 480px;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .rsvp-form-card input, .rsvp-form-card select {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #d3c4c7;
+      background: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      border-radius: 3px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: #4b2f46;
+      color: #fff;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
     }
   </style>
 </head>
-<body class="bg-[#1f1124] text-[#3e2e23] antialiased m-0 p-0 selection:bg-[#c2a2cb] selection:text-[#2b1731]">
+<body>
 
-  <!-- ========================================================
-       PAGE 1: INTRO (WEDDING JOURNAL COVER)
-       Background: intro p.jpg (mobile) / intro b.jpg (desktop)
-       Positions calibrated to sit directly inside the cream label patch!
-       ======================================================== -->
-  <section id="page-1" class="journal-page">
-    <div class="canvas-frame">
+  <!-- ==================== PAGE 1: COVER ==================== -->
+  <section class="page-stage">
+    <div class="journal-canvas" id="page-1">
       
-      <!-- EXACT FIT INSIDE THE CREAM PARCHMENT LABEL -->
-      <div class="cover-label-box">
-        
-        <!-- Script Names: Andy & Lance -->
-        <div class="flex flex-col items-center select-none text-[#3e2d26] -space-y-2 sm:-space-y-4 md:-space-y-5">
-          <div class="flex items-center justify-center gap-2">
-            <span class="font-script text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-normal leading-tight">
-              Andy
-            </span>
-            <span class="font-serif-vintage italic text-3xl sm:text-4xl md:text-5xl text-[#5a4235] ml-1">
-              &amp;
-            </span>
-          </div>
-          <span class="font-script text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-normal leading-tight">
-            Lance
-          </span>
+      <!-- Text strictly bounded inside the Cream Parchment Label -->
+      <div class="cover-card-text">
+        <div class="cover-names">
+          Andy <span class="ampersand">&amp;</span>
+          <span class="lance">Lance</span>
         </div>
-
-        <!-- Spaced Serif Journal Subtitle inside the parchment label -->
-        <div class="mt-4 sm:mt-5 md:mt-6 text-center select-none">
-          <p class="font-serif-title uppercase tracking-[0.28em] text-[10px] sm:text-xs md:text-sm text-[#4d3a31] font-semibold">
-            OUR WEDDING JOURNAL
-          </p>
-          <p class="font-serif-title uppercase tracking-[0.24em] text-[9px] sm:text-[11px] md:text-xs text-[#635043] mt-1">
-            SEPTEMBER 4, 2028
-          </p>
-        </div>
-
+        <div class="cover-subheading">Our Wedding Journal</div>
+        <div class="cover-date">September 4, 2028</div>
       </div>
 
-      <!-- LOWER COVER QUOTE: Situated on the purple book cover underneath the label -->
-      <div class="cover-quote-box select-none pointer-events-none">
-        <p class="font-serif-title uppercase tracking-[0.22em] text-[9px] sm:text-xs md:text-[13px] text-[#eddcf3] leading-relaxed drop-shadow">
-          A JOURNEY OF UNEXPECTED TIMING,<br class="hidden sm:inline"> AND A LOVE THAT STAYED.
-        </p>
+      <!-- Tagline on the lower purple texture -->
+      <div class="cover-quote">
+        A journey of unexpected timing,<br>and a love that stayed.
       </div>
 
-      <!-- BOTTOM CTA: OPEN JOURNAL -->
-      <div class="cover-cta-box">
-        <a href="#page-2" class="group inline-flex items-center gap-2 text-[#eddcf3] hover:text-white transition-all py-1 px-4">
-          <span class="font-serif-title uppercase tracking-[0.3em] text-[10px] sm:text-xs md:text-sm border-b border-[#eddcf3]/50 pb-0.5 group-hover:border-white">
-            OPEN JOURNAL
-          </span>
-          <i data-lucide="arrow-right" class="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform"></i>
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       PAGE 2: TO OUR FAVORITE PEOPLE
-       Background: 2nd page p.jpg (mobile) / 2nd page b.jpg (desktop)
-       ======================================================== -->
-  <section id="page-2" class="journal-page">
-    <div class="canvas-frame flex flex-col justify-between p-4 sm:p-8 md:p-12">
-      
-      <!-- Top Scrapbook Navigation -->
-      <header class="w-full flex justify-center select-none pt-2">
-        <nav class="flex items-center gap-5 sm:gap-9 text-xs sm:text-sm md:text-base">
-          <a href="#page-1" class="text-[#554133] hover:text-[#794d82] p-1" title="Back to Cover">
-            <i data-lucide="home" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-          </a>
-          <a href="#page-3" class="nav-link">Our Story</a>
-          <a href="#page-4" class="nav-link">The Details</a>
-          <a href="#page-5" class="nav-link hidden sm:inline">Entourage</a>
-          <a href="#page-6" class="nav-link">Gallery</a>
-          <a href="#page-6" class="font-sans-clean font-semibold uppercase tracking-widest text-[#794d82] hover:text-[#532e5c] text-[11px] sm:text-xs">RSVP</a>
-        </nav>
-      </header>
-
-      <!-- Main Content -->
-      <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center my-auto px-4">
-        <div class="md:col-span-7 space-y-4 md:space-y-6">
-          <h2 class="font-script text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#4a3424] leading-tight select-none">
-            To our favorite people,
-          </h2>
-          <p class="font-serif-vintage text-base sm:text-lg md:text-xl text-[#3f2e22] leading-relaxed">
-            We're so glad you're here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here &mdash; to this very moment.
-          </p>
-          <p class="font-serif-vintage italic text-base sm:text-lg text-[#523e30]">
-            Thank you for being part of our forever.
-          </p>
-          <div class="pt-2 flex items-center gap-3 select-none">
-            <span class="font-script text-4xl sm:text-5xl md:text-6xl text-[#583925]">
-              Andy &amp; Lance
-            </span>
-            <span class="font-hand text-3xl sm:text-4xl text-[#7a5542] transform -rotate-12 translate-y-1">
-              ♡
-            </span>
-          </div>
-        </div>
-
-        <div class="md:col-span-5 flex justify-center">
-          <div class="bg-white p-2.5 pb-6 shadow-xl transform rotate-3 max-w-[260px] sm:max-w-[290px] w-full border border-[#ded4c5]">
-            <div class="w-full aspect-[4/5] overflow-hidden bg-[#e0d6c8]">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=700&auto=format&fit=crop" alt="Andy & Lance" class="w-full h-full object-cover sepia-[0.15]">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom link -->
-      <div class="w-full flex justify-center pb-2">
-        <a href="#page-3" class="text-[#554133]/60 hover:text-[#554133]">
-          <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
-        </a>
+      <!-- Link to open journal -->
+      <div class="cover-open-btn">
+        <a href="#page-2">OPEN JOURNAL &rarr;</a>
       </div>
 
     </div>
   </section>
 
 
-  <!-- ========================================================
-       PAGE 2: TO OUR FAVORITE PEOPLE
-       Background: 2nd page p.jpg (mobile) / 2nd page b.jpg (desktop)
-       ======================================================== -->
-  <section id="page-2" class="journal-page justify-between">
-    
-    <!-- Top Scrapbook Navigation -->
-    <header class="w-full pt-6 md:pt-8 px-6 flex justify-center select-none">
-      <nav class="flex items-center gap-5 sm:gap-9 text-xs sm:text-sm md:text-base">
-        <a href="#page-1" class="text-[#554133] hover:text-[#794d82] p-1" title="Back to Cover">
-          <i data-lucide="home" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-        </a>
-        <a href="#page-3" class="nav-link">Our Story</a>
-        <a href="#page-4" class="nav-link">The Details</a>
-        <a href="#page-5" class="nav-link hidden sm:inline">Entourage</a>
-        <a href="#page-6" class="nav-link">Gallery</a>
-        <a href="#page-6" class="font-sans-clean font-semibold uppercase tracking-widest text-[#794d82] hover:text-[#532e5c] text-[11px] sm:text-xs">RSVP</a>
+  <!-- ==================== PAGE 2: FAVORITE PEOPLE ==================== -->
+  <section class="page-stage">
+    <div class="journal-canvas" id="page-2">
+      <nav class="top-journal-nav">
+        <a href="#page-3">Our Story</a>
+        <a href="#page-4">The Details</a>
+        <a href="#page-5">Entourage</a>
+        <a href="#page-6">Gallery</a>
+        <a href="#page-6">RSVP</a>
       </nav>
-    </header>
 
-    <!-- Main Content: Left letter + Right couple polaroid -->
-    <div class="w-full max-w-6xl mx-auto px-6 sm:px-12 py-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center my-auto">
-      
-      <!-- Left Page: Heartfelt Note to Loved Ones -->
-      <div class="md:col-span-7 flex flex-col justify-center space-y-4 md:space-y-6 md:pr-4">
-        <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-[#4a3424] leading-tight select-none">
-          To our favorite people,
-        </h2>
-
-        <p class="font-serif-vintage text-base sm:text-lg md:text-xl text-[#3f2e22] leading-relaxed">
-          We're so glad you're here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here &mdash; to this very moment.
-        </p>
-
-        <p class="font-serif-vintage italic text-base sm:text-lg text-[#523e30]">
-          Thank you for being part of our forever.
-        </p>
-
-        <!-- Hand Signatures -->
-        <div class="pt-3 flex items-center gap-3 select-none">
-          <span class="font-script text-4xl sm:text-5xl md:text-6xl text-[#583925]">
-            Andy &amp; Lance
-          </span>
-          <span class="font-hand text-3xl sm:text-4xl text-[#7a5542] transform -rotate-12 translate-y-1">
-            ♡
-          </span>
+      <div class="letter-container">
+        <h2 class="script-title">To our favorite people,</h2>
+        <div class="letter-body">
+          <p>We're so glad you're here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here &mdash; to this very moment.</p>
+          <br>
+          <p>Thank you for being part of our forever.</p>
         </div>
+        <div class="letter-sign">Andy &amp; Lance ♡</div>
       </div>
-
-      <!-- Right Page: Taped Couple Polaroid -->
-      <div class="md:col-span-5 flex justify-center items-center py-4">
-        <div class="polaroid-box max-w-[280px] sm:max-w-[320px] w-full transform rotate-3">
-          <!-- Tape accents -->
-          <div class="washi-tape -top-3 -left-4 transform -rotate-45"></div>
-          <div class="washi-tape -top-3 -right-4 transform rotate-45"></div>
-
-          <!-- Polaroid Photo -->
-          <div class="w-full aspect-[4/5] overflow-hidden bg-[#d8cbbb]">
-            <img 
-              src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=700&auto=format&fit=crop" 
-              alt="Andy & Lance Sunset View" 
-              class="w-full h-full object-cover filter contrast-[1.05] sepia-[0.15]"
-              loading="lazy"
-            >
-          </div>
-          <p class="font-hand text-center text-sm text-[#735d4d] mt-2 mb-0 tracking-wider">our horizon • forever</p>
-        </div>
-      </div>
-
     </div>
-
-    <!-- Bottom link to next page -->
-    <div class="w-full flex justify-center pb-6">
-      <a href="#page-3" class="text-[#554133]/60 hover:text-[#554133] transition-colors p-2" title="Next page">
-        <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
-      </a>
-    </div>
-
   </section>
 
 
-  <!-- ========================================================
-       PAGE 3: OUR STORY
-       Background: 3rd page p.jpg (mobile) / 3rd page b.jpg (desktop)
-       ======================================================== -->
-  <section id="page-3" class="journal-page justify-between">
-    
-    <!-- Top Scrapbook Navigation -->
-    <header class="w-full pt-6 md:pt-8 px-6 flex justify-center select-none">
-      <nav class="flex items-center gap-5 sm:gap-9 text-xs sm:text-sm md:text-base">
-        <a href="#page-1" class="text-[#554133] hover:text-[#794d82] p-1" title="Back to Cover">
-          <i data-lucide="home" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-        </a>
-        <a href="#page-3" class="nav-link active">Our Story</a>
-        <a href="#page-4" class="nav-link">The Details</a>
-        <a href="#page-5" class="nav-link hidden sm:inline">Entourage</a>
-        <a href="#page-6" class="nav-link">Gallery</a>
-        <a href="#page-6" class="font-sans-clean font-semibold uppercase tracking-widest text-[#794d82] text-[11px] sm:text-xs">RSVP</a>
+  <!-- ==================== PAGE 3: OUR STORY ==================== -->
+  <section class="page-stage">
+    <div class="journal-canvas" id="page-3">
+      <nav class="top-journal-nav">
+        <a href="#page-3" class="active">Our Story</a>
+        <a href="#page-4">The Details</a>
+        <a href="#page-5">Entourage</a>
+        <a href="#page-6">Gallery</a>
+        <a href="#page-6">RSVP</a>
       </nav>
-    </header>
 
-    <!-- Main Content: Polaroid cluster on left, narrative on right -->
-    <div class="w-full max-w-6xl mx-auto px-6 sm:px-12 py-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center my-auto">
-      
-      <!-- Left Side: Overlapping Polaroids -->
-      <div class="md:col-span-5 relative flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px]">
-        
-        <!-- Polaroid 1: Top left city skyline -->
-        <div class="polaroid-box w-44 sm:w-52 transform -rotate-6 absolute -top-2 left-2 sm:left-4 z-10">
-          <div class="washi-tape -top-3 left-6 transform -rotate-6"></div>
-          <div class="w-full aspect-[4/3] overflow-hidden bg-[#d9cbbd]">
-            <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=500&auto=format&fit=crop" alt="Night skyline" class="w-full h-full object-cover sepia-[0.15]">
-          </div>
+      <div class="story-content">
+        <h2 class="script-title">Our Story</h2>
+        <div class="story-subtitle">A love story that began in the most unexpected time.</div>
+        <div class="story-text">
+          <p>It all started with a simple day, just hanging around, not expecting any love, not even a thought of falling in love. But then, <strong>it happened.</strong></p>
+          <p>Late night conversations and calls, daily chats even from a distance, and a decision to finally meet.</p>
+          <p>And just like that, we got over with each other &mdash; and it all happened in a very sudden way.</p>
+          <p>Now, it's been more than a decade, and our story is still our favorite one. ♡</p>
         </div>
-
-        <!-- Polaroid 2: Center couple silhouette -->
-        <div class="polaroid-box w-44 sm:w-52 transform rotate-6 absolute top-20 right-2 sm:right-4 z-20">
-          <div class="washi-tape -top-3 right-6 transform rotate-12"></div>
-          <div class="w-full aspect-square overflow-hidden bg-[#d9cbbd]">
-            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=500&auto=format&fit=crop" alt="Couple by the sea" class="w-full h-full object-cover sepia-[0.1]">
-          </div>
-        </div>
-
-        <!-- Polaroid 3: Holding hands -->
-        <div class="polaroid-box w-40 sm:w-48 transform -rotate-3 absolute bottom-2 left-8 sm:left-12 z-30">
-          <div class="washi-tape -top-3 left-6 transform -rotate-12"></div>
-          <div class="w-full aspect-[4/3] overflow-hidden bg-[#d9cbbd]">
-            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=500&auto=format&fit=crop" alt="Holding hands" class="w-full h-full object-cover sepia-[0.2]">
-          </div>
-        </div>
-
       </div>
-
-      <!-- Right Side: The Story Narrative -->
-      <div class="md:col-span-7 flex flex-col justify-center space-y-4 md:pl-6 text-[#3e2e23]">
-        
-        <div>
-          <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-[#4a3424] leading-none select-none">
-            Our Story
-          </h2>
-          <p class="font-serif-vintage italic text-base sm:text-lg text-[#6d513e] mt-1">
-            A love story that began in the most unexpected time.
-          </p>
-          <div class="flex items-center gap-2 mt-2 text-[#8d6d53]/50">
-            <span class="w-12 h-[1px] bg-current"></span>
-            <span class="text-xs">❦</span>
-            <span class="w-12 h-[1px] bg-current"></span>
-          </div>
-        </div>
-
-        <div class="space-y-3 font-serif-vintage text-base sm:text-lg leading-relaxed text-[#403024]">
-          <p>
-            It all started with a simple day, just hanging around, not expecting any love, not even a thought of falling in love. But then, <strong class="font-semibold text-[#291a13]">it happened.</strong>
-          </p>
-
-          <p>
-            Late night conversations and calls, daily chats even from a distance, and a decision to finally meet.
-          </p>
-
-          <p>
-            And just like that, we got over with each other &mdash; and it all happened in a very sudden way.
-          </p>
-
-          <p class="pt-1">
-            Now, it's been more than a decade, and our story is still our favorite one.
-            <span class="font-hand text-2xl text-[#6b4773] inline-block ml-1">♡</span>
-          </p>
-        </div>
-
-      </div>
-
     </div>
-
-    <!-- Bottom link to next page -->
-    <div class="w-full flex justify-center pb-6">
-      <a href="#page-4" class="text-[#554133]/60 hover:text-[#554133] transition-colors p-2" title="Next page">
-        <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
-      </a>
-    </div>
-
   </section>
 
 
-  <!-- ========================================================
-       PAGE 4: THE WEDDING DETAILS
-       Background: 4th page p.jpg (mobile) / 4th page b.jpg (desktop)
-       ======================================================== -->
-  <section id="page-4" class="journal-page justify-between">
-    
-    <!-- Top Scrapbook Navigation -->
-    <header class="w-full pt-6 md:pt-8 px-6 flex justify-center select-none">
-      <nav class="flex items-center gap-5 sm:gap-9 text-xs sm:text-sm md:text-base">
-        <a href="#page-1" class="text-[#554133] hover:text-[#794d82] p-1" title="Back to Cover">
-          <i data-lucide="home" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-        </a>
-        <a href="#page-3" class="nav-link">Our Story</a>
-        <a href="#page-4" class="nav-link active">The Details</a>
-        <a href="#page-5" class="nav-link hidden sm:inline">Entourage</a>
-        <a href="#page-6" class="nav-link">Gallery</a>
-        <a href="#page-6" class="font-sans-clean font-semibold uppercase tracking-widest text-[#794d82] text-[11px] sm:text-xs">RSVP</a>
+  <!-- ==================== PAGE 4: THE DETAILS ==================== -->
+  <section class="page-stage">
+    <div class="journal-canvas" id="page-4">
+      <nav class="top-journal-nav">
+        <a href="#page-3">Our Story</a>
+        <a href="#page-4" class="active">The Details</a>
+        <a href="#page-5">Entourage</a>
+        <a href="#page-6">Gallery</a>
+        <a href="#page-6">RSVP</a>
       </nav>
-    </header>
 
-    <!-- Main Content: Ceremony, Reception, Attire -->
-    <div class="w-full max-w-6xl mx-auto px-6 sm:px-10 py-6 my-auto">
-      
-      <div class="text-center mb-8 sm:mb-12">
-        <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-[#4a3424] select-none">
-          The Wedding Details
-        </h2>
-        <p class="font-serif-vintage italic text-base sm:text-lg text-[#695343] mt-1">
-          Here's everything you need to know for our big day.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <div class="details-wrap">
+        <h2 class="script-title">The Wedding Details</h2>
+        <p style="font-style: italic; font-size: 1.2vw; color: #55444a;">Here's everything you need to know for our big day.</p>
         
-        <!-- Ceremony -->
-        <div class="md:col-span-5 flex flex-col items-center text-center px-4">
-          <!-- Church Sketch -->
-          <div class="w-48 sm:w-52 h-32 mb-2 flex items-center justify-center">
-            <svg class="w-full h-full text-[#4a372c]" viewBox="0 0 200 130" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M70 120 V50 L100 25 L130 50 V120 Z"/>
-              <path d="M100 25 V15 M96 15 H104"/>
-              <path d="M85 70 Q100 55 115 70 V120 H85 Z"/>
-              <circle cx="100" cy="45" r="7"/>
-              <path d="M35 120 V65 L70 50 M130 50 L165 65 V120"/>
-              <path d="M40 65 V35 L52 20 L65 35 V65"/>
-              <path d="M52 20 V12 M49 12 H55"/>
-              <rect x="47" y="38" width="10" height="15" rx="4"/>
-              <path d="M135 65 V35 L148 20 L160 35 V65"/>
-              <path d="M148 20 V12 M145 12 H151"/>
-              <rect x="143" y="38" width="10" height="15" rx="4"/>
-              <path d="M20 120 H180"/>
-            </svg>
+        <div class="details-columns">
+          <div class="venue-col">
+            <div class="venue-title">Ceremony</div>
+            <div class="venue-sub">San Agustin Church<br>San Agustin, Manila</div>
+            <div style="font-size: 0.95vw; color: #6b5a61;">September 4, 2028 &bull; Monday &bull; 3:00 PM</div>
           </div>
-
-          <h3 class="font-serif-vintage italic text-xl sm:text-2xl text-[#7a553e]">Ceremony</h3>
-          <h4 class="font-serif-vintage text-2xl sm:text-3xl font-semibold text-[#3b2a1f] mt-1">San Agustin Church</h4>
-          <p class="font-serif-vintage text-base text-[#5c4738]">San Agustin, Manila</p>
-
-          <div class="mt-3 flex items-center gap-2 text-xs sm:text-sm font-serif-vintage text-[#473426] tracking-wider">
-            <i data-lucide="church" class="w-4 h-4 text-[#794d82]"></i>
-            <span>September 4, 2028 &bull; Monday &bull; 3:00 PM</span>
+          <div class="venue-col">
+            <div class="venue-title">Reception</div>
+            <div class="venue-sub">Taal Vista Hotel<br>Tagaytay City</div>
+            <div style="font-size: 0.95vw; color: #6b5a61;">September 4, 2028 &bull; Monday &bull; 6:00 PM</div>
           </div>
         </div>
-
-        <!-- Reception -->
-        <div class="md:col-span-4 flex flex-col items-center text-center px-4 md:border-l md:border-[#8d6d53]/25">
-          <!-- Venue Sketch -->
-          <div class="w-48 sm:w-52 h-32 mb-2 flex items-center justify-center">
-            <svg class="w-full h-full text-[#4a372c]" viewBox="0 0 200 130" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M25 120 V60 L50 45 L150 45 L175 60 V120 Z"/>
-              <path d="M85 45 L100 28 L115 45"/>
-              <path d="M20 60 H180"/>
-              <rect x="40" y="70" width="16" height="20"/>
-              <rect x="70" y="70" width="16" height="20"/>
-              <rect x="114" y="70" width="16" height="20"/>
-              <rect x="144" y="70" width="16" height="20"/>
-              <path d="M92 120 V95 Q100 88 108 95 V120 Z"/>
-              <path d="M15 120 H185"/>
-            </svg>
-          </div>
-
-          <h3 class="font-serif-vintage italic text-xl sm:text-2xl text-[#7a553e]">Reception</h3>
-          <h4 class="font-serif-vintage text-2xl sm:text-3xl font-semibold text-[#3b2a1f] mt-1">Taal Vista Hotel</h4>
-          <p class="font-serif-vintage text-base text-[#5c4738]">Tagaytay City</p>
-
-          <div class="mt-3 flex items-center gap-2 text-xs sm:text-sm font-serif-vintage text-[#473426] tracking-wider">
-            <i data-lucide="glass-water" class="w-4 h-4 text-[#794d82]"></i>
-            <span>September 4, 2028 &bull; Monday &bull; 6:00 PM</span>
-          </div>
-        </div>
-
-        <!-- Attire Swatches -->
-        <div class="md:col-span-3 flex justify-center">
-          <div class="relative bg-[#fcf8f2]/80 border border-[#d8c8b6] p-5 rounded shadow-sm text-center w-full max-w-[200px]">
-            <div class="washi-tape -top-3 left-1/2 -translate-x-1/2"></div>
-            
-            <h4 class="font-script text-4xl text-[#4a3424]">Attire</h4>
-            <p class="font-serif-vintage italic text-sm text-[#735d4d] -mt-1">Shades of Purple</p>
-
-            <!-- Purple Color Circles -->
-            <div class="flex items-center justify-center gap-1.5 my-4">
-              <span class="w-6 h-6 rounded-full bg-[#d6c4de] shadow-inner inline-block" title="Lilac"></span>
-              <span class="w-6 h-6 rounded-full bg-[#b28eb8] shadow-inner inline-block" title="Orchid"></span>
-              <span class="w-6 h-6 rounded-full bg-[#825c93] shadow-inner inline-block" title="Purple"></span>
-              <span class="w-6 h-6 rounded-full bg-[#5d3b6b] shadow-inner inline-block" title="Plum"></span>
-              <span class="w-6 h-6 rounded-full bg-[#3e2349] shadow-inner inline-block" title="Deep Mauve"></span>
-            </div>
-
-            <div class="pt-2 border-t border-[#dfcebd]">
-              <span class="font-serif-vintage italic text-xs text-[#7a6454] block">Dress Code</span>
-              <span class="font-serif-vintage font-semibold text-base text-[#3b2a1f] tracking-wider">Formal</span>
-            </div>
-          </div>
-        </div>
-
       </div>
-
     </div>
-
-    <!-- Bottom link to next page -->
-    <div class="w-full flex justify-center pb-6">
-      <a href="#page-5" class="text-[#554133]/60 hover:text-[#554133] transition-colors p-2" title="Next page">
-        <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
-      </a>
-    </div>
-
   </section>
 
 
-  <!-- ========================================================
-       PAGE 5: OUR ENTOURAGE
-       Background: 5th page p.jpg (mobile) / 5th page b.jpg (desktop)
-       ======================================================== -->
-  <section id="page-5" class="journal-page justify-between">
-    
-    <!-- Top Scrapbook Navigation -->
-    <header class="w-full pt-6 md:pt-8 px-6 flex justify-center select-none">
-      <nav class="flex items-center gap-5 sm:gap-9 text-xs sm:text-sm md:text-base">
-        <a href="#page-1" class="text-[#554133] hover:text-[#794d82] p-1" title="Back to Cover">
-          <i data-lucide="home" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-        </a>
-        <a href="#page-3" class="nav-link">Our Story</a>
-        <a href="#page-4" class="nav-link">The Details</a>
-        <a href="#page-5" class="nav-link active">Entourage</a>
-        <a href="#page-6" class="nav-link">Gallery</a>
-        <a href="#page-6" class="font-sans-clean font-semibold uppercase tracking-widest text-[#794d82] text-[11px] sm:text-xs">RSVP</a>
+  <!-- ==================== PAGE 5: OUR ENTOURAGE ==================== -->
+  <section class="page-stage">
+    <div class="journal-canvas" id="page-5">
+      <nav class="top-journal-nav">
+        <a href="#page-3">Our Story</a>
+        <a href="#page-4">The Details</a>
+        <a href="#page-5" class="active">Entourage</a>
+        <a href="#page-6">Gallery</a>
+        <a href="#page-6">RSVP</a>
       </nav>
-    </header>
 
-    <!-- Main Content: Entourage text directly on page -->
-    <div class="w-full max-w-6xl mx-auto px-6 sm:px-12 py-6 my-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-      
-      <!-- Left 8 columns: Full entourage list -->
-      <div class="md:col-span-8 flex flex-col justify-center text-center md:text-left space-y-6">
-        
-        <div>
-          <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-[#4a3424] select-none">
-            Our Entourage
-          </h2>
-          <div class="flex items-center justify-center md:justify-start gap-2 mt-1 text-[#8d6d53]/60">
-            <span class="w-16 h-[1px] bg-current"></span>
-            <span class="text-sm">✤</span>
-            <span class="w-16 h-[1px] bg-current"></span>
-          </div>
+      <div class="entourage-wrap">
+        <h2 class="script-title">Our Entourage</h2>
+        <div style="font-style: italic; font-size: 1.3vw; margin-bottom: 0.5vw; color: #3a2b2f;">Principal Sponsors</div>
+        <div style="font-size: 0.95vw; line-height: 1.6; margin-bottom: 1.5vw;">
+          Mr. and Mrs. Juan Dela Cruz &emsp;&bull;&emsp; Mr. and Mrs. Paolo Garcia<br>
+          Mr. and Mrs. Miguel Santos &emsp;&bull;&emsp; Mr. and Mrs. David Lim<br>
+          Mr. and Mrs. Ramon Reyes &emsp;&bull;&emsp; Mr. and Mrs. Carlo Mendoza
         </div>
 
-        <!-- Principal Sponsors -->
-        <div class="space-y-2">
-          <h3 class="font-serif-vintage italic text-xl sm:text-2xl text-[#7a553e]">
-            Principal Sponsors
-          </h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 font-serif-vintage text-base sm:text-lg text-[#3e2e23]">
-            <p>Mr. and Mrs. Juan Dela Cruz</p>
-            <p>Mr. and Mrs. Paolo Garcia</p>
-            <p>Mr. and Mrs. Miguel Santos</p>
-            <p>Mr. and Mrs. David Lim</p>
-            <p>Mr. and Mrs. Ramon Reyes</p>
-            <p>Mr. and Mrs. Carlo Mendoza</p>
-          </div>
-        </div>
-
-        <!-- Maid of Honor & Best Man -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 font-serif-vintage">
+        <div class="entourage-grid">
           <div>
-            <h4 class="italic text-lg text-[#7a553e]">Maid of Honor</h4>
-            <p class="text-xl font-medium text-[#3b2a1f]">Angelica Santos</p>
+            <div class="role-title">Maid of Honor</div>
+            <div>Angelica Santos</div>
+            <br>
+            <div class="role-title">Bridesmaids</div>
+            <div>Camille Diaz &bull; Marielle Santos<br>Denise Cruz</div>
           </div>
           <div>
-            <h4 class="italic text-lg text-[#7a553e]">Best Man</h4>
-            <p class="text-xl font-medium text-[#3b2a1f]">Michael Reyes</p>
+            <div class="role-title">Best Man</div>
+            <div>Michael Reyes</div>
+            <br>
+            <div class="role-title">Groomsmen</div>
+            <div>Daniel Garcia &bull; Patrick Lim<br>Matthew Reyes</div>
           </div>
-        </div>
-
-        <!-- Bridesmaids & Groomsmen -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-1 font-serif-vintage">
-          <div>
-            <h4 class="italic text-lg text-[#7a553e]">Bridesmaids</h4>
-            <p class="text-base text-[#473426] leading-relaxed">
-              Camille Diaz &bull; Marielle Santos<br>&bull; Denise Cruz
-            </p>
-          </div>
-          <div>
-            <h4 class="italic text-lg text-[#7a553e]">Groomsmen</h4>
-            <p class="text-base text-[#473426] leading-relaxed">
-              Daniel Garcia &bull; Patrick Lim<br>&bull; Matthew Reyes
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Right 4 columns: AL Wax Seal -->
-      <div class="md:col-span-4 flex justify-center items-center">
-        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-[#523348] shadow-2xl flex items-center justify-center border-4 border-[#3e2436] relative cursor-pointer hover:scale-105 transition-transform" title="Andy & Lance Wax Seal">
-          <div class="absolute inset-1 rounded-full border border-[#835c7a]/40"></div>
-          <span class="font-script text-4xl sm:text-5xl text-[#e8d2e3] select-none">
-            AL
-          </span>
         </div>
       </div>
-
     </div>
-
-    <!-- Bottom link to next page -->
-    <div class="w-full flex justify-center pb-6">
-      <a href="#page-6" class="text-[#554133]/60 hover:text-[#554133] transition-colors p-2" title="Next page">
-        <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
-      </a>
-    </div>
-
   </section>
 
 
-  <!-- ========================================================
-       PAGE 6: OUR GALLERY & RSVP
-       Background: 6th page p.jpg (mobile) / 6th page b.jpg (desktop)
-       ======================================================== -->
-  <section id="page-6" class="journal-page justify-between">
-    
-    <!-- Top Scrapbook Navigation -->
-    <header class="w-full pt-6 md:pt-8 px-6 flex justify-center select-none">
-      <nav class="flex items-center gap-5 sm:gap-9 text-xs sm:text-sm md:text-base">
-        <a href="#page-1" class="text-[#554133] hover:text-[#794d82] p-1" title="Back to Cover">
-          <i data-lucide="home" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-        </a>
-        <a href="#page-3" class="nav-link">Our Story</a>
-        <a href="#page-4" class="nav-link">The Details</a>
-        <a href="#page-5" class="nav-link hidden sm:inline">Entourage</a>
-        <a href="#page-6" class="nav-link">Gallery</a>
-        <a href="#page-6" class="font-sans-clean font-semibold uppercase tracking-widest text-[#794d82] text-[11px] sm:text-xs active">RSVP</a>
+  <!-- ==================== PAGE 6: GALLERY & RSVP ==================== -->
+  <section class="page-stage">
+    <div class="journal-canvas" id="page-6">
+      <nav class="top-journal-nav">
+        <a href="#page-3">Our Story</a>
+        <a href="#page-4">The Details</a>
+        <a href="#page-5">Entourage</a>
+        <a href="#page-6">Gallery</a>
+        <a href="#page-6" class="active">RSVP</a>
       </nav>
-    </header>
 
-    <!-- Main Content: Left side Gallery & Right side RSVP -->
-    <div class="w-full max-w-6xl mx-auto px-6 sm:px-12 py-6 my-auto grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-      
-      <!-- Left Page: Gallery -->
-      <div class="md:col-span-6 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-        <div>
-          <h2 class="font-script text-5xl sm:text-6xl md:text-7xl text-[#4a3424] select-none">
-            Our Gallery
-          </h2>
-          <p class="font-serif-vintage italic text-base sm:text-lg text-[#695343] mt-1">
-            A collection of moments, from then until now.
-          </p>
+      <div class="rsvp-column">
+        <div class="rsvp-title">RSVP</div>
+        <p style="font-size: 1.25vw; color: #43333e;">Kindly let us know if you can join us.</p>
+        <button class="rsvp-btn" onclick="openModal()">CONFIRM ATTENDANCE &rarr;</button>
+        <div style="font-family: 'Alex Brush', cursive; font-size: 2.2vw; margin-top: 2vw; color: #43333e;">
+          Let's make this chapter complete together. ♡
         </div>
-
-        <!-- Scrapbook Photo Strip & Polaroids -->
-        <div class="relative w-full max-w-sm h-64 flex items-center justify-center my-2">
-          <div class="polaroid-box w-32 transform -rotate-6 absolute left-2 top-2 z-10">
-            <div class="washi-tape -top-3 left-3 transform -rotate-12 scale-75"></div>
-            <div class="w-full aspect-[4/5] overflow-hidden bg-[#d9cbbd]">
-              <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover sepia-[0.1]" alt="Memory 1">
-            </div>
-          </div>
-
-          <div class="bg-white p-2 shadow-lg transform rotate-6 absolute right-4 top-0 z-20 w-28 border border-[#e2d6c8]">
-            <div class="washi-tape -top-3 right-2 transform rotate-12 scale-75"></div>
-            <div class="space-y-1.5">
-              <div class="w-full h-16 overflow-hidden bg-[#e0d6c9]">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover sepia-[0.15]" alt="Strip 1">
-              </div>
-              <div class="w-full h-16 overflow-hidden bg-[#e0d6c9]">
-                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover sepia-[0.15]" alt="Strip 2">
-              </div>
-            </div>
-          </div>
-
-          <div class="polaroid-box w-36 transform rotate-2 absolute left-20 bottom-1 z-30">
-            <div class="washi-tape -top-3 right-4 transform rotate-6 scale-75"></div>
-            <div class="w-full aspect-square overflow-hidden bg-[#d9cbbd]">
-              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover sepia-[0.1]" alt="Memory 3">
-            </div>
-          </div>
-        </div>
-
-        <button onclick="openGalleryModal()" class="group inline-flex items-center gap-2 px-6 py-2 rounded-full border border-[#835c93]/60 bg-white/30 hover:bg-[#835c93] text-[#4f3657] hover:text-white transition-all shadow-sm">
-          <span class="font-serif-title text-xs uppercase tracking-[0.2em] font-medium">VIEW MORE</span>
-          <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
-        </button>
       </div>
-
-      <!-- Right Page: RSVP -->
-      <div class="md:col-span-6 flex flex-col items-center text-center space-y-4 md:border-l md:border-[#8d6d53]/20 md:pl-10">
-        
-        <h2 class="font-script text-7xl sm:text-8xl text-[#4a3424] leading-tight select-none">
-          RSVP
-        </h2>
-
-        <p class="font-serif-vintage text-lg sm:text-xl text-[#443327] max-w-xs">
-          Kindly let us know if you can join us.
-        </p>
-
-        <div class="pt-2">
-          <button onclick="openRsvpModal()" class="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-[#6b4773] bg-[#794d82] hover:bg-[#603968] text-white transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-            <span class="font-serif-title text-xs sm:text-sm uppercase tracking-[0.22em] font-medium">
-              CONFIRM ATTENDANCE
-            </span>
-            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-          </button>
-        </div>
-
-        <div class="pt-6 select-none">
-          <p class="font-script text-3xl sm:text-4xl text-[#583f4d]">
-            Let's make this chapter complete together.
-          </p>
-          <span class="font-hand text-4xl text-[#7a5542] block mt-1">♡</span>
-        </div>
-
-      </div>
-
     </div>
-
-    <!-- Bottom Footer Sign-off -->
-    <footer class="w-full text-center pb-6 text-xs sm:text-sm font-serif-vintage tracking-widest text-[#5c4a3d]/80 select-none">
-      Andy &amp; Lance &bull; September 4, 2028
-    </footer>
-
   </section>
 
-
-  <!-- ========================================================
-       MODAL 1: RSVP FORM POP-UP
-       ======================================================== -->
-  <div id="rsvp-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-    <div class="bg-[#faf5ed] border border-[#d6c4b2] max-w-lg w-full p-6 sm:p-8 rounded-lg relative shadow-2xl max-h-[92vh] overflow-y-auto">
-      
-      <button onclick="closeRsvpModal()" class="absolute top-4 right-4 text-[#796758] hover:text-[#382340] p-1.5 rounded-full hover:bg-black/5 transition-colors">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div class="text-center mb-6">
-        <span class="font-serif-title text-[11px] uppercase tracking-[0.25em] text-[#865d96]">Wedding Attendance</span>
-        <h3 class="font-script text-4xl sm:text-5xl text-[#463148] mt-1">R S V P</h3>
-        <p class="font-serif-vintage italic text-sm text-[#736355]">Andy &amp; Lance • September 4, 2028</p>
-      </div>
-
-      <form id="rsvp-form" onsubmit="handleRsvpSubmit(event)" class="space-y-4 font-serif-vintage text-base text-[#4d4034]">
-        <div>
-          <label class="block text-xs font-serif-title uppercase tracking-wider text-[#635345] mb-1">Your Full Name *</label>
-          <input type="text" required placeholder="e.g. Maria Santos" class="w-full px-4 py-2.5 rounded bg-white border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025]">
-        </div>
-
-        <div>
-          <label class="block text-xs font-serif-title uppercase tracking-wider text-[#635345] mb-1">Email / Phone *</label>
-          <input type="text" required placeholder="e.g. maria@example.com" class="w-full px-4 py-2.5 rounded bg-white border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025]">
-        </div>
-
-        <div>
-          <label class="block text-xs font-serif-title uppercase tracking-wider text-[#635345] mb-2">Will you be celebrating with us? *</label>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-            <label class="flex items-center gap-2.5 p-3 rounded border border-[#d8ccbe] bg-[#fbf8f2] cursor-pointer hover:border-[#8e659f]">
-              <input type="radio" name="attendance" value="accept" checked class="accent-[#8e659f]">
-              <span>Joyfully Accept ♡</span>
-            </label>
-            <label class="flex items-center gap-2.5 p-3 rounded border border-[#d8ccbe] bg-[#fbf8f2] cursor-pointer hover:border-[#8e659f]">
-              <input type="radio" name="attendance" value="decline" class="accent-[#8e659f]">
-              <span>Regretfully Decline</span>
-            </label>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-serif-title uppercase tracking-wider text-[#635345] mb-1">Number of Guests</label>
-          <select class="w-full px-4 py-2.5 rounded bg-white border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025]">
-            <option value="1">1 Person (Just me)</option>
-            <option value="2">2 Persons</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-xs font-serif-title uppercase tracking-wider text-[#635345] mb-1">Dietary Preferences / Heartfelt Message</label>
-          <textarea rows="3" placeholder="Leave your heartfelt message or dietary requirements..." class="w-full px-4 py-2 rounded bg-white border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025] resize-none"></textarea>
-        </div>
-
-        <div class="pt-2">
-          <button type="submit" class="w-full py-3 rounded-full bg-[#794d82] hover:bg-[#623c6a] text-white font-serif-title text-xs uppercase tracking-[0.22em] font-medium transition-all shadow-md">
-            Submit Response
-          </button>
-        </div>
-      </form>
-
-      <div id="rsvp-success" class="hidden text-center py-8 space-y-3">
-        <div class="w-12 h-12 rounded-full bg-[#8e659f]/20 text-[#8e659f] flex items-center justify-center mx-auto">
-          <i data-lucide="check" class="w-6 h-6"></i>
-        </div>
-        <h4 class="font-script text-4xl text-[#463148]">Thank you!</h4>
-        <p class="font-serif-vintage text-lg text-[#554538]">
-          Your RSVP has been saved. We can't wait to celebrate together!
-        </p>
-        <button onclick="closeRsvpModal()" class="mt-4 px-6 py-2 rounded-full border border-[#8e659f] text-[#8e659f] hover:bg-[#8e659f] hover:text-white font-serif-title text-xs uppercase tracking-widest transition-all">
-          Close
-        </button>
-      </div>
-
+  <!-- RSVP Interactive Modal -->
+  <div class="modal-overlay" id="rsvpModal" onclick="closeModalOnBg(event)">
+    <div class="rsvp-form-card">
+      <h3 style="font-family: 'Alex Brush', cursive; font-size: 2.5rem; margin-bottom: 1rem; color: #3b2436;">Join Our Celebration</h3>
+      <input type="text" placeholder="Your Full Name" required>
+      <select>
+        <option value="yes">Joyfully Accepts</option>
+        <option value="no">Regretfully Declines</option>
+      </select>
+      <input type="number" placeholder="Number of Guests" min="1" max="4" value="1">
+      <button class="submit-btn" onclick="submitRSVP()">SUBMIT RESPONSE</button>
     </div>
   </div>
 
-
-  <!-- ========================================================
-       MODAL 2: FULL PHOTO GALLERY
-       ======================================================== -->
-  <div id="gallery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-    <div class="bg-[#faf5ed] max-w-4xl w-full p-6 sm:p-8 rounded-lg relative shadow-2xl max-h-[90vh] overflow-y-auto border border-[#ded0bf]">
-      
-      <button onclick="closeGalleryModal()" class="absolute top-4 right-4 text-[#796758] hover:text-[#382340] p-1.5 rounded-full hover:bg-black/5 transition-colors">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div class="text-center mb-6">
-        <h3 class="font-script text-4xl sm:text-5xl text-[#463148]">Our Captured Moments</h3>
-        <p class="font-serif-vintage italic text-sm text-[#736355]">A collection of memories through the years</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-        <div class="bg-white p-3 shadow-md rounded border border-[#e5dcd1]">
-          <div class="aspect-square overflow-hidden bg-[#e0d6c8] rounded">
-            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Sunset">
-          </div>
-          <p class="font-serif-vintage italic text-xs text-center text-[#7a6a5d] mt-2">Tagaytay sunset</p>
-        </div>
-
-        <div class="bg-white p-3 shadow-md rounded border border-[#e5dcd1]">
-          <div class="aspect-square overflow-hidden bg-[#e0d6c8] rounded">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Night lights">
-          </div>
-          <p class="font-serif-vintage italic text-xs text-center text-[#7a6a5d] mt-2">Intramuros stroll</p>
-        </div>
-
-        <div class="bg-white p-3 shadow-md rounded border border-[#e5dcd1]">
-          <div class="aspect-square overflow-hidden bg-[#e0d6c8] rounded">
-            <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Beach">
-          </div>
-          <p class="font-serif-vintage italic text-xs text-center text-[#7a6a5d] mt-2">weekend getaway</p>
-        </div>
-
-        <div class="bg-white p-3 shadow-md rounded border border-[#e5dcd1]">
-          <div class="aspect-square overflow-hidden bg-[#e0d6c8] rounded">
-            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Holding hands">
-          </div>
-          <p class="font-serif-vintage italic text-xs text-center text-[#7a6a5d] mt-2">she said yes</p>
-        </div>
-
-        <div class="bg-white p-3 shadow-md rounded border border-[#e5dcd1]">
-          <div class="aspect-square overflow-hidden bg-[#e0d6c8] rounded">
-            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Travels">
-          </div>
-          <p class="font-serif-vintage italic text-xs text-center text-[#7a6a5d] mt-2">roadtrips &amp; coffees</p>
-        </div>
-
-        <div class="bg-white p-3 shadow-md rounded border border-[#e5dcd1]">
-          <div class="aspect-square overflow-hidden bg-[#e0d6c8] rounded">
-            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Embrace">
-          </div>
-          <p class="font-serif-vintage italic text-xs text-center text-[#7a6a5d] mt-2">forever to go ♡</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ========================================================
-       JAVASCRIPT INTERACTIONS
-       ======================================================== -->
   <script>
-    // Initialize Lucide Icons
-    window.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-    });
-
-    // RSVP Modal
-    function openRsvpModal() {
-      const modal = document.getElementById('rsvp-modal');
-      modal.classList.remove('hidden');
-      setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
+    function openModal() {
+      document.getElementById('rsvpModal').classList.add('active');
     }
-
-    function closeRsvpModal() {
-      const modal = document.getElementById('rsvp-modal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-        document.getElementById('rsvp-form').reset();
-        document.getElementById('rsvp-form').classList.remove('hidden');
-        document.getElementById('rsvp-success').classList.add('hidden');
-      }, 300);
-    }
-
-    // Gallery Modal
-    function openGalleryModal() {
-      const modal = document.getElementById('gallery-modal');
-      modal.classList.remove('hidden');
-      setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
-    }
-
-    function closeGalleryModal() {
-      const modal = document.getElementById('gallery-modal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 300);
-    }
-
-    // Handle Form Submit
-    function handleRsvpSubmit(e) {
-      e.preventDefault();
-      document.getElementById('rsvp-form').classList.add('hidden');
-      const successDiv = document.getElementById('rsvp-success');
-      successDiv.classList.remove('hidden');
-      lucide.createIcons();
-    }
-
-    // Close on outside click
-    window.addEventListener('click', (e) => {
-      if (e.target === document.getElementById('rsvp-modal')) closeRsvpModal();
-      if (e.target === document.getElementById('gallery-modal')) closeGalleryModal();
-    });
-
-    // Close on ESC
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeRsvpModal();
-        closeGalleryModal();
+    function closeModalOnBg(e) {
+      if (e.target.id === 'rsvpModal') {
+        document.getElementById('rsvpModal').classList.remove('active');
       }
-    });
+    }
+    function submitRSVP() {
+      alert('Thank you! Your RSVP has been recorded.');
+      document.getElementById('rsvpModal').classList.remove('active');
+    }
   </script>
 
 </body>
