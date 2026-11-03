@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Andy & Lance — Our Wedding Journal</title>
-  
-  <!-- Matching Typography: Calligraphy Script & Elegant Serif -->
+
+  <!-- Typography matching the vintage journal -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after {
@@ -18,24 +18,24 @@
     }
 
     body {
-      background-color: #242022;
+      background-color: #1f1b1d;
       color: #382c2a;
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
-    /* Screen Stage: Centers each page like a real journal */
+    /* Centers the canvas on any screen */
     .journal-stage {
-      width: 100%;
+      width: 100vw;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #242022;
-      padding: 0;
+      background-color: #1f1b1d;
     }
 
-    /* Fixed Canvas: 16:9 ratio in browser ensures coordinates NEVER drift */
+    /* Fixed ratio canvas: coordinates never stretch or drift */
     .page-sheet {
       position: relative;
       width: 100vw;
@@ -58,7 +58,10 @@
     }
 
     @media (max-width: 768px) {
-      .page-sheet { aspect-ratio: 9 / 16; width: 100vw; }
+      .page-sheet { 
+        aspect-ratio: 9 / 16; 
+        width: 100vw; 
+      }
       #page-1 { background-image: url('intro p.jpg'); }
       #page-2 { background-image: url('2nd page p.jpg'); }
       #page-3 { background-image: url('3rd page p.jpg'); }
@@ -67,167 +70,222 @@
       #page-6 { background-image: url('6th page p.jpg'); }
     }
 
-    /* ----------------------------------------------------
-       TOP NAVIGATION TABS (Pages 2 to 6)
-       ---------------------------------------------------- */
-    .journal-nav {
+    /* ========================================================
+       PAGE 1: COVER LAYOUT & REALISTIC JOURNAL SLANT
+       ======================================================== */
+
+    /* Cream Paper Label Area: Shifted to the right of the flowers & ribbon */
+    .p1-journal-label {
       position: absolute;
-      top: 5.2%;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 3.2%;
-      z-index: 30;
-    }
-
-    .journal-nav a {
-      text-decoration: none;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(13px, 1.25vw, 20px);
-      color: #634e56;
-      transition: color 0.2s;
-    }
-
-    .journal-nav a:hover,
-    .journal-nav a.active {
-      color: #2e1c25;
-      font-weight: 600;
-      border-bottom: 1px solid #7d4f6c;
-    }
-
-    .journal-nav .home-icon {
-      font-style: normal;
-      font-size: clamp(12px, 1.1vw, 18px);
-    }
-
-    /* ----------------------------------------------------
-       PAGE 1: COVER
-       ---------------------------------------------------- */
-    .p1-card-content {
-      position: absolute;
-      top: 15%;
-      left: 31%;
-      width: 53%;
-      height: 56%;
+      top: 20%;
+      left: 51.5%;
+      width: 32.5%;
+      height: 48%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
+      /* Slant matching the journal's perspective */
+      transform: rotate(-6.8deg);
+      transform-origin: center center;
+      /* Ink blend effect to look naturally written into paper fibers */
+      mix-blend-mode: multiply;
+      pointer-events: none;
     }
 
-    .p1-script-names {
+    /* Couple's Names: Slanted Calligraphy */
+    .p1-names-wrap {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(48px, 6.2vw, 100px);
-      line-height: 0.95;
+      font-size: clamp(40px, 5.1vw, 84px);
+      line-height: 0.98;
       color: #3b282c;
       font-weight: 400;
-      text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.08);
-      position: relative;
+      letter-spacing: 0.01em;
+      filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1));
+      user-select: none;
+    }
+
+    .p1-names-wrap .scramble-line-1 {
       display: inline-block;
+      white-space: nowrap;
     }
 
-    .p1-script-names .amp {
-      font-size: 0.65em;
-      margin-left: 0.15em;
-      vertical-align: 0.2em;
-    }
-
-    .p1-script-names .name-lance {
+    .p1-names-wrap .scramble-line-2 {
       display: block;
       margin-top: -0.1em;
-      margin-left: 0.5em;
+      margin-left: 0.55em;
+      white-space: nowrap;
     }
 
-    .p1-subhead {
-      margin-top: 1.8vw;
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(8px, 0.8vw, 13px);
-      font-weight: 400;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: #554148;
-    }
-
-    .p1-date {
-      margin-top: 0.5vw;
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(9px, 0.85vw, 14px);
-      font-weight: 400;
+    /* "OUR WEDDING JOURNAL" in refined, spaced serif */
+    .p1-label-subhead {
+      margin-top: 1.5vw;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(9px, 0.92vw, 15px);
+      font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: #554148;
+      color: #534247;
+      opacity: 0.92;
     }
 
-    .p1-bottom-quote {
+    /* "SEPTEMBER 4, 2028" */
+    .p1-label-date {
+      margin-top: 0.4vw;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(9px, 0.95vw, 15px);
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #534247;
+      opacity: 0.92;
+    }
+
+    /* Lower Quote on Purple Velvet/Linen Fabric */
+    .p1-lower-quote {
       position: absolute;
-      top: 74%;
-      left: 54%;
+      top: 73.5%;
+      left: 54.5%;
       width: 27%;
       text-align: center;
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(7px, 0.7vw, 11px);
+      font-size: clamp(7.5px, 0.68vw, 11px);
       font-weight: 400;
-      letter-spacing: 0.22em;
-      line-height: 1.7;
+      letter-spacing: 0.24em;
+      line-height: 1.75;
       text-transform: uppercase;
-      color: #e5d7eb;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      color: #e5d6eb;
+      /* Slanted with the book cover */
+      transform: rotate(-6.8deg);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
     }
 
-    .p1-open-btn {
+    /* "OPEN JOURNAL ──→" */
+    .p1-open-action {
       position: absolute;
       top: 89%;
-      left: 54%;
+      left: 54.5%;
       width: 27%;
       text-align: center;
+      transform: rotate(-6.8deg);
     }
 
-    .p1-open-btn a {
+    .p1-open-action a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7vw;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(8px, 0.72vw, 12px);
-      letter-spacing: 0.32em;
+      letter-spacing: 0.36em;
       text-transform: uppercase;
-      color: #ede2ef;
-      border-bottom: 1px solid rgba(237, 226, 239, 0.45);
+      color: #ede0ef;
       padding-bottom: 0.3vw;
-      transition: all 0.3s;
+      border-bottom: 1px solid rgba(237, 224, 239, 0.4);
+      transition: all 0.3s ease;
     }
 
-    .p1-open-btn a:hover {
+    .p1-open-action a:hover {
       color: #ffffff;
       border-bottom-color: #ffffff;
+      letter-spacing: 0.42em;
     }
 
     /* ----------------------------------------------------
-       PAGE 2: TO OUR FAVORITE PEOPLE
+       MOBILE ADJUSTMENTS (9:16 Portrait Canvas)
        ---------------------------------------------------- */
+    @media (max-width: 768px) {
+      .p1-journal-label {
+        top: 25%;
+        left: 22%;
+        width: 58%;
+        height: 38%;
+        transform: rotate(-5.5deg);
+      }
+      .p1-names-wrap { font-size: 11.5vw; }
+      .p1-label-subhead { font-size: 2.3vw; margin-top: 3vw; }
+      .p1-label-date { font-size: 2.4vw; margin-top: 0.8vw; }
+      .p1-lower-quote {
+        top: 68%;
+        left: 15%;
+        width: 70%;
+        font-size: 2vw;
+        transform: rotate(-5.5deg);
+      }
+      .p1-open-action {
+        top: 82%;
+        left: 15%;
+        width: 70%;
+        transform: rotate(-5.5deg);
+      }
+      .p1-open-action a { font-size: 2.2vw; }
+
+      .p2-letter { top: 16%; left: 10%; width: 80%; transform: rotate(-2deg); }
+      .p2-polaroid { display: none; }
+      .p3-photos { display: none; }
+      .p3-story-box { top: 16%; left: 10%; width: 80%; }
+      .p4-container { top: 14%; left: 8%; width: 84%; }
+      .p4-attire-tag { display: none; }
+      .p5-container { top: 14%; left: 8%; width: 84%; }
+      .p6-gallery-side { display: none; }
+      .p6-rsvp-side { top: 22%; left: 10%; width: 80%; }
+    }
+
+    /* ----------------------------------------------------
+       PAGES 2-6: SUBPAGES STYLING
+       ---------------------------------------------------- */
+    .journal-nav {
+      position: absolute;
+      top: 5%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 3.5%;
+      z-index: 20;
+    }
+    .journal-nav a {
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1.2vw, 19px);
+      color: #634e56;
+      transition: color 0.2s;
+    }
+    .journal-nav a:hover, .journal-nav a.active {
+      color: #2e1c25;
+      font-weight: 600;
+    }
+
     .p2-letter {
       position: absolute;
       top: 14%;
       left: 17%;
       width: 40%;
       text-align: left;
+      transform: rotate(-1.5deg);
+      mix-blend-mode: multiply;
     }
-
     .script-heading {
       font-family: 'Alex Brush', cursive;
       font-size: clamp(32px, 3.8vw, 60px);
       color: #3b282c;
       margin-bottom: 1.2vw;
     }
-
     .letter-body {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(13px, 1.22vw, 20px);
       line-height: 1.6;
       color: #4a3c40;
     }
-
+    .p2-sign {
+      margin-top: 1.5vw;
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(24px, 2.7vw, 42px);
+      color: #3b282c;
+    }
     .p2-polaroid {
       position: absolute;
       top: 11%;
@@ -235,49 +293,12 @@
       width: 28%;
       background: #ffffff;
       padding: 3.5% 3.5% 8.5% 3.5%;
-      box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.15);
+      box-shadow: 2px 5px 15px rgba(0,0,0,0.15);
       transform: rotate(3deg);
     }
+    .p2-polaroid img { width: 100%; display: block; }
 
-    .p2-polaroid img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .p2-sign {
-      margin-top: 1.5vw;
-      font-family: 'Alex Brush', cursive;
-      font-size: clamp(24px, 2.7vw, 42px);
-      color: #3b282c;
-    }
-
-    /* ----------------------------------------------------
-       PAGE 3: OUR STORY
-       ---------------------------------------------------- */
-    .p3-story-box {
-      position: absolute;
-      top: 15%;
-      left: 50%;
-      width: 40%;
-      text-align: left;
-    }
-
-    .p3-story-box .sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(13px, 1.2vw, 19px);
-      color: #5b4a4f;
-      margin-bottom: 1.5vw;
-    }
-
-    .p3-story-box p {
-      font-size: clamp(12px, 1.15vw, 18px);
-      line-height: 1.58;
-      color: #46383b;
-      margin-bottom: 0.9vw;
-    }
-
+    /* Page 3 */
     .p3-photos {
       position: absolute;
       top: 16%;
@@ -285,45 +306,48 @@
       width: 36%;
       height: 72%;
     }
-
     .polaroid-frame {
       position: absolute;
       background: #ffffff;
       padding: 3% 3% 7% 3%;
       box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.14);
     }
-
-    .polaroid-frame img {
-      width: 100%;
-      display: block;
-    }
-
+    .polaroid-frame img { width: 100%; display: block; }
     .p3-frame-1 { width: 56%; top: 0; left: 6%; transform: rotate(-6deg); z-index: 1; }
     .p3-frame-2 { width: 56%; top: 22%; left: 36%; transform: rotate(4deg); z-index: 2; }
     .p3-frame-3 { width: 58%; top: 48%; left: 8%; transform: rotate(-3deg); z-index: 3; }
 
-    /* ----------------------------------------------------
-       PAGE 4: THE WEDDING DETAILS
-       ---------------------------------------------------- */
+    .p3-story-box {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      width: 40%;
+      text-align: left;
+      transform: rotate(-1deg);
+      mix-blend-mode: multiply;
+    }
+    .p3-story-box p {
+      font-size: clamp(12px, 1.15vw, 18px);
+      line-height: 1.58;
+      color: #46383b;
+      margin-bottom: 0.9vw;
+    }
+
+    /* Page 4 Details */
     .p4-container {
       position: absolute;
       top: 14%;
       left: 16%;
       width: 56%;
       text-align: center;
+      mix-blend-mode: multiply;
     }
-
     .p4-columns {
       display: flex;
       justify-content: space-between;
       margin-top: 2vw;
     }
-
-    .p4-col {
-      width: 47%;
-      text-align: center;
-    }
-
+    .p4-col { width: 47%; text-align: center; }
     .venue-name {
       font-size: clamp(14px, 1.4vw, 22px);
       font-weight: 600;
@@ -331,18 +355,8 @@
       color: #38252a;
       margin: 0.4vw 0 0.2vw 0;
     }
-
-    .venue-loc {
-      font-size: clamp(12px, 1.1vw, 17px);
-      color: #554449;
-      margin-bottom: 0.6vw;
-    }
-
-    .venue-time {
-      font-size: clamp(11px, 0.95vw, 15px);
-      color: #6a575d;
-      letter-spacing: 0.05em;
-    }
+    .venue-loc { font-size: clamp(12px, 1.1vw, 17px); color: #554449; margin-bottom: 0.6vw; }
+    .venue-time { font-size: clamp(11px, 0.95vw, 15px); color: #6a575d; }
 
     .p4-attire-tag {
       position: absolute;
@@ -352,46 +366,22 @@
       background: #fdfaf5;
       padding: 1.8vw 1.2vw;
       text-align: center;
-      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.08);
       border: 1px dashed #d5c8be;
       transform: rotate(2deg);
     }
+    .swatches { display: flex; justify-content: center; gap: 0.4vw; margin: 0.8vw 0; }
+    .swatch { width: 1.3vw; height: 1.3vw; min-width: 14px; min-height: 14px; border-radius: 50%; }
 
-    .swatches {
-      display: flex;
-      justify-content: center;
-      gap: 0.4vw;
-      margin: 0.8vw 0;
-    }
-
-    .swatch {
-      width: 1.3vw;
-      height: 1.3vw;
-      min-width: 14px;
-      min-height: 14px;
-      border-radius: 50%;
-    }
-
-    /* ----------------------------------------------------
-       PAGE 5: OUR ENTOURAGE
-       ---------------------------------------------------- */
+    /* Page 5 Entourage */
     .p5-container {
       position: absolute;
       top: 13%;
       left: 8%;
       width: 50%;
       text-align: center;
+      mix-blend-mode: multiply;
     }
-
-    .entourage-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1vw;
-      font-size: clamp(11px, 1.05vw, 16px);
-      line-height: 1.5;
-      color: #433337;
-    }
-
     .role-head {
       font-style: italic;
       font-weight: 600;
@@ -400,10 +390,15 @@
       margin-top: 0.8vw;
       margin-bottom: 0.3vw;
     }
+    .entourage-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1vw;
+      font-size: clamp(11px, 1.05vw, 16px);
+      line-height: 1.5;
+    }
 
-    /* ----------------------------------------------------
-       PAGE 6: OUR GALLERY & RSVP
-       ---------------------------------------------------- */
+    /* Page 6 Gallery & RSVP */
     .p6-gallery-side {
       position: absolute;
       top: 14%;
@@ -411,20 +406,17 @@
       width: 40%;
       text-align: center;
     }
-
     .gallery-preview {
       display: flex;
       justify-content: center;
       gap: 0.8vw;
       margin-top: 1.5vw;
     }
-
     .gallery-preview img {
       width: 28%;
       border: 4px solid #ffffff;
-      box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.12);
+      box-shadow: 1px 3px 8px rgba(0,0,0,0.12);
     }
-
     .view-more-btn {
       display: inline-block;
       margin-top: 1.2vw;
@@ -446,8 +438,8 @@
       right: 9%;
       width: 38%;
       text-align: center;
+      mix-blend-mode: multiply;
     }
-
     .rsvp-large-title {
       font-family: 'Alex Brush', cursive;
       font-size: clamp(48px, 5.8vw, 90px);
@@ -455,7 +447,6 @@
       line-height: 1;
       margin-bottom: 1.2vw;
     }
-
     .confirm-attendance-btn {
       display: inline-block;
       margin: 1.8vw 0;
@@ -471,13 +462,9 @@
       transition: all 0.3s;
       text-decoration: none;
     }
+    .confirm-attendance-btn:hover { background: #462c43; color: #fff; }
 
-    .confirm-attendance-btn:hover {
-      background: #462c43;
-      color: #ffffff;
-    }
-
-    /* Modal Form for RSVP */
+    /* Modal Form */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -488,9 +475,7 @@
       justify-content: center;
       z-index: 1000;
     }
-
     .modal-overlay.open { display: flex; }
-
     .modal-card {
       background: #fbf7f2;
       border: 1px solid #d5c8be;
@@ -498,9 +483,8 @@
       width: 90%;
       max-width: 440px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
-
     .modal-card input, .modal-card select {
       width: 100%;
       padding: 0.75rem;
@@ -510,7 +494,6 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem;
     }
-
     .modal-card button {
       width: 100%;
       padding: 0.8rem;
@@ -522,33 +505,6 @@
       letter-spacing: 0.2em;
       cursor: pointer;
     }
-
-    /* ----------------------------------------------------
-       MOBILE ADJUSTMENTS (aspect-ratio: 9/16)
-       ---------------------------------------------------- */
-    @media (max-width: 768px) {
-      .p1-card-content { top: 22%; left: 16%; width: 68%; height: 42%; }
-      .p1-script-names { font-size: 14vw; }
-      .p1-subhead { font-size: 2.4vw; margin-top: 3vw; }
-      .p1-date { font-size: 2.5vw; }
-      .p1-bottom-quote { top: 68%; left: 10%; width: 80%; font-size: 2.1vw; }
-      .p1-open-btn { top: 83%; left: 10%; width: 80%; }
-      .p1-open-btn a { font-size: 2.4vw; }
-
-      .p2-letter { top: 18%; left: 10%; width: 80%; }
-      .p2-polaroid { display: none; }
-      
-      .p3-photos { display: none; }
-      .p3-story-box { top: 16%; left: 10%; width: 80%; }
-      
-      .p4-container { top: 14%; left: 8%; width: 84%; }
-      .p4-attire-tag { display: none; }
-
-      .p5-container { top: 14%; left: 8%; width: 84%; }
-      
-      .p6-gallery-side { display: none; }
-      .p6-rsvp-side { top: 20%; left: 10%; width: 80%; }
-    }
   </style>
 </head>
 <body>
@@ -557,22 +513,23 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-1">
       
-      <!-- Bounded directly inside the cream paper label -->
-      <div class="p1-card-content">
-        <div class="p1-script-names">
-          Andy <span class="amp">&amp;</span>
-          <span class="name-lance">Lance</span>
+      <!-- Bounded squarely inside the cream paper label with authentic tilt -->
+      <div class="p1-journal-label">
+        <div class="p1-names-wrap" aria-label="Andy & Lance">
+          <span class="scramble-line-1" id="scramble1">Andy &amp;</span>
+          <span class="scramble-line-2" id="scramble2">Lance</span>
         </div>
-        <div class="p1-subhead">Our Wedding Journal</div>
-        <div class="p1-date">September 4, 2028</div>
+        <div class="p1-label-subhead">Our Wedding Journal</div>
+        <div class="p1-label-date">September 4, 2028</div>
       </div>
 
-      <!-- Centered below the label on purple book fabric -->
-      <div class="p1-bottom-quote">
+      <!-- Tagline on lower cover, tilted along with the journal -->
+      <div class="p1-lower-quote">
         A journey of unexpected timing,<br>and a love that stayed.
       </div>
 
-      <div class="p1-open-btn">
+      <!-- Open Link -->
+      <div class="p1-open-action">
         <a href="#page-2">OPEN JOURNAL &rarr;</a>
       </div>
 
@@ -584,7 +541,7 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-2">
       <nav class="journal-nav">
-        <a href="#page-1" class="home-icon">&#8962;</a>
+        <a href="#page-1">&#8962;</a>
         <a href="#page-3">Our Story</a>
         <a href="#page-4">The Details</a>
         <a href="#page-5">Gallery</a>
@@ -612,7 +569,7 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-3">
       <nav class="journal-nav">
-        <a href="#page-1" class="home-icon">&#8962;</a>
+        <a href="#page-1">&#8962;</a>
         <a href="#page-3" class="active">Our Story</a>
         <a href="#page-4">The Details</a>
         <a href="#page-5">Gallery</a>
@@ -633,7 +590,9 @@
 
       <div class="p3-story-box">
         <h2 class="script-heading">Our Story</h2>
-        <div class="sub">A love story that began in the most unexpected time.</div>
+        <div style="font-style: italic; font-size: clamp(13px, 1.2vw, 19px); color: #5b4a4f; margin-bottom: 1.5vw;">
+          A love story that began in the most unexpected time.
+        </div>
         <p>It all started with a simple day, just hanging around, not expecting any love, not even a thought of falling in love. But then, <strong>it happened.</strong></p>
         <p>Late night conversations and calls, daily chats even from a distance, and a decision to finally meet.</p>
         <p>And just like that, we got over with each other &mdash; and it all happened in a very sudden way.</p>
@@ -647,7 +606,7 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-4">
       <nav class="journal-nav">
-        <a href="#page-1" class="home-icon">&#8962;</a>
+        <a href="#page-1">&#8962;</a>
         <a href="#page-3">Our Story</a>
         <a href="#page-4" class="active">The Details</a>
         <a href="#page-5">Gallery</a>
@@ -695,10 +654,10 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-5">
       <nav class="journal-nav">
-        <a href="#page-1" class="home-icon">&#8962;</a>
+        <a href="#page-1">&#8962;</a>
         <a href="#page-3">Our Story</a>
-        <a href="#page-4" class="active">The Details</a>
-        <a href="#page-5">Gallery</a>
+        <a href="#page-4">The Details</a>
+        <a href="#page-5" class="active">Gallery</a>
         <a href="#page-6">RSVP</a>
       </nav>
 
@@ -737,7 +696,7 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-6">
       <nav class="journal-nav">
-        <a href="#page-1" class="home-icon">&#8962;</a>
+        <a href="#page-1">&#8962;</a>
         <a href="#page-3">Our Story</a>
         <a href="#page-4">The Details</a>
         <a href="#page-5" class="active">Gallery</a>
@@ -780,7 +739,58 @@
     </div>
   </div>
 
+  <!-- Scrambler & Modal Script -->
   <script>
+    // Letter-morphing scramble animation that resolves into the couple's names
+    function runScrambleAnimation() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&♡';
+      
+      function scramble(elementId, targetText, delay = 0, duration = 1600) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        
+        const length = targetText.length;
+        let start = null;
+
+        setTimeout(() => {
+          function frame(now) {
+            if (!start) start = now;
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Number of characters resolved from left to right
+            const resolvedCount = Math.floor(progress * length);
+            
+            let output = '';
+            for (let i = 0; i < length; i++) {
+              if (targetText[i] === ' ') {
+                output += ' ';
+              } else if (i < resolvedCount) {
+                output += targetText[i];
+              } else {
+                output += chars[Math.floor(Math.random() * chars.length)];
+              }
+            }
+            
+            el.textContent = output;
+            
+            if (progress < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              el.textContent = targetText;
+            }
+          }
+          requestAnimationFrame(frame);
+        }, delay);
+      }
+
+      scramble('scramble1', 'Andy &', 200, 1500);
+      scramble('scramble2', 'Lance', 600, 1600);
+    }
+
+    window.addEventListener('DOMContentLoaded', runScrambleAnimation);
+
+    // RSVP modal handlers
     function openRSVP() {
       document.getElementById('rsvpModal').classList.add('open');
     }
