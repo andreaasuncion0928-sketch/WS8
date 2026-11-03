@@ -25,7 +25,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Centers the canvas on any screen without horizontal stretching */
+    /* Centers the canvas on any screen */
     .journal-stage {
       width: 100vw;
       min-height: 100vh;
@@ -71,25 +71,23 @@
     }
 
     /* ========================================================
-       PAGE 1: COVER LAYOUT & NATURAL JOURNAL SLANT
+       PAGE 1: COVER LAYOUT
+       All text cleanly placed on the cream paper label
        ======================================================== */
 
-    /* Cream Paper Label: All title text is grouped here inside the white paper */
     .p1-parchment-label {
       position: absolute;
-      top: 19%;
+      top: 17%;
       left: 47%;
       width: 37%;
-      height: 49%;
+      height: 54%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      /* Rotated to precisely match the diagonal angle of the torn paper */
       transform: rotate(-12.8deg);
       transform-origin: center center;
-      /* Natural ink blend into paper fibers */
       mix-blend-mode: multiply;
       pointer-events: none;
     }
@@ -97,7 +95,7 @@
     /* Couple's Names Calligraphy */
     .p1-names-wrap {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(38px, 5.2vw, 86px);
+      font-size: clamp(38px, 5vw, 84px);
       line-height: 0.98;
       color: #382428;
       font-weight: 400;
@@ -106,64 +104,77 @@
       user-select: none;
     }
 
-    .scramble-char {
+    /* Nostalgic slow-fading individual characters */
+    .fade-char {
       display: inline-block;
-      min-width: 0.35em;
+      opacity: 0;
+      filter: blur(4px);
+      transform: translateY(2px) scale(0.96);
+      transition: opacity 1.8s cubic-bezier(0.25, 1, 0.5, 1),
+                  filter 1.8s cubic-bezier(0.25, 1, 0.5, 1),
+                  transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    .p1-names-wrap .scramble-line-1 {
+    .fade-char.revealed {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0) scale(1);
+    }
+
+    .p1-names-wrap .line-1 {
       display: block;
       white-space: nowrap;
     }
 
-    .p1-names-wrap .scramble-line-2 {
+    .p1-names-wrap .line-2 {
       display: block;
       margin-top: -0.05em;
-      margin-left: 0.8em;
+      margin-left: 0.75em;
       white-space: nowrap;
     }
 
-    /* "OUR WEDDING JOURNAL" directly underneath in the white paper */
+    /* "OUR WEDDING JOURNAL" */
     .p1-label-subhead {
-      margin-top: 1.8vw;
+      margin-top: 1.4vw;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(9px, 0.95vw, 15px);
+      font-size: clamp(9px, 0.92vw, 15px);
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: #4a363c;
     }
 
-    /* "SEPTEMBER 4, 2028" underneath */
+    /* "SEPTEMBER 4, 2028" */
     .p1-label-date {
-      margin-top: 0.45vw;
+      margin-top: 0.35vw;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(9px, 0.98vw, 15px);
+      font-size: clamp(9px, 0.95vw, 15px);
       font-weight: 600;
       letter-spacing: 0.26em;
       text-transform: uppercase;
       color: #4a363c;
     }
 
-    /* Lower Quote on Purple Book Fabric: parallel -12.8deg slant */
-    .p1-lower-quote {
-      position: absolute;
-      top: 74.5%;
-      left: 54%;
-      width: 30%;
-      text-align: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(7.5px, 0.68vw, 11px);
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      line-height: 1.75;
-      text-transform: uppercase;
-      color: #e5d6eb;
-      transform: rotate(-12.8deg);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    /* Quote placed directly under September 4, 2028 inside the cream label */
+    .p1-inner-quote {
+      margin-top: 1vw;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(8.5px, 0.88vw, 14px);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      color: #5a444b;
+      max-width: 88%;
+      opacity: 0;
+      transition: opacity 2.2s ease;
     }
 
-    /* "OPEN JOURNAL ──→" */
+    .p1-inner-quote.revealed {
+      opacity: 0.95;
+    }
+
+    /* "OPEN JOURNAL ──→" on the lower book cover */
     .p1-open-action {
       position: absolute;
       top: 90.5%;
@@ -200,22 +211,16 @@
        ---------------------------------------------------- */
     @media (max-width: 768px) {
       .p1-parchment-label {
-        top: 24%;
+        top: 23%;
         left: 20%;
         width: 62%;
-        height: 40%;
+        height: 44%;
         transform: rotate(-10deg);
       }
-      .p1-names-wrap { font-size: 11.5vw; }
-      .p1-label-subhead { font-size: 2.3vw; margin-top: 3vw; }
-      .p1-label-date { font-size: 2.4vw; margin-top: 0.8vw; }
-      .p1-lower-quote {
-        top: 68%;
-        left: 15%;
-        width: 70%;
-        font-size: 2vw;
-        transform: rotate(-10deg);
-      }
+      .p1-names-wrap { font-size: 11vw; }
+      .p1-label-subhead { font-size: 2.3vw; margin-top: 2.5vw; }
+      .p1-label-date { font-size: 2.4vw; margin-top: 0.6vw; }
+      .p1-inner-quote { font-size: 2.2vw; margin-top: 1.8vw; max-width: 95%; }
       .p1-open-action {
         top: 83%;
         left: 15%;
@@ -515,19 +520,17 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-1">
       
-      <!-- Grouped cleanly inside the white/cream paper label -->
+      <!-- Grouped cleanly inside the cream paper label with slant -->
       <div class="p1-parchment-label">
         <div class="p1-names-wrap" aria-label="Andy & Lance">
-          <span class="scramble-line-1" id="line1">Andy &amp;</span>
-          <span class="scramble-line-2" id="line2">Lance</span>
+          <span class="line-1" id="line1">Andy &amp;</span>
+          <span class="line-2" id="line2">Lance</span>
         </div>
         <div class="p1-label-subhead">Our Wedding Journal</div>
         <div class="p1-label-date">September 4, 2028</div>
-      </div>
-
-      <!-- Lower Quote on purple cover texture -->
-      <div class="p1-lower-quote">
-        A journey of unexpected timing,<br>and a love that stayed.
+        <div class="p1-inner-quote" id="innerQuote">
+          A journey of unexpected timing,<br>and a love that stayed.
+        </div>
       </div>
 
       <!-- Open Link -->
@@ -741,62 +744,65 @@
     </div>
   </div>
 
-  <!-- Script: Slow, Measured Letter Switching & Modal -->
+  <!-- Script: Randomized Slow Fade-In Animation -->
   <script>
-    // Scrambler that switches only 3-4 times per letter at a deliberate, readable pace
-    function initGentleScramble() {
-      const glyphs = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    function setupSlowFadingNames() {
+      const line1 = document.getElementById('line1');
+      const line2 = document.getElementById('line2');
+      const quote = document.getElementById('innerQuote');
+      if (!line1 || !line2) return;
 
-      function animateLine(elementId, finalText, startDelay) {
-        const container = document.getElementById(elementId);
-        if (!container) return;
+      const text1 = "Andy &";
+      const text2 = "Lance";
 
-        // Build individual character span elements
+      function buildSpans(container, text) {
         container.innerHTML = '';
-        const charSpans = [];
-
-        for (let i = 0; i < finalText.length; i++) {
+        const spans = [];
+        for (let i = 0; i < text.length; i++) {
           const span = document.createElement('span');
-          span.className = 'scramble-char';
-          span.textContent = finalText[i] === ' ' ? '\u00A0' : glyphs[Math.floor(Math.random() * glyphs.length)];
+          span.className = 'fade-char';
+          if (text[i] === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = text[i];
+          }
           container.appendChild(span);
-          charSpans.push(span);
+          if (text[i] !== ' ') {
+            spans.push(span);
+          }
         }
-
-        // Each letter cycles through 3-4 random changes spaced 110ms apart
-        charSpans.forEach((span, charIdx) => {
-          const targetChar = finalText[charIdx];
-          if (targetChar === ' ') {
-            span.textContent = '\u00A0';
-            return;
-          }
-
-          const totalCycles = 3 + (charIdx % 2); // exactly 3 or 4 letter switches
-          const cycleInterval = 110; // deliberate, visible step speed (in ms)
-          const charStartDelay = startDelay + (charIdx * 75); // slight left-to-right cascade
-
-          for (let step = 1; step <= totalCycles; step++) {
-            setTimeout(() => {
-              if (step === totalCycles) {
-                // Final reveal of real letter
-                span.textContent = targetChar;
-              } else {
-                // Switch to a new random letter
-                span.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
-              }
-            }, charStartDelay + (step * cycleInterval));
-          }
-        });
+        return spans;
       }
 
-      // Trigger line 1 ("Andy &") then line 2 ("Lance")
+      const allSpans = [
+        ...buildSpans(line1, text1),
+        ...buildSpans(line2, text2)
+      ];
+
+      // Shuffle indices for unpredictable random order
+      const shuffledIndices = allSpans.map((_, i) => i);
+      for (let i = shuffledIndices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
+      }
+
+      // Slowly fade each letter into view at spaced out random intervals
+      const baseDelay = 400; // ms
+      const intervalStep = 220; // ms between random reveals
+
+      shuffledIndices.forEach((targetIdx, step) => {
+        setTimeout(() => {
+          allSpans[targetIdx].classList.add('revealed');
+        }, baseDelay + (step * intervalStep));
+      });
+
+      // Gently reveal the underlying quote after names materialize
       setTimeout(() => {
-        animateLine('line1', 'Andy &', 150);
-        animateLine('line2', 'Lance', 500);
-      }, 300);
+        if (quote) quote.classList.add('revealed');
+      }, baseDelay + (allSpans.length * intervalStep) + 300);
     }
 
-    window.addEventListener('DOMContentLoaded', initGentleScramble);
+    window.addEventListener('DOMContentLoaded', setupSlowFadingNames);
 
     // RSVP modal handlers
     function openRSVP() {
