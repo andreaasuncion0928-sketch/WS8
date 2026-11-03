@@ -25,7 +25,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Centers the canvas on any screen */
+    /* Centers the canvas on any screen without horizontal stretching */
     .journal-stage {
       width: 100vw;
       min-height: 100vh;
@@ -233,16 +233,17 @@
 
     /* ========================================================
        PAGE 2: TO OUR FAVORITE PEOPLE
-       Naturally rotated to book perspective & blended ink
+       Centered on the White/Cream Parchment Paper
        ======================================================== */
-    .p2-letter-area {
+    .p2-parchment-text {
       position: absolute;
-      top: 15%;
-      left: 14%;
-      width: 38%;
+      top: 17%;
+      /* Positioned to start right after the lavender flower stem */
+      left: 27.5%;
+      width: 32.5%;
       text-align: left;
-      /* Precise slant matching the open journal's left page */
-      transform: rotate(-3.2deg);
+      /* Slanted to flow with the open page perspective */
+      transform: rotate(-5deg);
       transform-origin: top left;
       mix-blend-mode: multiply;
       pointer-events: none;
@@ -250,38 +251,38 @@
 
     .p2-title {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(34px, 3.9vw, 64px);
+      font-size: clamp(30px, 3.5vw, 56px);
       color: #3b282c;
       font-weight: 400;
       line-height: 1.1;
-      margin-bottom: 1.4vw;
+      margin-bottom: 1.2vw;
       letter-spacing: 0.01em;
-      filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.12));
+      filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1));
     }
 
     .p2-body {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(13px, 1.25vw, 20.5px);
+      font-size: clamp(12.5px, 1.18vw, 18.5px);
       font-weight: 500;
       line-height: 1.62;
       color: #453539;
-      letter-spacing: 0.015em;
+      letter-spacing: 0.01em;
     }
 
     .p2-body p {
-      margin-bottom: 1.3vw;
+      margin-bottom: 1.1vw;
     }
 
     .p2-sign-wrap {
       display: inline-flex;
       align-items: baseline;
-      gap: 0.6vw;
-      margin-top: 0.5vw;
+      gap: 0.5vw;
+      margin-top: 0.4vw;
     }
 
     .p2-sign-text {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(30px, 3.3vw, 54px);
+      font-size: clamp(26px, 2.9vw, 46px);
       color: #3b282c;
       font-weight: 400;
       letter-spacing: 0.02em;
@@ -289,21 +290,20 @@
 
     .p2-handwritten-heart {
       font-family: 'Caveat', cursive;
-      font-size: clamp(24px, 2.6vw, 42px);
+      font-size: clamp(22px, 2.3vw, 36px);
       color: #3b282c;
       font-weight: 600;
       transform: rotate(6deg) translateY(0.1vw);
       display: inline-block;
     }
 
-    /* Page 2 Polaroid using 8th.jpeg */
+    /* Page 2 Polaroid using 8th.jpeg, placed cleanly on the right half */
     .p2-polaroid-wrap {
       position: absolute;
-      top: 10.5%;
-      right: 9.5%;
-      width: 33%;
-      /* Matching clockwise slant from reference */
-      transform: rotate(5.8deg);
+      top: 13%;
+      left: 64%;
+      width: 25.5%;
+      transform: rotate(5.5deg);
       transform-origin: center center;
       z-index: 10;
     }
@@ -311,10 +311,10 @@
     /* Washi tape strip top */
     .p2-tape-top {
       position: absolute;
-      top: -1.2vw;
+      top: -1.1vw;
       left: 36%;
       width: 28%;
-      height: 2.2vw;
+      height: 2vw;
       background: rgba(232, 218, 195, 0.72);
       border-left: 1px dashed rgba(180, 160, 140, 0.4);
       border-right: 1px dashed rgba(180, 160, 140, 0.4);
@@ -323,7 +323,7 @@
       z-index: 15;
     }
 
-    /* Polaroid frame with dual layered photo effect */
+    /* Polaroid frame */
     .p2-polaroid-frame {
       position: relative;
       background: #fbf9f5;
@@ -346,7 +346,7 @@
       bottom: -1vw;
       right: -1vw;
       width: 30%;
-      height: 2.2vw;
+      height: 2vw;
       background: rgba(232, 218, 195, 0.72);
       border-left: 1px dashed rgba(180, 160, 140, 0.4);
       border-right: 1px dashed rgba(180, 160, 140, 0.4);
@@ -601,20 +601,20 @@
       }
       .p1-open-action a { font-size: 2.2vw; }
 
-      .p2-letter-area {
+      .p2-parchment-text {
         top: 15%;
-        left: 12%;
-        width: 76%;
-        transform: rotate(-2.5deg);
+        left: 14%;
+        width: 74%;
+        transform: rotate(-3deg);
       }
-      .p2-title { font-size: 8vw; margin-bottom: 2.5vw; }
-      .p2-body { font-size: 3.4vw; line-height: 1.55; }
-      .p2-sign-text { font-size: 7.5vw; }
-      .p2-handwritten-heart { font-size: 6.5vw; }
+      .p2-title { font-size: 7.8vw; margin-bottom: 2vw; }
+      .p2-body { font-size: 3.2vw; line-height: 1.55; }
+      .p2-sign-text { font-size: 7vw; }
+      .p2-handwritten-heart { font-size: 6vw; }
       .p2-polaroid-wrap {
         position: relative;
         top: auto;
-        right: auto;
+        left: auto;
         width: 70%;
         margin: 5vw auto 0 auto;
         transform: rotate(2deg);
@@ -667,8 +667,8 @@
         <a href="#page-6">RSVP</a>
       </nav>
 
-      <!-- Handwritten text naturally angled to the left page -->
-      <div class="p2-letter-area">
+      <!-- Positioned squarely on the white/cream parchment page -->
+      <div class="p2-parchment-text">
         <h2 class="p2-title">To our favorite people,</h2>
         
         <div class="p2-body">
