@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Andy & Lance — Our Wedding Journal</title>
 
-  <!-- Google Fonts: Script, Serif, and Clean Sans -->
+  <!-- Typography matching the original scrapbook calligraphy & serif print -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Centers the canvas on any screen without horizontal stretching */
+    /* Centers the canvas on all screens without stretching or drifting coordinates */
     .journal-stage {
       width: 100vw;
       min-height: 100vh;
@@ -232,83 +232,89 @@
     }
 
     /* ========================================================
-       PAGE 2: TO OUR FAVORITE PEOPLE
-       Centered on the White/Cream Parchment Paper
+       PAGE 2: EXACT SCRAPBOOK JOURNAL CALIBRATION
+       Placed seamlessly on the left page between flower & polaroid
        ======================================================== */
-    .p2-parchment-text {
+    .p2-journal-sheet {
       position: absolute;
-      top: 17%;
-      /* Positioned to start right after the lavender flower stem */
-      left: 27.5%;
-      width: 32.5%;
+      top: 20%;
+      /* Begins clearly past the pressed flower and edge lace */
+      left: 20%;
+      width: 32%;
       text-align: left;
-      /* Slanted to flow with the open page perspective */
-      transform: rotate(-5deg);
+      /* Rotated -7.5deg to follow the page curl and book horizon */
+      transform: rotate(-7.5deg);
       transform-origin: top left;
+      /* Inks the letters directly into the paper fibers */
       mix-blend-mode: multiply;
       pointer-events: none;
+      z-index: 5;
     }
 
-    .p2-title {
+    .p2-journal-title {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(30px, 3.5vw, 56px);
-      color: #3b282c;
+      font-size: clamp(28px, 3.4vw, 56px);
+      color: #4a333d;
       font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 1.2vw;
+      line-height: 1.05;
+      margin-bottom: 1.5vw;
       letter-spacing: 0.01em;
-      filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1));
+      opacity: 0.94;
+      text-shadow: 0.3px 0.3px 0px rgba(0, 0, 0, 0.2);
     }
 
-    .p2-body {
+    .p2-journal-body {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(12.5px, 1.18vw, 18.5px);
+      font-size: clamp(12px, 1.15vw, 18.5px);
       font-weight: 500;
-      line-height: 1.62;
-      color: #453539;
-      letter-spacing: 0.01em;
+      line-height: 1.54;
+      color: #433338;
+      letter-spacing: 0.015em;
     }
 
-    .p2-body p {
+    .p2-journal-body p {
       margin-bottom: 1.1vw;
     }
 
-    .p2-sign-wrap {
+    .p2-journal-sign-row {
       display: inline-flex;
       align-items: baseline;
-      gap: 0.5vw;
+      gap: 0.6vw;
       margin-top: 0.4vw;
     }
 
-    .p2-sign-text {
+    .p2-journal-names {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(26px, 2.9vw, 46px);
-      color: #3b282c;
+      font-size: clamp(28px, 3.3vw, 54px);
+      color: #4a333d;
       font-weight: 400;
       letter-spacing: 0.02em;
+      opacity: 0.95;
     }
 
-    .p2-handwritten-heart {
+    .p2-journal-heart {
       font-family: 'Caveat', cursive;
-      font-size: clamp(22px, 2.3vw, 36px);
-      color: #3b282c;
+      font-size: clamp(24px, 2.7vw, 44px);
+      color: #4a333d;
       font-weight: 600;
-      transform: rotate(6deg) translateY(0.1vw);
+      transform: rotate(8deg) translateY(0.15vw);
       display: inline-block;
+      opacity: 0.9;
     }
 
-    /* Page 2 Polaroid using 8th.jpeg, placed cleanly on the right half */
+    /* Polaroid displaying 8th.jpeg, calibrated rightward onto the right page */
     .p2-polaroid-wrap {
       position: absolute;
-      top: 13%;
-      left: 64%;
-      width: 25.5%;
-      transform: rotate(5.5deg);
+      top: 13.5%;
+      left: 55%;
+      width: 29.5%;
+      /* Counter-angled +5.8deg to reflect the pinned photograph */
+      transform: rotate(5.8deg);
       transform-origin: center center;
       z-index: 10;
     }
 
-    /* Washi tape strip top */
+    /* Washi tape strip top center */
     .p2-tape-top {
       position: absolute;
       top: -1.1vw;
@@ -601,22 +607,22 @@
       }
       .p1-open-action a { font-size: 2.2vw; }
 
-      .p2-parchment-text {
-        top: 15%;
-        left: 14%;
-        width: 74%;
-        transform: rotate(-3deg);
+      .p2-journal-sheet {
+        top: 14%;
+        left: 12%;
+        width: 76%;
+        transform: rotate(-4deg);
       }
-      .p2-title { font-size: 7.8vw; margin-bottom: 2vw; }
-      .p2-body { font-size: 3.2vw; line-height: 1.55; }
-      .p2-sign-text { font-size: 7vw; }
-      .p2-handwritten-heart { font-size: 6vw; }
+      .p2-journal-title { font-size: 7.5vw; margin-bottom: 2vw; }
+      .p2-journal-body { font-size: 3.2vw; line-height: 1.5; }
+      .p2-journal-names { font-size: 7vw; }
+      .p2-journal-heart { font-size: 6vw; }
       .p2-polaroid-wrap {
         position: relative;
         top: auto;
         left: auto;
-        width: 70%;
-        margin: 5vw auto 0 auto;
+        width: 72%;
+        margin: 4vw auto 0 auto;
         transform: rotate(2deg);
       }
 
@@ -667,27 +673,27 @@
         <a href="#page-6">RSVP</a>
       </nav>
 
-      <!-- Positioned squarely on the white/cream parchment page -->
-      <div class="p2-parchment-text">
-        <h2 class="p2-title">To our favorite people,</h2>
+      <!-- Written seamlessly on the actual journal paper -->
+      <div class="p2-journal-sheet">
+        <h2 class="p2-journal-title">To our favorite people,</h2>
         
-        <div class="p2-body">
+        <div class="p2-journal-body">
           <p>
             We're so glad you're here to be part<br>
             of our story. This is a journal of how<br>
             we found each other, even when we<br>
             least expected it, and how it all<br>
-            led us here – to this very moment.
+            led us here – to this very moment.[cite: 1, 15]
           </p>
           <p>
             Thank you for being part of our<br>
-            forever.
+            forever.[cite: 1, 15]
           </p>
         </div>
 
-        <div class="p2-sign-wrap">
-          <span class="p2-sign-text">Andy &amp; Lance</span>
-          <span class="p2-handwritten-heart">&#9825;</span>
+        <div class="p2-journal-sign-row">
+          <span class="p2-journal-names">Andy &amp; Lance</span>
+          <span class="p2-journal-heart">&#9825;</span>
         </div>
       </div>
 
@@ -730,12 +736,12 @@
       <div class="p3-story-box">
         <h2 class="script-heading">Our Story</h2>
         <div style="font-style: italic; font-size: clamp(13px, 1.2vw, 19px); color: #5b4a4f; margin-bottom: 1.5vw;">
-          A love story that began in the most unexpected time.
+          A love story that began in the most unexpected time.[cite: 1]
         </div>
-        <p>It all started with a simple day, just hanging around, not expecting any love, not even a thought of falling in love. But then, <strong>it happened.</strong></p>
-        <p>Late night conversations and calls, daily chats even from a distance, and a decision to finally meet.</p>
-        <p>And just like that, we got over with each other &mdash; and it all happened in a very sudden way.</p>
-        <p>Now, it's been more than a decade, and our story is still our favorite one. ♡</p>
+        <p>It all started with a simple day, just hanging around, not expecting any love, not even a thought of falling in love. But then, <strong>it happened.</strong>[cite: 1]</p>
+        <p>Late night conversations and calls, daily chats even from a distance, and a decision to finally meet.[cite: 1]</p>
+        <p>And just like that, we got over with each other &mdash; and it all happened in a very sudden way.[cite: 1]</p>
+        <p>Now, it's been more than a decade, and our story is still our favorite one. ♡[cite: 1]</p>
       </div>
     </div>
   </div>
@@ -807,7 +813,7 @@
         <div style="margin-bottom: 0.8vw;">
           Mr. and Mrs. Juan Dela Cruz &emsp;&bull;&emsp; Mr. and Mrs. Paolo Garcia<br>
           Mr. and Mrs. Miguel Santos &emsp;&bull;&emsp; Mr. and Mrs. David Lim<br>
-          Mr. and Mrs. Ramon Reyes &emsp;&bull;&emsp; Mr. and Mrs. Carlo Mendoza
+          Mr. and Mrs. Ramon Reyes &emsp;&bull;&emsp; Mr. and Mrs. Carlo Mendoza[cite: 1]
         </div>
 
         <div class="entourage-columns">
@@ -844,7 +850,7 @@
 
       <div class="p6-gallery-side">
         <h2 class="script-heading">Our Gallery</h2>
-        <div style="font-style: italic; font-size: clamp(12px, 1.1vw, 16px); color: #554449;">A collection of moments, from then until now.</div>
+        <div style="font-style: italic; font-size: clamp(12px, 1.1vw, 16px); color: #554449;">A collection of moments, from then until now.[cite: 1]</div>
         <div class="gallery-preview">
           <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=300&auto=format&fit=crop&q=80" alt="Moment 1">
           <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=300&auto=format&fit=crop&q=80" alt="Moment 2">
@@ -855,10 +861,10 @@
 
       <div class="p6-rsvp-side">
         <div class="rsvp-large-title">RSVP</div>
-        <p style="font-size: clamp(14px, 1.2vw, 19px); color: #43333d;">Kindly let us know if you can join us.</p>
+        <p style="font-size: clamp(14px, 1.2vw, 19px); color: #43333d;">Kindly let us know if you can join us.[cite: 1]</p>
         <button class="confirm-attendance-btn" onclick="openRSVP()">CONFIRM ATTENDANCE &rarr;</button>
         <div style="font-family: 'Alex Brush', cursive; font-size: clamp(20px, 2.2vw, 34px); color: #3b282c;">
-          Let's make this chapter complete together. ♡
+          Let's make this chapter complete together. ♡[cite: 1]
         </div>
       </div>
     </div>
