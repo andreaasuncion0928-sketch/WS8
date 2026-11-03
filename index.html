@@ -34,17 +34,38 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* Base Journal Section */
+    /* Base Journal Section: Locked aspect canvas container */
     .journal-page {
       width: 100%;
       min-height: 100vh;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: #1f1124;
+    }
+
+    /* Scaled coordinate container locked to the exact photo composition */
+    .canvas-frame {
+      position: relative;
+      width: 100%;
+      max-width: 1600px;
+      aspect-ratio: 16 / 9;
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .journal-page {
+        min-height: 100vh;
+        height: auto;
+      }
+      .canvas-frame {
+        aspect-ratio: 9 / 16;
+        min-height: 100vh;
+      }
     }
 
     /* -------------------------------------------------------------
@@ -55,50 +76,106 @@
 
     /* Page 1: Intro Cover */
     @media (max-width: 768px) {
-      #page-1 { background-image: url('intro p.jpg'), radial-gradient(circle, #614668 0%, #2f1d35 100%); }
+      #page-1 .canvas-frame { background-image: url('intro p.jpg'), radial-gradient(circle, #614668 0%, #2f1d35 100%); }
     }
     @media (min-width: 769px) {
-      #page-1 { background-image: url('intro b.jpg'), radial-gradient(circle, #614668 0%, #2f1d35 100%); }
+      #page-1 .canvas-frame { background-image: url('intro b.jpg'), radial-gradient(circle, #614668 0%, #2f1d35 100%); }
     }
 
     /* Page 2: To our favorite people */
     @media (max-width: 768px) {
-      #page-2 { background-image: url('2nd page p.jpg'), linear-gradient(135deg, #f7efe7 0%, #e8dbce 100%); }
+      #page-2 .canvas-frame { background-image: url('2nd page p.jpg'), linear-gradient(135deg, #f7efe7 0%, #e8dbce 100%); }
     }
     @media (min-width: 769px) {
-      #page-2 { background-image: url('2nd page b.jpg'), linear-gradient(135deg, #f7efe7 0%, #e8dbce 100%); }
+      #page-2 .canvas-frame { background-image: url('2nd page b.jpg'), linear-gradient(135deg, #f7efe7 0%, #e8dbce 100%); }
     }
 
     /* Page 3: Our Story */
     @media (max-width: 768px) {
-      #page-3 { background-image: url('3rd page p.jpg'), linear-gradient(180deg, #f8f1e8 0%, #ebdccc 100%); }
+      #page-3 .canvas-frame { background-image: url('3rd page p.jpg'), linear-gradient(180deg, #f8f1e8 0%, #ebdccc 100%); }
     }
     @media (min-width: 769px) {
-      #page-3 { background-image: url('3rd page b.jpg'), linear-gradient(180deg, #f8f1e8 0%, #ebdccc 100%); }
+      #page-3 .canvas-frame { background-image: url('3rd page b.jpg'), linear-gradient(180deg, #f8f1e8 0%, #ebdccc 100%); }
     }
 
     /* Page 4: The Details */
     @media (max-width: 768px) {
-      #page-4 { background-image: url('4th page p.jpg'), linear-gradient(145deg, #faf4ed 0%, #eae0d3 100%); }
+      #page-4 .canvas-frame { background-image: url('4th page p.jpg'), linear-gradient(145deg, #faf4ed 0%, #eae0d3 100%); }
     }
     @media (min-width: 769px) {
-      #page-4 { background-image: url('4th page b.jpg'), linear-gradient(145deg, #faf4ed 0%, #eae0d3 100%); }
+      #page-4 .canvas-frame { background-image: url('4th page b.jpg'), linear-gradient(145deg, #faf4ed 0%, #eae0d3 100%); }
     }
 
     /* Page 5: Our Entourage */
     @media (max-width: 768px) {
-      #page-5 { background-image: url('5th page p.jpg'), linear-gradient(180deg, #f6eee5 0%, #e6d8c7 100%); }
+      #page-5 .canvas-frame { background-image: url('5th page p.jpg'), linear-gradient(180deg, #f6eee5 0%, #e6d8c7 100%); }
     }
     @media (min-width: 769px) {
-      #page-5 { background-image: url('5th page b.jpg'), linear-gradient(180deg, #f6eee5 0%, #e6d8c7 100%); }
+      #page-5 .canvas-frame { background-image: url('5th page b.jpg'), linear-gradient(180deg, #f6eee5 0%, #e6d8c7 100%); }
     }
 
     /* Page 6: Our Gallery & RSVP */
     @media (max-width: 768px) {
-      #page-6 { background-image: url('6th page p.jpg'), linear-gradient(160deg, #faf4ed 0%, #eadfcb 100%); }
+      #page-6 .canvas-frame { background-image: url('6th page p.jpg'), linear-gradient(160deg, #faf4ed 0%, #eadfcb 100%); }
     }
     @media (min-width: 769px) {
-      #page-6 { background-image: url('6th page b.jpg'), linear-gradient(160deg, #faf4ed 0%, #eadfcb 100%); }
+      #page-6 .canvas-frame { background-image: url('6th page b.jpg'), linear-gradient(160deg, #faf4ed 0%, #eadfcb 100%); }
+    }
+
+    /* Precise positioning for Page 1 Cream Label in Desktop Browser */
+    @media (min-width: 769px) {
+      .cover-label-box {
+        position: absolute;
+        top: 22%;
+        left: 45%;
+        width: 38%;
+        height: 48%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        pointer-events: none;
+      }
+      .cover-quote-box {
+        position: absolute;
+        top: 72%;
+        left: 45%;
+        width: 38%;
+        text-align: center;
+      }
+      .cover-cta-box {
+        position: absolute;
+        top: 86%;
+        left: 45%;
+        width: 38%;
+        text-align: center;
+      }
+    }
+
+    /* Page 1 Mobile Positions */
+    @media (max-width: 768px) {
+      .cover-label-box {
+        position: absolute;
+        top: 26%;
+        left: 10%;
+        width: 80%;
+        text-align: center;
+      }
+      .cover-quote-box {
+        position: absolute;
+        top: 72%;
+        left: 8%;
+        width: 84%;
+        text-align: center;
+      }
+      .cover-cta-box {
+        position: absolute;
+        top: 86%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
     }
 
     /* Subtle Navigation Links across top margin */
@@ -120,99 +197,127 @@
       text-underline-offset: 4px;
       font-weight: 600;
     }
-
-    /* Polaroid Styles for Pages 2, 3 & 6 */
-    .polaroid-box {
-      background: #ffffff;
-      padding: 9px 9px 24px 9px;
-      box-shadow: 0 10px 24px -5px rgba(58, 40, 30, 0.35), 0 3px 6px -2px rgba(58, 40, 30, 0.2);
-      position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .polaroid-box:hover {
-      transform: scale(1.03) rotate(0deg) !important;
-      box-shadow: 0 18px 32px -4px rgba(58, 40, 30, 0.45);
-      z-index: 30;
-    }
-
-    /* Semi-transparent Scotch Tape Accents */
-    .washi-tape {
-      position: absolute;
-      width: 72px;
-      height: 20px;
-      background: rgba(238, 226, 204, 0.75);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-      z-index: 15;
-      backdrop-filter: blur(1px);
-      border-left: 2px dashed rgba(200, 185, 160, 0.5);
-      border-right: 2px dashed rgba(200, 185, 160, 0.5);
-    }
-
-    /* Custom thin line dividers */
-    .vintage-divider {
-      position: relative;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(120, 85, 60, 0.45), transparent);
-    }
   </style>
 </head>
-<body class="bg-[#24132a] text-[#3e2e23] antialiased m-0 p-0 selection:bg-[#c2a2cb] selection:text-[#2b1731]">
+<body class="bg-[#1f1124] text-[#3e2e23] antialiased m-0 p-0 selection:bg-[#c2a2cb] selection:text-[#2b1731]">
 
   <!-- ========================================================
        PAGE 1: INTRO (WEDDING JOURNAL COVER)
        Background: intro p.jpg (mobile) / intro b.jpg (desktop)
-       The artwork already contains the purple book, ribbon & label.
+       Positions calibrated to sit directly inside the cream label patch!
        ======================================================== -->
-  <section id="page-1" class="journal-page justify-between items-center text-center px-4 py-8 md:py-12">
-    <!-- Top spacing -->
-    <div class="h-2 md:h-6"></div>
-
-    <!-- Container aligned with the cream label & purple book cover in the photo -->
-    <div class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center my-auto px-4 md:px-0">
+  <section id="page-1" class="journal-page">
+    <div class="canvas-frame">
       
-      <!-- Label Text Area: Placed on the parchment area on the right half -->
-      <div class="w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto flex flex-col items-center justify-center py-4 md:translate-x-12 lg:translate-x-16">
+      <!-- EXACT FIT INSIDE THE CREAM PARCHMENT LABEL -->
+      <div class="cover-label-box">
         
         <!-- Script Names: Andy & Lance -->
-        <div class="flex flex-col items-center select-none text-[#3a2c26]">
-          <h1 class="font-script text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-normal leading-[0.95] drop-shadow-sm">
-            Andy <span class="font-serif-vintage italic text-4xl sm:text-5xl md:text-6xl text-[#5c4436]">&amp;</span>
-          </h1>
-          <h1 class="font-script text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-normal leading-[0.95] -mt-2 sm:-mt-4 md:-mt-6 drop-shadow-sm">
+        <div class="flex flex-col items-center select-none text-[#3e2d26] -space-y-2 sm:-space-y-4 md:-space-y-5">
+          <div class="flex items-center justify-center gap-2">
+            <span class="font-script text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-normal leading-tight">
+              Andy
+            </span>
+            <span class="font-serif-vintage italic text-3xl sm:text-4xl md:text-5xl text-[#5a4235] ml-1">
+              &amp;
+            </span>
+          </div>
+          <span class="font-script text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-normal leading-tight">
             Lance
-          </h1>
+          </span>
         </div>
 
-        <!-- Spaced Serif Journal Subtitle -->
-        <div class="mt-4 sm:mt-6 text-center select-none">
-          <p class="font-serif-title uppercase tracking-[0.32em] text-xs sm:text-sm md:text-base text-[#4f3c32] font-medium">
+        <!-- Spaced Serif Journal Subtitle inside the parchment label -->
+        <div class="mt-4 sm:mt-5 md:mt-6 text-center select-none">
+          <p class="font-serif-title uppercase tracking-[0.28em] text-[10px] sm:text-xs md:text-sm text-[#4d3a31] font-semibold">
             OUR WEDDING JOURNAL
           </p>
-          <p class="font-serif-title uppercase tracking-[0.26em] text-[11px] sm:text-xs md:text-sm text-[#665042] mt-1.5 font-normal">
+          <p class="font-serif-title uppercase tracking-[0.24em] text-[9px] sm:text-[11px] md:text-xs text-[#635043] mt-1">
             SEPTEMBER 4, 2028
           </p>
         </div>
 
       </div>
 
-      <!-- Lower Cover Tagline: Sits on the purple textured area -->
-      <div class="mt-10 sm:mt-14 md:mt-16 w-full max-w-xs sm:max-w-sm md:max-w-md text-center md:translate-x-12 lg:translate-x-16 select-none">
-        <p class="font-serif-title uppercase tracking-[0.24em] text-[10px] sm:text-xs md:text-[13px] text-[#eedcf5] leading-relaxed drop-shadow">
-          A JOURNEY OF UNEXPECTED TIMING, AND A LOVE THAT STAYED.
+      <!-- LOWER COVER QUOTE: Situated on the purple book cover underneath the label -->
+      <div class="cover-quote-box select-none pointer-events-none">
+        <p class="font-serif-title uppercase tracking-[0.22em] text-[9px] sm:text-xs md:text-[13px] text-[#eddcf3] leading-relaxed drop-shadow">
+          A JOURNEY OF UNEXPECTED TIMING,<br class="hidden sm:inline"> AND A LOVE THAT STAYED.
         </p>
       </div>
 
-    </div>
+      <!-- BOTTOM CTA: OPEN JOURNAL -->
+      <div class="cover-cta-box">
+        <a href="#page-2" class="group inline-flex items-center gap-2 text-[#eddcf3] hover:text-white transition-all py-1 px-4">
+          <span class="font-serif-title uppercase tracking-[0.3em] text-[10px] sm:text-xs md:text-sm border-b border-[#eddcf3]/50 pb-0.5 group-hover:border-white">
+            OPEN JOURNAL
+          </span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
 
-    <!-- Bottom Link: OPEN JOURNAL -->
-    <div class="pb-4 sm:pb-6 md:pb-8 w-full flex justify-center md:translate-x-12 lg:translate-x-16">
-      <a href="#page-2" class="group inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/30 bg-black/15 hover:bg-black/30 backdrop-blur-sm transition-all duration-300">
-        <span class="font-serif-title uppercase tracking-[0.32em] text-xs md:text-sm text-[#f5eaf9] font-medium">
-          OPEN JOURNAL
-        </span>
-        <i data-lucide="arrow-right" class="w-4 h-4 text-[#f5eaf9] group-hover:translate-x-1.5 transition-transform duration-200"></i>
-      </a>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PAGE 2: TO OUR FAVORITE PEOPLE
+       Background: 2nd page p.jpg (mobile) / 2nd page b.jpg (desktop)
+       ======================================================== -->
+  <section id="page-2" class="journal-page">
+    <div class="canvas-frame flex flex-col justify-between p-4 sm:p-8 md:p-12">
+      
+      <!-- Top Scrapbook Navigation -->
+      <header class="w-full flex justify-center select-none pt-2">
+        <nav class="flex items-center gap-5 sm:gap-9 text-xs sm:text-sm md:text-base">
+          <a href="#page-1" class="text-[#554133] hover:text-[#794d82] p-1" title="Back to Cover">
+            <i data-lucide="home" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          </a>
+          <a href="#page-3" class="nav-link">Our Story</a>
+          <a href="#page-4" class="nav-link">The Details</a>
+          <a href="#page-5" class="nav-link hidden sm:inline">Entourage</a>
+          <a href="#page-6" class="nav-link">Gallery</a>
+          <a href="#page-6" class="font-sans-clean font-semibold uppercase tracking-widest text-[#794d82] hover:text-[#532e5c] text-[11px] sm:text-xs">RSVP</a>
+        </nav>
+      </header>
+
+      <!-- Main Content -->
+      <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center my-auto px-4">
+        <div class="md:col-span-7 space-y-4 md:space-y-6">
+          <h2 class="font-script text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#4a3424] leading-tight select-none">
+            To our favorite people,
+          </h2>
+          <p class="font-serif-vintage text-base sm:text-lg md:text-xl text-[#3f2e22] leading-relaxed">
+            We're so glad you're here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here &mdash; to this very moment.
+          </p>
+          <p class="font-serif-vintage italic text-base sm:text-lg text-[#523e30]">
+            Thank you for being part of our forever.
+          </p>
+          <div class="pt-2 flex items-center gap-3 select-none">
+            <span class="font-script text-4xl sm:text-5xl md:text-6xl text-[#583925]">
+              Andy &amp; Lance
+            </span>
+            <span class="font-hand text-3xl sm:text-4xl text-[#7a5542] transform -rotate-12 translate-y-1">
+              ♡
+            </span>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 flex justify-center">
+          <div class="bg-white p-2.5 pb-6 shadow-xl transform rotate-3 max-w-[260px] sm:max-w-[290px] w-full border border-[#ded4c5]">
+            <div class="w-full aspect-[4/5] overflow-hidden bg-[#e0d6c8]">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=700&auto=format&fit=crop" alt="Andy & Lance" class="w-full h-full object-cover sepia-[0.15]">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom link -->
+      <div class="w-full flex justify-center pb-2">
+        <a href="#page-3" class="text-[#554133]/60 hover:text-[#554133]">
+          <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
+        </a>
+      </div>
+
     </div>
   </section>
 
