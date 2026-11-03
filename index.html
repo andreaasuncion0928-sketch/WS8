@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Andy & Lance — Our Wedding Journal</title>
 
-  <!-- Typography matching the vintage journal -->
+  <!-- Google Fonts: Script, Serif, and Clean Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after {
@@ -35,7 +35,7 @@
       background-color: #1f1b1d;
     }
 
-    /* Fixed 16:9 canvas: coordinates and angles lock directly to image artwork */
+    /* Fixed 16:9 canvas to lock layout coordinates directly onto background imagery */
     .page-sheet {
       position: relative;
       width: 100vw;
@@ -71,14 +71,38 @@
     }
 
     /* ========================================================
-       PAGE 1: COVER LAYOUT
-       Balanced left-to-right on the cream paper label
+       TOP NAVIGATION
        ======================================================== */
+    .journal-nav {
+      position: absolute;
+      top: 5.2%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3.5%;
+      z-index: 25;
+    }
+    .journal-nav a {
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1.2vw, 19px);
+      color: #634e56;
+      transition: color 0.2s;
+    }
+    .journal-nav a:hover, .journal-nav a.active {
+      color: #2e1c25;
+      font-weight: 600;
+    }
 
+    /* ========================================================
+       PAGE 1: COVER
+       ======================================================== */
     .p1-parchment-label {
       position: absolute;
       top: 17%;
-      /* Shifted rightward to create balanced left and right margins */
       left: 53.5%;
       width: 32%;
       height: 54%;
@@ -94,7 +118,6 @@
       pointer-events: none;
     }
 
-    /* Couple's Names Calligraphy */
     .p1-names-wrap {
       font-family: 'Alex Brush', cursive;
       font-size: clamp(36px, 4.8vw, 80px);
@@ -107,7 +130,6 @@
       width: 100%;
     }
 
-    /* Nostalgic slow-fading individual characters */
     .fade-char {
       display: inline-block;
       opacity: 0;
@@ -137,7 +159,6 @@
       white-space: nowrap;
     }
 
-    /* "OUR WEDDING JOURNAL" */
     .p1-label-subhead {
       margin-top: 1.3vw;
       font-family: 'Cormorant Garamond', serif;
@@ -149,7 +170,6 @@
       width: 100%;
     }
 
-    /* "SEPTEMBER 4, 2028" */
     .p1-label-date {
       margin-top: 0.35vw;
       font-family: 'Cormorant Garamond', serif;
@@ -161,7 +181,6 @@
       width: 100%;
     }
 
-    /* Quote placed directly under September 4, 2028 with balanced margins */
     .p1-inner-quote {
       margin-top: 0.9vw;
       font-family: 'Cormorant Garamond', serif;
@@ -181,7 +200,6 @@
       opacity: 0.95;
     }
 
-    /* "OPEN JOURNAL ──→" on the lower book cover */
     .p1-open-action {
       position: absolute;
       top: 90.5%;
@@ -213,107 +231,133 @@
       letter-spacing: 0.42em;
     }
 
-    /* ----------------------------------------------------
-       MOBILE ADJUSTMENTS (9:16 Portrait Canvas)
-       ---------------------------------------------------- */
-    @media (max-width: 768px) {
-      .p1-parchment-label {
-        top: 23%;
-        left: 23%;
-        width: 56%;
-        height: 44%;
-        padding: 0 2vw;
-        transform: rotate(-10deg);
-      }
-      .p1-names-wrap { font-size: 10.5vw; }
-      .p1-label-subhead { font-size: 2.2vw; margin-top: 2.5vw; letter-spacing: 0.2em; }
-      .p1-label-date { font-size: 2.3vw; margin-top: 0.6vw; letter-spacing: 0.18em; }
-      .p1-inner-quote { font-size: 2.1vw; margin-top: 1.6vw; max-width: 95%; }
-      .p1-open-action {
-        top: 83%;
-        left: 15%;
-        width: 70%;
-        transform: rotate(-10deg);
-      }
-      .p1-open-action a { font-size: 2.2vw; }
-
-      .p2-letter { top: 16%; left: 10%; width: 80%; transform: rotate(-2deg); }
-      .p2-polaroid { display: none; }
-      .p3-photos { display: none; }
-      .p3-story-box { top: 16%; left: 10%; width: 80%; }
-      .p4-container { top: 14%; left: 8%; width: 84%; }
-      .p4-attire-tag { display: none; }
-      .p5-container { top: 14%; left: 8%; width: 84%; }
-      .p6-gallery-side { display: none; }
-      .p6-rsvp-side { top: 22%; left: 10%; width: 80%; }
-    }
-
-    /* ----------------------------------------------------
-       PAGES 2-6: SUBPAGES STYLING
-       ---------------------------------------------------- */
-    .journal-nav {
+    /* ========================================================
+       PAGE 2: TO OUR FAVORITE PEOPLE
+       Naturally rotated to book perspective & blended ink
+       ======================================================== */
+    .p2-letter-area {
       position: absolute;
-      top: 5%;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 3.5%;
-      z-index: 20;
-    }
-    .journal-nav a {
-      text-decoration: none;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(13px, 1.2vw, 19px);
-      color: #634e56;
-      transition: color 0.2s;
-    }
-    .journal-nav a:hover, .journal-nav a.active {
-      color: #2e1c25;
-      font-weight: 600;
-    }
-
-    .p2-letter {
-      position: absolute;
-      top: 14%;
-      left: 17%;
-      width: 40%;
+      top: 15%;
+      left: 14%;
+      width: 38%;
       text-align: left;
-      transform: rotate(-1.5deg);
+      /* Precise slant matching the open journal's left page */
+      transform: rotate(-3.2deg);
+      transform-origin: top left;
       mix-blend-mode: multiply;
+      pointer-events: none;
     }
-    .script-heading {
-      font-family: 'Alex Brush', cursive;
-      font-size: clamp(32px, 3.8vw, 60px);
-      color: #3b282c;
-      margin-bottom: 1.2vw;
-    }
-    .letter-body {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(13px, 1.22vw, 20px);
-      line-height: 1.6;
-      color: #4a3c40;
-    }
-    .p2-sign {
-      margin-top: 1.5vw;
-      font-family: 'Alex Brush', cursive;
-      font-size: clamp(24px, 2.7vw, 42px);
-      color: #3b282c;
-    }
-    .p2-polaroid {
-      position: absolute;
-      top: 11%;
-      right: 12%;
-      width: 28%;
-      background: #ffffff;
-      padding: 3.5% 3.5% 8.5% 3.5%;
-      box-shadow: 2px 5px 15px rgba(0,0,0,0.15);
-      transform: rotate(3deg);
-    }
-    .p2-polaroid img { width: 100%; display: block; }
 
-    /* Page 3 */
+    .p2-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(34px, 3.9vw, 64px);
+      color: #3b282c;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.4vw;
+      letter-spacing: 0.01em;
+      filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.12));
+    }
+
+    .p2-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(13px, 1.25vw, 20.5px);
+      font-weight: 500;
+      line-height: 1.62;
+      color: #453539;
+      letter-spacing: 0.015em;
+    }
+
+    .p2-body p {
+      margin-bottom: 1.3vw;
+    }
+
+    .p2-sign-wrap {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.6vw;
+      margin-top: 0.5vw;
+    }
+
+    .p2-sign-text {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(30px, 3.3vw, 54px);
+      color: #3b282c;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .p2-handwritten-heart {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(24px, 2.6vw, 42px);
+      color: #3b282c;
+      font-weight: 600;
+      transform: rotate(6deg) translateY(0.1vw);
+      display: inline-block;
+    }
+
+    /* Page 2 Polaroid using 8th.jpeg */
+    .p2-polaroid-wrap {
+      position: absolute;
+      top: 10.5%;
+      right: 9.5%;
+      width: 33%;
+      /* Matching clockwise slant from reference */
+      transform: rotate(5.8deg);
+      transform-origin: center center;
+      z-index: 10;
+    }
+
+    /* Washi tape strip top */
+    .p2-tape-top {
+      position: absolute;
+      top: -1.2vw;
+      left: 36%;
+      width: 28%;
+      height: 2.2vw;
+      background: rgba(232, 218, 195, 0.72);
+      border-left: 1px dashed rgba(180, 160, 140, 0.4);
+      border-right: 1px dashed rgba(180, 160, 140, 0.4);
+      transform: rotate(-3deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      z-index: 15;
+    }
+
+    /* Polaroid frame with dual layered photo effect */
+    .p2-polaroid-frame {
+      position: relative;
+      background: #fbf9f5;
+      padding: 3.8% 3.8% 10.5% 3.8%;
+      box-shadow: 4px 8px 24px rgba(45, 30, 35, 0.22),
+                  0 1px 4px rgba(0, 0, 0, 0.12);
+      border: 1px solid #e7ded5;
+    }
+
+    .p2-polaroid-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Washi tape strip bottom right */
+    .p2-tape-bottom {
+      position: absolute;
+      bottom: -1vw;
+      right: -1vw;
+      width: 30%;
+      height: 2.2vw;
+      background: rgba(232, 218, 195, 0.72);
+      border-left: 1px dashed rgba(180, 160, 140, 0.4);
+      border-right: 1px dashed rgba(180, 160, 140, 0.4);
+      transform: rotate(-24deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      z-index: 15;
+    }
+
+    /* ========================================================
+       PAGE 3: OUR STORY
+       ======================================================== */
     .p3-photos {
       position: absolute;
       top: 16%;
@@ -347,8 +391,16 @@
       color: #46383b;
       margin-bottom: 0.9vw;
     }
+    .script-heading {
+      font-family: 'Alex Brush', cursive;
+      font-size: clamp(32px, 3.8vw, 60px);
+      color: #3b282c;
+      margin-bottom: 1.2vw;
+    }
 
-    /* Page 4 Details */
+    /* ========================================================
+       PAGE 4: THE DETAILS
+       ======================================================== */
     .p4-container {
       position: absolute;
       top: 14%;
@@ -388,7 +440,9 @@
     .swatches { display: flex; justify-content: center; gap: 0.4vw; margin: 0.8vw 0; }
     .swatch { width: 1.3vw; height: 1.3vw; min-width: 14px; min-height: 14px; border-radius: 50%; }
 
-    /* Page 5 Entourage */
+    /* ========================================================
+       PAGE 5: OUR ENTOURAGE
+       ======================================================== */
     .p5-container {
       position: absolute;
       top: 13%;
@@ -413,7 +467,9 @@
       line-height: 1.5;
     }
 
-    /* Page 6 Gallery & RSVP */
+    /* ========================================================
+       PAGE 6: GALLERY & RSVP
+       ======================================================== */
     .p6-gallery-side {
       position: absolute;
       top: 14%;
@@ -520,6 +576,58 @@
       letter-spacing: 0.2em;
       cursor: pointer;
     }
+
+    /* ----------------------------------------------------
+       MOBILE ADJUSTMENTS (9:16 Portrait Canvas)
+       ---------------------------------------------------- */
+    @media (max-width: 768px) {
+      .p1-parchment-label {
+        top: 23%;
+        left: 23%;
+        width: 56%;
+        height: 44%;
+        padding: 0 2vw;
+        transform: rotate(-10deg);
+      }
+      .p1-names-wrap { font-size: 10.5vw; }
+      .p1-label-subhead { font-size: 2.2vw; margin-top: 2.5vw; }
+      .p1-label-date { font-size: 2.3vw; margin-top: 0.6vw; }
+      .p1-inner-quote { font-size: 2.1vw; margin-top: 1.6vw; max-width: 95%; }
+      .p1-open-action {
+        top: 83%;
+        left: 15%;
+        width: 70%;
+        transform: rotate(-10deg);
+      }
+      .p1-open-action a { font-size: 2.2vw; }
+
+      .p2-letter-area {
+        top: 15%;
+        left: 12%;
+        width: 76%;
+        transform: rotate(-2.5deg);
+      }
+      .p2-title { font-size: 8vw; margin-bottom: 2.5vw; }
+      .p2-body { font-size: 3.4vw; line-height: 1.55; }
+      .p2-sign-text { font-size: 7.5vw; }
+      .p2-handwritten-heart { font-size: 6.5vw; }
+      .p2-polaroid-wrap {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 70%;
+        margin: 5vw auto 0 auto;
+        transform: rotate(2deg);
+      }
+
+      .p3-photos { display: none; }
+      .p3-story-box { top: 16%; left: 10%; width: 80%; }
+      .p4-container { top: 14%; left: 8%; width: 84%; }
+      .p4-attire-tag { display: none; }
+      .p5-container { top: 14%; left: 8%; width: 84%; }
+      .p6-gallery-side { display: none; }
+      .p6-rsvp-side { top: 22%; left: 10%; width: 80%; }
+    }
   </style>
 </head>
 <body>
@@ -528,7 +636,6 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-1">
       
-      <!-- Positioned and centered evenly inside the cream paper label -->
       <div class="p1-parchment-label">
         <div class="p1-names-wrap" aria-label="Andy & Lance">
           <span class="line-1" id="line1">Andy &amp;</span>
@@ -541,7 +648,6 @@
         </div>
       </div>
 
-      <!-- Open Link -->
       <div class="p1-open-action">
         <a href="#page-2">OPEN JOURNAL &rarr;</a>
       </div>
@@ -561,19 +667,39 @@
         <a href="#page-6">RSVP</a>
       </nav>
 
-      <div class="p2-letter">
-        <h2 class="script-heading">To our favorite people,</h2>
-        <div class="letter-body">
-          <p>We're so glad you're here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here &mdash; to this very moment.</p>
-          <br>
-          <p>Thank you for being part of our forever.</p>
+      <!-- Handwritten text naturally angled to the left page -->
+      <div class="p2-letter-area">
+        <h2 class="p2-title">To our favorite people,</h2>
+        
+        <div class="p2-body">
+          <p>
+            We're so glad you're here to be part<br>
+            of our story. This is a journal of how<br>
+            we found each other, even when we<br>
+            least expected it, and how it all<br>
+            led us here – to this very moment.
+          </p>
+          <p>
+            Thank you for being part of our<br>
+            forever.
+          </p>
         </div>
-        <div class="p2-sign">Andy &amp; Lance ♡</div>
+
+        <div class="p2-sign-wrap">
+          <span class="p2-sign-text">Andy &amp; Lance</span>
+          <span class="p2-handwritten-heart">&#9825;</span>
+        </div>
       </div>
 
-      <div class="p2-polaroid">
-        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&auto=format&fit=crop&q=80" alt="Andy & Lance">
+      <!-- Tilted Polaroid Frame displaying 8th.jpeg with Washi Tape -->
+      <div class="p2-polaroid-wrap">
+        <div class="p2-tape-top"></div>
+        <div class="p2-polaroid-frame">
+          <img src="8th.jpeg" alt="Andy & Lance">
+        </div>
+        <div class="p2-tape-bottom"></div>
       </div>
+
     </div>
   </div>
 
@@ -787,16 +913,14 @@
         ...buildSpans(line2, text2)
       ];
 
-      // Shuffle indices for unpredictable random order
       const shuffledIndices = allSpans.map((_, i) => i);
       for (let i = shuffledIndices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
       }
 
-      // Slowly fade each letter into view at spaced out random intervals
-      const baseDelay = 400; // ms
-      const intervalStep = 220; // ms between random reveals
+      const baseDelay = 400;
+      const intervalStep = 220;
 
       shuffledIndices.forEach((targetIdx, step) => {
         setTimeout(() => {
@@ -804,7 +928,6 @@
         }, baseDelay + (step * intervalStep));
       });
 
-      // Gently reveal the underlying quote after names materialize
       setTimeout(() => {
         if (quote) quote.classList.add('revealed');
       }, baseDelay + (allSpans.length * intervalStep) + 300);
@@ -812,7 +935,6 @@
 
     window.addEventListener('DOMContentLoaded', setupSlowFadingNames);
 
-    // RSVP modal handlers
     function openRSVP() {
       document.getElementById('rsvpModal').classList.add('open');
     }
