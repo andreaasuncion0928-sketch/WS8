@@ -1,777 +1,1150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kensington | Executive CX & Business Opportunity Analysis</title>
-  <!-- Google Fonts: Piazzolla & Poppins -->
+  <title>Andy & Lance — Wedding Journal</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Script, Serif & Handwritten -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,600;0,8..30,700;1,8..30,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    :root {
-      --dark-moss: #001705;
-      --soft-grey: #F3F1E5;
-      --hot-green: #4CE467;
-      --summer-yellow: #FFC844;
-      --lavender: #766DFA;
-      --white: #FFFFFF;
-      --card-bg: #FFFFFF;
-      --border-subtle: #E2DFD2;
-      --text-muted: #536357;
-      --danger: #FF5A5F;
+    /* Font helpers */
+    .font-script { font-family: 'Great Vibes', cursive; }
+    .font-brush { font-family: 'Alex Brush', cursive; }
+    .font-serif-vintage { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .font-hand { font-family: 'Caveat', cursive; }
+    .font-clean { font-family: 'Montserrat', sans-serif; }
+
+    /* Custom Parchment & Scrapbook Fallback Backgrounds */
+    .bg-parchment-base {
+      background-color: #f7f3ee;
+      background-image: 
+        radial-gradient(#d6c9b8 0.6px, transparent 0.6px), 
+        linear-gradient(to right, rgba(230, 222, 212, 0.4), rgba(245, 239, 230, 0.8));
+      background-size: 20px 20px, 100% 100%;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* ----------------------------------------------------
+       RESPONSIVE BACKGROUNDS:
+       * p.jpg for mobile (max-width: 768px)
+       * b.jpg for browser (min-width: 769px)
+       With elegant fallback gradients/textures
+       ---------------------------------------------------- */
+    
+    /* 1. Cover / Intro */
+    #page-intro {
+      background-color: #44324c;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      #page-intro {
+        background-image: url('intro p.jpg'), radial-gradient(circle at 80% 20%, #684a75, #2b1a35);
+      }
+    }
+    @media (min-width: 769px) {
+      #page-intro {
+        background-image: url('intro b.jpg'), radial-gradient(circle at 60% 30%, #5a3c69, #251630);
+      }
     }
 
-    body {
-      background-color: var(--soft-grey);
-      color: var(--dark-moss);
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      line-height: 1.45;
-      padding: 32px 24px;
-      -webkit-font-smoothing: antialiased;
+    /* 2. Favorite People Note */
+    #page-favorite {
+      background-color: #f4eee6;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      #page-favorite {
+        background-image: url('favorite_people p.jpg'), linear-gradient(135deg, #f7f1ea 0%, #ece2d5 100%);
+      }
+    }
+    @media (min-width: 769px) {
+      #page-favorite {
+        background-image: url('favorite_people b.jpg'), linear-gradient(135deg, #faf5ef 0%, #e8ddcf 100%);
+      }
     }
 
-    .report-wrapper {
-      max-width: 1240px;
-      margin: 0 auto;
+    /* 3. Our Story */
+    #page-story {
+      background-color: #f5efe6;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      #page-story {
+        background-image: url('story p.jpg'), linear-gradient(180deg, #f6f0e7 0%, #ebdcc9 100%);
+      }
+    }
+    @media (min-width: 769px) {
+      #page-story {
+        background-image: url('story b.jpg'), linear-gradient(180deg, #f8f3ec 0%, #e9dbc7 100%);
+      }
     }
 
-    /* Header & Branding */
-    header {
-      background: var(--dark-moss);
-      color: var(--white);
-      padding: 28px 32px;
-      border-radius: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 20px rgba(0, 23, 5, 0.12);
+    /* 4. Details */
+    #page-details {
+      background-color: #f5ede4;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      #page-details {
+        background-image: url('details p.jpg'), linear-gradient(145deg, #faf3ea 0%, #ebe0d3 100%);
+      }
+    }
+    @media (min-width: 769px) {
+      #page-details {
+        background-image: url('details b.jpg'), linear-gradient(145deg, #faf4ec 0%, #ece1d3 100%);
+      }
     }
 
-    .header-titles h1 {
-      font-family: 'Piazzolla', serif;
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      color: var(--white);
-      margin-bottom: 4px;
+    /* 5. Entourage */
+    #page-entourage {
+      background-color: #f3ece3;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      #page-entourage {
+        background-image: url('entourage p.jpg'), linear-gradient(180deg, #f5eee5 0%, #e5d8c8 100%);
+      }
+    }
+    @media (min-width: 769px) {
+      #page-entourage {
+        background-image: url('entourage b.jpg'), linear-gradient(180deg, #f7f0e7 0%, #e4d6c5 100%);
+      }
     }
 
-    .header-titles p {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--border-subtle);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
+    /* 6. Gallery & RSVP */
+    #page-gallery-rsvp {
+      background-color: #f6efe7;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 768px) {
+      #page-gallery-rsvp {
+        background-image: url('gallery_rsvp p.jpg'), linear-gradient(160deg, #f8f2eb 0%, #eadfcb 100%);
+      }
+    }
+    @media (min-width: 769px) {
+      #page-gallery-rsvp {
+        background-image: url('gallery_rsvp b.jpg'), linear-gradient(160deg, #faf5ee 0%, #eadfcb 100%);
+      }
     }
 
-    .badge-scope {
-      background: rgba(76, 228, 103, 0.15);
-      border: 1px solid var(--hot-green);
-      color: var(--hot-green);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 30px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    /* Realistic Deckle / Torn Paper Edge Simulation */
+    .deckle-card {
+      position: relative;
+      background-color: #fbf7f0;
+      box-shadow: 
+        0 1px 3px rgba(0,0,0,0.06),
+        0 15px 35px -5px rgba(68, 50, 76, 0.18),
+        inset 0 0 45px rgba(210, 186, 155, 0.25);
+      border: 1px solid rgba(216, 201, 180, 0.65);
     }
 
-    /* Section Headings */
-    h2.section-title {
-      font-family: 'Piazzolla', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--dark-moss);
-      margin: 28px 0 14px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* Torn right edge jagged mask */
+    .torn-right {
+      -webkit-mask-image: radial-gradient(circle at 100% 50%, transparent 2px, black 3px);
+      -webkit-mask-size: 8px 12px;
     }
 
-    h2.section-title::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 18px;
-      background: var(--lavender);
+    /* Frosted Scotch Tape Effect */
+    .washi-tape {
+      background: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      backdrop-filter: blur(1.5px);
+      border-left: 2px dashed rgba(220, 210, 195, 0.6);
+      border-right: 2px dashed rgba(220, 210, 195, 0.6);
+    }
+
+    /* Polaroid Picture Styling */
+    .polaroid {
+      background: #ffffff;
+      padding: 10px 10px 32px 10px;
+      box-shadow: 0 10px 22px rgba(60, 40, 70, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
+      border: 1px solid #eee9e0;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    }
+    .polaroid:hover {
+      transform: scale(1.03) rotate(0deg) !important;
+      box-shadow: 0 18px 30px rgba(60, 40, 70, 0.24);
+      z-index: 30;
+    }
+
+    /* Subtle Paper Ribbon & Wax Seal */
+    .wax-seal {
+      background: radial-gradient(circle at 35% 35%, #7e5c8e, #492857, #31183c);
+      box-shadow: 
+        inset 1px 1px 3px rgba(255,255,255,0.4),
+        inset -2px -2px 4px rgba(0,0,0,0.5),
+        0 8px 16px rgba(50, 20, 60, 0.35);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1ebd9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c3b2cf;
       border-radius: 4px;
     }
-
-    .sub-heading {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    /* KPI Summary Cards */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .kpi-card {
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      padding: 18px 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .kpi-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--lavender);
-    }
-
-    .kpi-card.green::after { background: var(--hot-green); }
-    .kpi-card.yellow::after { background: var(--summer-yellow); }
-    .kpi-card.moss::after { background: var(--dark-moss); }
-
-    .kpi-label {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .kpi-value {
-      font-family: 'Piazzolla', serif;
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--dark-moss);
-      line-height: 1.1;
-    }
-
-    .kpi-subtext {
-      font-size: 11px;
-      margin-top: 6px;
-      color: var(--text-muted);
-    }
-
-    /* Charts Row */
-    .charts-row {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .chart-container {
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-    }
-
-    .chart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .chart-title {
-      font-family: 'Piazzolla', serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--dark-moss);
-    }
-
-    .chart-wrapper {
-      position: relative;
-      height: 220px;
-      width: 100%;
-    }
-
-    /* Comparison Tables */
-    .table-container {
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    thead th {
-      background-color: var(--dark-moss);
-      color: var(--white);
-      font-family: 'Poppins', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      padding: 12px 16px;
-      border: none;
-    }
-
-    tbody tr {
-      border-bottom: 1px solid var(--border-subtle);
-      transition: background-color 0.15s ease;
-    }
-
-    tbody tr:last-child {
-      border-bottom: none;
-    }
-
-    tbody tr:hover {
-      background-color: rgba(243, 241, 229, 0.5);
-    }
-
-    td {
-      padding: 12px 16px;
-      font-size: 12px;
-      vertical-align: middle;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-    }
-
-    .pill-green { background: #E3FBE7; color: #0C6B22; }
-    .pill-yellow { background: #FEF7DE; color: #8A6400; }
-    .pill-red { background: #FDE8E8; color: #9B1C1C; }
-    .pill-lavender { background: #EDEBFD; color: #4338CA; }
-
-    /* Visual Grid: Red & Green Flags */
-    .signals-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .signal-card {
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 20px;
-    }
-
-    .signal-card.red-flag {
-      border-top: 4px solid var(--danger);
-    }
-
-    .signal-card.green-flag {
-      border-top: 4px solid var(--hot-green);
-    }
-
-    .signal-item {
-      padding: 12px 0;
-      border-bottom: 1px dashed var(--border-subtle);
-    }
-
-    .signal-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .signal-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4px;
-    }
-
-    .signal-item-title {
-      font-weight: 600;
-      font-size: 12px;
-      color: var(--dark-moss);
-    }
-
-    .verbatim-quote {
-      font-style: italic;
-      background: var(--soft-grey);
-      padding: 8px 12px;
-      border-left: 3px solid var(--lavender);
-      border-radius: 0 6px 6px 0;
-      margin-top: 8px;
-      font-size: 11px;
-      color: var(--dark-moss);
-    }
-
-    /* EPOS Callout Container */
-    .epos-banner {
-      background: #FFFFFF;
-      border: 1px solid var(--lavender);
-      border-left: 6px solid var(--lavender);
-      padding: 18px 22px;
-      border-radius: 10px;
-      margin-bottom: 24px;
-      display: grid;
-      grid-template-columns: 1.5fr 2fr;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .epos-stat-cluster {
-      display: flex;
-      gap: 20px;
-    }
-
-    .epos-stat-item h4 {
-      font-family: 'Piazzolla', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--dark-moss);
-    }
-
-    .epos-stat-item p {
-      font-size: 10px;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 11px;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-subtle);
-      margin-top: 20px;
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9d7bb0;
     }
   </style>
 </head>
-<body>
+<body class="bg-parchment-base text-[#4a3f35] antialiased selection:bg-[#9d7bb0]/30 selection:text-[#382245] overflow-x-hidden">
 
-  <div class="report-wrapper">
-    <!-- Header -->
-    <header>
-      <div class="header-titles">
-        <p>InTouch Strategic Performance Intelligence</p>
-        <h1>Kensington CX & Business Opportunity Analysis</h1>
-        <p>Audit Period: October 26–31, 2026 &bull; Verified Contact Dataset</p>
-      </div>
-      <div>
-        <span class="badge-scope">Audited Conversations: 93 (Core) + 17 (EPOS)</span>
-      </div>
-    </header>
+  <!-- ========================================================
+       TOP FLOATING NAV BAR (Vintage Journal Tabs)
+       ======================================================== -->
+  <header class="fixed top-2 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 pointer-events-none">
+    <nav class="pointer-events-auto bg-[#faf6f0]/90 backdrop-blur-md border border-[#dfd4c4] px-4 sm:px-8 py-2 rounded-full shadow-lg flex items-center gap-3 sm:gap-7 text-xs sm:text-sm font-serif-vintage tracking-wider text-[#5c4a3b]">
+      <a href="#page-favorite" class="p-1 hover:text-[#7f5896] transition-colors flex items-center gap-1.5" title="Home">
+        <i data-lucide="home" class="w-4 h-4"></i>
+      </a>
+      <span class="w-[1px] h-3 bg-[#d5c7b5]"></span>
+      <a href="#page-story" class="hover:text-[#7f5896] transition-colors italic hover:font-medium">Our Story</a>
+      <span class="w-[1px] h-3 bg-[#d5c7b5]"></span>
+      <a href="#page-details" class="hover:text-[#7f5896] transition-colors italic hover:font-medium">The Details</a>
+      <span class="w-[1px] h-3 bg-[#d5c7b5]"></span>
+      <a href="#page-entourage" class="hover:text-[#7f5896] transition-colors italic hover:font-medium hidden sm:inline">Entourage</a>
+      <span class="w-[1px] h-3 bg-[#d5c7b5] hidden sm:inline"></span>
+      <a href="#page-gallery-rsvp" class="hover:text-[#7f5896] transition-colors italic hover:font-medium">Gallery</a>
+      <span class="w-[1px] h-3 bg-[#d5c7b5]"></span>
+      <a href="#page-gallery-rsvp" class="text-[#7f5896] font-semibold tracking-widest hover:text-[#5d3873] transition-colors">RSVP</a>
+    </nav>
+  </header>
 
-    <!-- Top KPI Grid -->
-    <div class="kpi-grid">
-      <div class="kpi-card green">
-        <div class="kpi-label">Chat CSAT (Peak Channel)</div>
-        <div class="kpi-value">60.7%</div>
-        <div class="kpi-subtext">57.1% Resolution Rate driven by SKU upgrades</div>
-      </div>
-      <div class="kpi-card moss">
-        <div class="kpi-label">Voice Volume Share</div>
-        <div class="kpi-value">80.6%</div>
-        <div class="kpi-subtext">75 of 93 Interactions | 50.9% CSAT</div>
-      </div>
-      <div class="kpi-card yellow">
-        <div class="kpi-label">Strategic Opportunity Volume</div>
-        <div class="kpi-value">19.4%</div>
-        <div class="kpi-subtext">18+ Core interactions addressing key operational gaps</div>
-      </div>
-      <div class="kpi-card" style="border-top-color: var(--danger);">
-        <div class="kpi-label">Email First-Contact Resolution</div>
-        <div class="kpi-value">0.0%</div>
-        <div class="kpi-subtext">27.5% CSAT due to RMA backorders & auto-closure</div>
-      </div>
+  <!-- ========================================================
+       PAGE 1: COVER / INTRO PAGE
+       (Velvet Purple Journal Cover with Ribbons & Gold Lettering)
+       ======================================================== -->
+  <section id="page-intro" class="min-h-screen relative flex items-center justify-center p-4 sm:p-8 overflow-hidden">
+    <!-- Atmospheric Vintage Lighting -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/30 pointer-events-none"></div>
+
+    <!-- Decorative Pressed Lavender / Botanical SVG Accent Left -->
+    <div class="absolute left-2 sm:left-10 top-1/4 pointer-events-none opacity-85 select-none hidden md:block">
+      <svg class="w-28 h-64 text-[#d8c2e7]/40" viewBox="0 0 100 240" fill="currentColor">
+        <path d="M50 240 Q48 160 52 80 Q53 40 50 0" stroke="currentColor" stroke-width="2" fill="none"/>
+        <ellipse cx="46" cy="40" rx="9" ry="5" transform="rotate(-35 46 40)"/>
+        <ellipse cx="58" cy="50" rx="9" ry="5" transform="rotate(35 58 50)"/>
+        <ellipse cx="45" cy="70" rx="10" ry="5.5" transform="rotate(-30 45 70)"/>
+        <ellipse cx="59" cy="85" rx="10" ry="5.5" transform="rotate(28 59 85)"/>
+        <ellipse cx="44" cy="110" rx="11" ry="6" transform="rotate(-38 44 110)"/>
+        <ellipse cx="58" cy="128" rx="11" ry="6" transform="rotate(32 58 128)"/>
+      </svg>
     </div>
 
-    <!-- Charts Section -->
-    <div class="charts-row">
-      <!-- Volume Distribution Donut -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div class="chart-title">Core Channel Volume Distribution</div>
-          <span class="pill pill-lavender">93 Total</span>
-        </div>
-        <div class="chart-wrapper">
-          <canvas id="volumeChart"></canvas>
-        </div>
-      </div>
-
-      <!-- CX Performance by Channel Bar Chart -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div class="chart-title">Channel Health Scorecard: QA, CSAT & Resolution</div>
-          <span class="pill pill-green">Comparative View</span>
-        </div>
-        <div class="chart-wrapper">
-          <canvas id="channelPerfChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cross-Channel Benchmark Matrix -->
-    <h2 class="section-title">Channel Performance & Strategic Metrics</h2>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Channel Campaign</th>
-            <th>Volume</th>
-            <th>Share (%)</th>
-            <th>QA Score</th>
-            <th>CSAT</th>
-            <th>Resolution Rate</th>
-            <th>Primary Contact Drivers</th>
-            <th>Operational Health</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Kensington – Voice</strong></td>
-            <td>75</td>
-            <td>80.6%</td>
-            <td>63.6%</td>
-            <td>50.9%</td>
-            <td>28.0%</td>
-            <td>Video Configuration, Docks, Cases, Headset Audio</td>
-            <td><span class="pill pill-yellow">Moderate Friction</span></td>
-          </tr>
-          <tr>
-            <td><strong>Kensington – Chat</strong></td>
-            <td>14</td>
-            <td>15.1%</td>
-            <td>57.7%</td>
-            <td>60.7%</td>
-            <td>57.1%</td>
-            <td>Dock Backorders, Warranty Validation, Lock Specs</td>
-            <td><span class="pill pill-green">High Agility</span></td>
-          </tr>
-          <tr>
-            <td><strong>Kensington – Email</strong></td>
-            <td>4</td>
-            <td>4.3%</td>
-            <td>65.3%</td>
-            <td>27.5%</td>
-            <td>0.0%</td>
-            <td>Privacy Screens, RMA Backlog, Driver Updates</td>
-            <td><span class="pill pill-red">Critical Focus</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Cross-Campaign Opportunity Matrix -->
-    <h2 class="section-title">High-Impact Cross-Campaign Opportunities</h2>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Opportunity Theme</th>
-            <th>Total Impact</th>
-            <th>Affected Channels</th>
-            <th>Root Cause Signal</th>
-            <th>High-Leverage Business Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Display & Multi-Monitor Self-Service</strong></td>
-            <td><span class="pill pill-lavender">12 Contacts (12.9%)</span></td>
-            <td>Voice (6), Chat (5), Email (1)</td>
-            <td>Customers verifying video spec mappings & monitor dimensional fit</td>
-            <td>Deploy interactive <strong>Compatibility Finder</strong> on Kensington.com to deflect repetitive specs inquiry</td>
-          </tr>
-          <tr>
-            <td><strong>Warranty Stock-Outs & Unified Inventory</strong></td>
-            <td><span class="pill pill-yellow">5 Contacts (5.4%)</span></td>
-            <td>Voice (2), Chat (2), Email (1)</td>
-            <td>Warranty stock delays while items appear in-stock on web store</td>
-            <td>Create cross-channel fulfillment bridge allowing RMA dispatch from D2C retail pools</td>
-          </tr>
-          <tr>
-            <td><strong>CRM Auto-Solve Synchronization Logic</strong></td>
-            <td><span class="pill pill-red">3 Contacts (3.2%)</span></td>
-            <td>Voice (1), Chat (1), Email (1)</td>
-            <td>System triggers "Resolved" notices while customer photos/media remain queued</td>
-            <td>Refactor ticket state triggers to keep claims in "Validation Review" until dispatch</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Visual Signals: Red Flags & Green Flags -->
-    <h2 class="section-title">Customer Experience Signals: Red & Green Flags</h2>
-    <div class="signals-grid">
-      <!-- Red Flags -->
-      <div class="signal-card red-flag">
-        <div class="sub-heading" style="color: var(--danger);">Critical Friction Signals (Red Flags)</div>
+    <!-- Center Book Cover Label -->
+    <div class="relative z-10 max-w-xl w-full mx-auto text-center px-4">
+      <!-- Main Paper Label (Deckle Torn Effect on Purple Cover) -->
+      <div class="relative bg-[#faf5ed] text-[#423326] p-8 sm:p-14 rounded-sm shadow-2xl border border-[#ded0bf]/80 transform rotate-[-0.5deg]">
+        <!-- Top corners pins / decorative tape -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 washi-tape w-24 h-6 rotate-1"></div>
         
-        <div class="signal-item">
-          <div class="signal-item-header">
-            <span class="signal-item-title">1. Warranty Delays vs Commercial Stock</span>
-            <span class="pill pill-red">Email / Chat</span>
-          </div>
-          <p style="font-size: 11px;">Prolonged backorders while storefront reflects stock generates severe churn & threats of negative reviews.</p>
-          <div class="verbatim-quote">
-            "I don't understand how it's in stock online but you are telling me you are out of stock?... I am going to write a review about my experience."
-          </div>
+        <!-- Ribbon bow illustration overlay hint -->
+        <div class="text-[#7c5e88] mb-1 font-serif-vintage tracking-[0.3em] text-xs uppercase opacity-80">
+          Save Our Date
         </div>
 
-        <div class="signal-item">
-          <div class="signal-item-header">
-            <span class="signal-item-title">2. Voice Telephony Audio Dropouts</span>
-            <span class="pill pill-red">Voice (2.7%)</span>
-          </div>
-          <p style="font-size: 11px;">Agent headsets dropping out mid-troubleshooting forces customers to disconnect and call back.</p>
-          <div class="verbatim-quote">
-            "Why are you cutting? Your voice is cutting... about every 3rd word... Is there someone else whose headset is working?"
-          </div>
-        </div>
+        <h1 class="font-brush text-6xl sm:text-7xl md:text-8xl text-[#463148] my-2 leading-none font-normal">
+          Andy <span class="font-serif-vintage italic text-4xl sm:text-5xl text-[#7c5e88]">&amp;</span> Lance
+        </h1>
 
-        <div class="signal-item">
-          <div class="signal-item-header">
-            <span class="signal-item-title">3. Unresponsive Auto-Closure Logic</span>
-            <span class="pill pill-red">Email / Chat</span>
-          </div>
-          <p style="font-size: 11px;">Automated "Resolved" triggers sent before customer verification evidence is reviewed.</p>
-        </div>
-      </div>
+        <div class="w-24 h-[1px] bg-[#baa291] mx-auto my-4"></div>
 
-      <!-- Green Flags -->
-      <div class="signal-card green-flag">
-        <div class="sub-heading" style="color: #0C6B22;">Value-Driving Behaviors (Green Flags)</div>
+        <h2 class="font-clean tracking-[0.28em] text-xs sm:text-sm uppercase text-[#6f5e51] font-semibold">
+          Our Wedding Journal
+        </h2>
 
-        <div class="signal-item">
-          <div class="signal-item-header">
-            <span class="signal-item-title">1. Proactive Model Upgrades on Backorders</span>
-            <span class="pill pill-green">Chat (14.3%)</span>
-          </div>
-          <p style="font-size: 11px;">Agents salvage churn by immediately offering current-gen docking models (e.g., SD4790P for SD4750P).</p>
-          <div class="verbatim-quote">
-            "Thanks for the quick reply! We are comfortable with the SD4790P as a replacement due to the backorder."
-          </div>
-        </div>
-
-        <div class="signal-item">
-          <div class="signal-item-header">
-            <span class="signal-item-title">2. High-Accuracy Dimensional Guidance</span>
-            <span class="pill pill-green">Voice & Chat</span>
-          </div>
-          <p style="font-size: 11px;">Fast, seamless lock pairing (MicroSaver 2.0) and screen sizing eliminates pre-purchase hesitation.</p>
-        </div>
-
-        <div class="signal-item">
-          <div class="signal-item-header">
-            <span class="signal-item-title">3. EPOS Diagnostic Scripting Adherence</span>
-            <span class="pill pill-green">100% Success</span>
-          </div>
-          <p style="font-size: 11px;">Methodical driver and firmware conflict isolation (VPN bypass, USB hubs) yields 100% resolution.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Specialized Callout: Kensington EPOS Program -->
-    <div class="epos-banner">
-      <div>
-        <div class="sub-heading" style="color: var(--lavender);">Program Focus</div>
-        <h3 style="font-family: 'Piazzolla', serif; font-size: 17px; margin-bottom: 6px;">Kensington EPOS Operational Deep Dive</h3>
-        <p style="font-size: 11px; color: var(--text-muted);">
-          17 interactions audited across Kensington EPOS – Voice (100% voice distribution). High unresolved rate driven by End-of-Life gaming headset friction and multi-month RMA backlog.
+        <p class="font-serif-vintage text-base sm:text-lg text-[#846b5a] mt-2 italic tracking-widest">
+          SEPTEMBER 4, 2028
         </p>
-      </div>
-      <div class="epos-stat-cluster">
-        <div class="epos-stat-item">
-          <h4>35.3%</h4>
-          <p>Resolution Rate</p>
+
+        <!-- Floral botanical divider -->
+        <div class="flex items-center justify-center gap-3 my-5 text-[#9d7bb0]">
+          <span class="w-12 h-[0.5px] bg-[#cbb8d8]"></span>
+          <i data-lucide="flower-2" class="w-4 h-4"></i>
+          <span class="w-12 h-[0.5px] bg-[#cbb8d8]"></span>
         </div>
-        <div class="epos-stat-item">
-          <h4>64.7%</h4>
-          <p>Unresolved Rate</p>
-        </div>
-        <div class="epos-stat-item">
-          <h4>11.9m</h4>
-          <p>Avg Handle Time</p>
-        </div>
-        <div class="epos-stat-item">
-          <h4>35.3%</h4>
-          <p>EOL Inquiries</p>
+
+        <p class="font-serif-vintage italic text-xs sm:text-sm text-[#736053] max-w-xs mx-auto leading-relaxed uppercase tracking-wider">
+          “A journey of unexpected timing,<br>and a love that stayed.”
+        </p>
+
+        <!-- CTA Button: Open Journal -->
+        <div class="mt-8">
+          <a href="#page-favorite" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#8f6d9e] bg-[#8a659a] hover:bg-[#724e82] text-white font-clean text-xs sm:text-sm tracking-[0.2em] uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+            <span>Open Journal</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Four Strategic Action Pillars -->
-    <h2 class="section-title">Strategic Action Roadmap</h2>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Priority</th>
-            <th>Initiative</th>
-            <th>Primary Business Area</th>
-            <th>Recommended Action</th>
-            <th>Target KPI</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong style="color: var(--danger);">P1</strong></td>
-            <td><strong>EOL & Discontinued Accommodation</strong></td>
-            <td>Process & Policy</td>
-            <td>Deploy trade-in vouchers and retailer return paths for discontinued gaming lines</td>
-            <td>Reduce EPOS Unresolved Rate to &lt;30%</td>
-          </tr>
-          <tr>
-            <td><strong style="color: var(--summer-yellow);">P2</strong></td>
-            <td><strong>Unified Warranty Buffer Pool</strong></td>
-            <td>Supply Chain & Ops</td>
-            <td>Bridge support RMA allocation with D2C commercial inventory stock</td>
-            <td>Zero review churn threats on out-of-stock items</td>
-          </tr>
-          <tr>
-            <td><strong style="color: var(--lavender);">P3</strong></td>
-            <td><strong>Interactive Self-Service Compatibility</strong></td>
-            <td>Knowledge Base / Web</td>
-            <td>Launch web-based sizing and multi-monitor setup finder for docks and screens</td>
-            <td>Deflect 12%+ routine display setup calls</td>
-          </tr>
-          <tr>
-            <td><strong style="color: var(--dark-moss);">P4</strong></td>
-            <td><strong>CRM Auto-Solve Validation Rules</strong></td>
-            <td>Data & Systems</td>
-            <td>Update ticketing state rules so tickets do not auto-close while photos are queued</td>
-            <td>Eliminate repeat contact loop on evidence upload</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Soft bottom scroll indicator -->
+    <a href="#page-favorite" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 hover:text-white flex flex-col items-center gap-1 text-xs font-clean tracking-widest transition-opacity animate-bounce">
+      <span>TURN PAGE</span>
+      <i data-lucide="chevron-down" class="w-4 h-4"></i>
+    </a>
+  </section>
+
+
+  <!-- ========================================================
+       PAGE 2: TO OUR FAVORITE PEOPLE
+       (Warm scrapbook letter + tilted sunset polaroid)
+       ======================================================== -->
+  <section id="page-favorite" class="min-h-screen relative flex items-center justify-center py-16 px-4 sm:px-8 border-b border-[#dfd4c4]">
+    <!-- Vintage Stamp in top corner -->
+    <div class="absolute top-8 right-6 sm:top-12 sm:right-16 opacity-35 pointer-events-none hidden sm:block">
+      <div class="w-20 h-20 rounded-full border-2 border-dashed border-[#573e63] flex flex-col items-center justify-center rotate-12 text-[#573e63]">
+        <i data-lucide="plane" class="w-5 h-5 mb-0.5"></i>
+        <span class="text-[9px] font-clean font-bold tracking-widest uppercase">POSTAGE</span>
+        <span class="text-[8px] font-clean">04.09.28</span>
+      </div>
     </div>
 
-    <footer>
-      Generated for Kensington Executive Leadership &bull; InTouch Brand Intelligence &bull; Verified October 26–31 Performance Data
-    </footer>
+    <div class="max-w-5xl w-full mx-auto deckle-card p-6 sm:p-14 rounded-lg my-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left Column: Handwritten / Typewriter Letter -->
+        <div class="md:col-span-7 space-y-6">
+          <h2 class="font-brush text-4xl sm:text-5xl md:text-6xl text-[#463148] leading-tight">
+            To our favorite people,
+          </h2>
+
+          <div class="space-y-4 font-serif-vintage text-base sm:text-lg lg:text-xl text-[#534438] leading-relaxed">
+            <p>
+              We’re so glad you’re here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here — to this very moment.
+            </p>
+            <p>
+              Thank you for being part of our forever.
+            </p>
+          </div>
+
+          <div class="pt-4">
+            <p class="font-brush text-3xl sm:text-4xl text-[#603b6e] flex items-center gap-2">
+              Andy &amp; Lance
+              <span class="font-hand text-2xl text-[#8e609e]">♡</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Polaroid with Washi Tape -->
+        <div class="md:col-span-5 flex justify-center">
+          <div class="relative polaroid transform rotate-2 max-w-xs sm:max-w-sm">
+            <!-- Washi tape at top -->
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 washi-tape w-24 h-6 rotate-[-2deg] z-20"></div>
+
+            <div class="overflow-hidden rounded-xs bg-[#ebe4da] aspect-[4/5] relative">
+              <img 
+                src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" 
+                alt="Andy & Lance Sunset Rooftop" 
+                class="w-full h-full object-cover filter sepia-[0.18] contrast-[1.05]"
+                onerror="this.src='https://placehold.co/600x750/e8ded0/5d4469?text=Andy+%26+Lance'"
+              />
+            </div>
+            <p class="text-center font-hand text-lg text-[#6d5b4e] mt-3 tracking-wide">
+              city lights &amp; forever views ✨
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       PAGE 3: OUR STORY
+       (Scrapbook collage + heartfelt chronicle)
+       ======================================================== -->
+  <section id="page-story" class="min-h-screen relative flex items-center justify-center py-20 px-4 sm:px-8 border-b border-[#dfd4c4]">
+    
+    <div class="max-w-6xl w-full mx-auto deckle-card p-6 sm:p-12 md:p-16 rounded-lg my-6">
+      
+      <!-- Section Title Header -->
+      <div class="text-center mb-10">
+        <h2 class="font-brush text-5xl sm:text-6xl md:text-7xl text-[#463148]">
+          Our Story
+        </h2>
+        <p class="font-serif-vintage italic text-base sm:text-xl text-[#786150] mt-1">
+          A love story that began in the most unexpected time.
+        </p>
+        <div class="flex items-center justify-center gap-3 mt-3 text-[#9d7bb0]">
+          <span class="w-16 h-[0.5px] bg-[#c5b1d4]"></span>
+          <span class="text-xs">❦</span>
+          <span class="w-16 h-[0.5px] bg-[#c5b1d4]"></span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left: Polaroid Cluster / Photo Mosaic -->
+        <div class="lg:col-span-6 relative flex flex-col items-center">
+          
+          <!-- Outer cluster container with layered tilts -->
+          <div class="relative w-full max-w-md h-[420px] sm:h-[460px]">
+            
+            <!-- Polaroid 1: Top Left City Night -->
+            <div class="polaroid absolute top-0 left-2 w-44 sm:w-56 transform -rotate-6 z-10">
+              <div class="absolute -top-3 left-4 washi-tape w-16 h-5 rotate-3 z-20"></div>
+              <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+                <img 
+                  src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" 
+                  alt="City lights night view"
+                  class="w-full h-full object-cover filter sepia-[0.15]"
+                  onerror="this.src='https://placehold.co/400x400/e3dacb/573d62?text=First+Date'"
+                />
+              </div>
+              <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">late night walks</p>
+            </div>
+
+            <!-- Polaroid 2: Center Main Couple Silhouette -->
+            <div class="polaroid absolute top-12 right-2 sm:right-4 w-48 sm:w-60 transform rotate-4 z-20">
+              <div class="absolute -top-3 right-6 washi-tape w-20 h-5 -rotate-2 z-30"></div>
+              <div class="aspect-[4/3] overflow-hidden bg-[#ded3c5]">
+                <img 
+                  src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=600&auto=format&fit=crop" 
+                  alt="Andy and Lance silhouette"
+                  class="w-full h-full object-cover filter sepia-[0.12]"
+                  onerror="this.src='https://placehold.co/500x375/decbc3/573d62?text=Us'"
+                />
+              </div>
+              <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">when it all clicked</p>
+            </div>
+
+            <!-- Polaroid 3: Bottom Left Hands Intertwined -->
+            <div class="polaroid absolute bottom-2 left-6 sm:left-10 w-44 sm:w-52 transform rotate-2 z-30">
+              <div class="absolute -top-3 left-8 washi-tape w-16 h-5 rotate-1 z-30"></div>
+              <div class="aspect-square overflow-hidden bg-[#e2d7c9]">
+                <img 
+                  src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600&auto=format&fit=crop" 
+                  alt="Holding hands"
+                  class="w-full h-full object-cover filter sepia-[0.2]"
+                  onerror="this.src='https://placehold.co/400x400/dfd3c5/573d62?text=Holding+Hands'"
+                />
+              </div>
+              <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">hand in hand</p>
+            </div>
+
+            <!-- Polaroid 4: Bottom Right Friends / Laughter -->
+            <div class="polaroid absolute bottom-0 right-2 w-36 sm:w-44 transform -rotate-3 z-10 hidden sm:block">
+              <div class="aspect-square overflow-hidden bg-[#e6dcce]">
+                <img 
+                  src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=600&auto=format&fit=crop" 
+                  alt="Celebration moment"
+                  class="w-full h-full object-cover filter sepia-[0.15]"
+                  onerror="this.src='https://placehold.co/400x400/ded3c5/573d62?text=Memories'"
+                />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Right: Journal Story Prose -->
+        <div class="lg:col-span-6 space-y-6 text-[#4d4034] font-serif-vintage text-base sm:text-lg leading-relaxed pl-0 lg:pl-6">
+          
+          <div class="p-6 bg-[#f7f2ea]/70 border-l-2 border-[#9d7bb0] rounded-r-md space-y-4">
+            <p>
+              It all started with a simple day, just hanging around, not expecting any love, not even a thought of falling in love. But then, <strong class="text-[#3b2342] font-semibold">it happened.</strong>
+            </p>
+            
+            <p>
+              Late night conversations and calls, daily chats even from a distance, and a decision to finally meet.
+            </p>
+            
+            <p>
+              And just like that, we got over with each other — and it all happened in a very sudden way.
+            </p>
+            
+            <p class="pt-2">
+              Now, it’s been more than a decade, and our story is still our favorite one.
+              <span class="inline-block ml-1 font-hand text-2xl text-[#8d629d]">♡</span>
+            </p>
+          </div>
+
+          <div class="flex items-center gap-4 text-xs font-clean uppercase tracking-[0.2em] text-[#867568]">
+            <span class="w-8 h-[1px] bg-[#baa697]"></span>
+            <span>2018 — 2028 &amp; BEYOND</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       PAGE 4: THE WEDDING DETAILS
+       (Ceremony, Reception & Scrapbook Attire Note)
+       ======================================================== -->
+  <section id="page-details" class="min-h-screen relative flex items-center justify-center py-20 px-4 sm:px-8 border-b border-[#dfd4c4]">
+    
+    <div class="max-w-6xl w-full mx-auto deckle-card p-6 sm:p-12 md:p-16 rounded-lg my-6">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h2 class="font-brush text-5xl sm:text-6xl md:text-7xl text-[#463148]">
+          The Wedding Details
+        </h2>
+        <p class="font-serif-vintage italic text-base sm:text-xl text-[#786150] mt-1">
+          Here’s everything you need to know for our big day.
+        </p>
+        <div class="w-20 h-[1px] bg-[#cbb8d8] mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Main Details: 2 Venues Side by Side -->
+        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          
+          <!-- Venue 1: Ceremony -->
+          <div class="bg-[#faf5ee] border border-[#e4d8c8] rounded-sm p-6 text-center space-y-4 shadow-sm hover:shadow-md transition-shadow">
+            <!-- Architectural sketch illustration -->
+            <div class="h-36 flex items-center justify-center overflow-hidden rounded bg-[#eee5d8]/40 border border-[#e2d5c3] p-2">
+              <svg class="w-full h-full text-[#6b5544] max-h-32" viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="1.3">
+                <!-- San Agustin Church Sketch Simulation -->
+                <path d="M70 110 V55 L100 30 L130 55 V110 Z" fill="#f7f1e6"/>
+                <path d="M100 15 V30 M95 20 H105"/>
+                <!-- Left Bell Tower -->
+                <path d="M30 110 V40 L50 25 L70 40 V110" fill="#f4ece0"/>
+                <path d="M45 55 A5 8 0 0 1 55 55 V75 H45 Z"/>
+                <!-- Right Bell Tower -->
+                <path d="M130 110 V40 L150 25 L170 40 V110" fill="#f4ece0"/>
+                <path d="M145 55 A5 8 0 0 1 155 55 V75 H145 Z"/>
+                <!-- Main Portal -->
+                <path d="M90 110 V85 A10 10 0 0 1 110 85 V110 Z" fill="#d9cbbe"/>
+                <circle cx="100" cy="55" r="9" stroke="currentColor"/>
+                <line x1="20" y1="110" x2="180" y2="110" stroke-width="1.5"/>
+              </svg>
+            </div>
+
+            <div>
+              <span class="font-clean text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8c679a]">The Sacrament</span>
+              <h3 class="font-serif-vintage font-bold text-2xl text-[#3d2c3f] mt-1">Ceremony</h3>
+            </div>
+
+            <div class="space-y-1 font-serif-vintage text-base text-[#564638]">
+              <p class="font-semibold text-lg text-[#3f2a44]">San Agustin Church</p>
+              <p class="text-sm italic text-[#726154]">General Luna St, Intramuros, Manila</p>
+            </div>
+
+            <div class="pt-3 border-t border-[#e8ddcf] flex flex-col items-center gap-1 text-sm font-serif-vintage text-[#625143]">
+              <div class="flex items-center gap-2 text-[#7f5b92]">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span class="font-medium">September 4, 2028</span>
+              </div>
+              <div class="flex items-center gap-2 text-[#685547]">
+                <i data-lucide="clock" class="w-4 h-4"></i>
+                <span>Monday • 3:00 PM</span>
+              </div>
+            </div>
+
+            <a href="https://maps.google.com/?q=San+Agustin+Church+Manila" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-clean uppercase tracking-wider text-[#815a94] hover:text-[#523363] pt-2">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+              <span>View Map</span>
+            </a>
+          </div>
+
+          <!-- Venue 2: Reception -->
+          <div class="bg-[#faf5ee] border border-[#e4d8c8] rounded-sm p-6 text-center space-y-4 shadow-sm hover:shadow-md transition-shadow">
+            <!-- Architectural sketch illustration -->
+            <div class="h-36 flex items-center justify-center overflow-hidden rounded bg-[#eee5d8]/40 border border-[#e2d5c3] p-2">
+              <svg class="w-full h-full text-[#6b5544] max-h-32" viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="1.3">
+                <!-- Taal Vista Hotel Building Sketch Simulation -->
+                <path d="M20 110 V65 L35 50 H165 L180 65 V110 Z" fill="#f4ede2"/>
+                <path d="M70 50 V30 L100 15 L130 30 V50" fill="#fcf8f2"/>
+                <!-- Windows & Colonial arches -->
+                <line x1="30" y1="75" x2="170" y2="75"/>
+                <line x1="30" y1="92" x2="170" y2="92"/>
+                <rect x="40" y="80" width="8" height="10"/>
+                <rect x="60" y="80" width="8" height="10"/>
+                <rect x="80" y="80" width="8" height="10"/>
+                <rect x="112" y="80" width="8" height="10"/>
+                <rect x="132" y="80" width="8" height="10"/>
+                <rect x="152" y="80" width="8" height="10"/>
+                <!-- Center entrance -->
+                <path d="M92 110 V95 A8 8 0 0 1 108 95 V110 Z" fill="#d9ccbe"/>
+                <line x1="10" y1="110" x2="190" y2="110" stroke-width="1.5"/>
+              </svg>
+            </div>
+
+            <div>
+              <span class="font-clean text-[11px] font-semibold uppercase tracking-[0.25em] text-[#8c679a]">Dinner &amp; Toast</span>
+              <h3 class="font-serif-vintage font-bold text-2xl text-[#3d2c3f] mt-1">Reception</h3>
+            </div>
+
+            <div class="space-y-1 font-serif-vintage text-base text-[#564638]">
+              <p class="font-semibold text-lg text-[#3f2a44]">Taal Vista Hotel</p>
+              <p class="text-sm italic text-[#726154]">Kilometer 60, Aguinaldo Hwy, Tagaytay City</p>
+            </div>
+
+            <div class="pt-3 border-t border-[#e8ddcf] flex flex-col items-center gap-1 text-sm font-serif-vintage text-[#625143]">
+              <div class="flex items-center gap-2 text-[#7f5b92]">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span class="font-medium">September 4, 2028</span>
+              </div>
+              <div class="flex items-center gap-2 text-[#685547]">
+                <i data-lucide="clock" class="w-4 h-4"></i>
+                <span>Monday • 6:00 PM</span>
+              </div>
+            </div>
+
+            <a href="https://maps.google.com/?q=Taal+Vista+Hotel+Tagaytay" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-clean uppercase tracking-wider text-[#815a94] hover:text-[#523363] pt-2">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+              <span>View Map</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right: Attire Paper Card (Torn Scrap note with Color Swatches) -->
+        <div class="lg:col-span-4 flex justify-center">
+          <div class="relative w-full max-w-sm bg-[#faf4ec] p-7 rounded-sm border border-[#e1d5c5] shadow-lg transform rotate-1">
+            <!-- Washi tape at top -->
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 washi-tape w-24 h-6 -rotate-1"></div>
+
+            <div class="text-center pb-4 border-b border-[#e5d9ca]">
+              <h4 class="font-brush text-4xl text-[#463148]">Attire</h4>
+              <p class="font-serif-vintage italic text-lg text-[#745a7d] mt-1">Shades of Purple</p>
+            </div>
+
+            <!-- Purple Color Swatches as shown in reference -->
+            <div class="py-6">
+              <div class="flex justify-center items-center gap-3">
+                <!-- Swatch 1: Soft Lilac -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full shadow-inner border border-white/60" style="background-color: #d1bddf;" title="Soft Lilac"></div>
+                  <span class="text-[9px] font-clean text-[#837060]">Lilac</span>
+                </div>
+                <!-- Swatch 2: Dusty Lavender -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full shadow-inner border border-white/60" style="background-color: #b598c5;" title="Dusty Lavender"></div>
+                  <span class="text-[9px] font-clean text-[#837060]">Lavender</span>
+                </div>
+                <!-- Swatch 3: Mauve / Muted Purple -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full shadow-inner border border-white/60" style="background-color: #8c679a;" title="Mauve"></div>
+                  <span class="text-[9px] font-clean text-[#837060]">Mauve</span>
+                </div>
+                <!-- Swatch 4: Deep Plum -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full shadow-inner border border-white/60" style="background-color: #55345d;" title="Deep Plum"></div>
+                  <span class="text-[9px] font-clean text-[#837060]">Plum</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center pt-2">
+              <span class="font-clean text-xs uppercase tracking-[0.25em] text-[#867160]">Dress Code</span>
+              <p class="font-serif-vintage italic font-semibold text-2xl text-[#402a43] mt-1">Formal</p>
+              <p class="text-xs font-serif-vintage text-[#78695d] mt-2 italic leading-relaxed">
+                Gentlemen: Barong Tagalog or Suits<br>
+                Ladies: Long Gowns or Midi Dresses in our palette
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       PAGE 5: OUR ENTOURAGE
+       (Principal Sponsors, Maid of Honor, Best Man, Wax Seal)
+       ======================================================== -->
+  <section id="page-entourage" class="min-h-screen relative flex items-center justify-center py-20 px-4 sm:px-8 border-b border-[#dfd4c4]">
+    
+    <div class="max-w-5xl w-full mx-auto deckle-card p-6 sm:p-14 rounded-lg my-6 relative overflow-hidden">
+      
+      <!-- Vintage Wax Seal in Right Bottom Corner -->
+      <div class="absolute -bottom-4 right-6 sm:right-12 z-20 pointer-events-none">
+        <div class="wax-seal w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center border-4 border-[#3a1d44]/30 transform -rotate-12">
+          <span class="font-brush text-3xl sm:text-4xl text-[#debfe8] select-none tracking-tight">AL</span>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="text-center mb-10">
+        <h2 class="font-brush text-5xl sm:text-6xl md:text-7xl text-[#463148]">
+          Our Entourage
+        </h2>
+        <div class="flex items-center justify-center gap-3 mt-2 text-[#9d7bb0]">
+          <span class="w-16 h-[0.5px] bg-[#c5b1d4]"></span>
+          <span class="text-xs">✤</span>
+          <span class="w-16 h-[0.5px] bg-[#c5b1d4]"></span>
+        </div>
+      </div>
+
+      <!-- Entourage Lists -->
+      <div class="space-y-10 max-w-3xl mx-auto text-center font-serif-vintage">
+        
+        <!-- Principal Sponsors -->
+        <div>
+          <h3 class="font-brush text-3xl text-[#5e4367] mb-4">
+            Principal Sponsors
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-base sm:text-lg text-[#4a3d31]">
+            <p>Mr. and Mrs. Juan Dela Cruz</p>
+            <p>Mr. and Mrs. Paolo Garcia</p>
+            <p>Mr. and Mrs. Miguel Santos</p>
+            <p>Mr. and Mrs. David Lim</p>
+            <p>Mr. and Mrs. Ramon Reyes</p>
+            <p>Mr. and Mrs. Carlo Mendoza</p>
+          </div>
+        </div>
+
+        <div class="w-24 h-[0.5px] bg-[#d9cbbe] mx-auto"></div>
+
+        <!-- Maid of Honor & Best Man -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+          <div>
+            <h4 class="font-brush text-2xl text-[#684773]">Maid of Honor</h4>
+            <p class="text-xl font-semibold text-[#3a283e] mt-1">Angelica Santos</p>
+          </div>
+          <div>
+            <h4 class="font-brush text-2xl text-[#684773]">Best Man</h4>
+            <p class="text-xl font-semibold text-[#3a283e] mt-1">Michael Reyes</p>
+          </div>
+        </div>
+
+        <div class="w-24 h-[0.5px] bg-[#d9cbbe] mx-auto"></div>
+
+        <!-- Bridesmaids & Groomsmen -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-2">
+          <div>
+            <h4 class="font-brush text-2xl text-[#684773] mb-2">Bridesmaids</h4>
+            <div class="text-base sm:text-lg text-[#514337] space-y-1">
+              <p>Camille Diaz</p>
+              <p>Marielle Santos</p>
+              <p>Denise Cruz</p>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-brush text-2xl text-[#684773] mb-2">Groomsmen</h4>
+            <div class="text-base sm:text-lg text-[#514337] space-y-1">
+              <p>Daniel Garcia</p>
+              <p>Patrick Lim</p>
+              <p>Matthew Reyes</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       PAGE 6: OUR GALLERY & RSVP
+       (Photo strips + RSVP Invitation + RSVP Modal)
+       ======================================================== -->
+  <section id="page-gallery-rsvp" class="min-h-screen relative flex items-center justify-center py-20 px-4 sm:px-8">
+    
+    <div class="max-w-6xl w-full mx-auto deckle-card p-6 sm:p-12 md:p-16 rounded-lg my-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Gallery Collage -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="text-center sm:text-left">
+            <h2 class="font-brush text-5xl sm:text-6xl text-[#463148]">
+              Our Gallery
+            </h2>
+            <p class="font-serif-vintage italic text-base sm:text-lg text-[#786150] mt-1">
+              A collection of moments, from then until now.
+            </p>
+          </div>
+
+          <!-- Collage of photo booth strip and polaroids -->
+          <div class="relative w-full max-w-md mx-auto pt-4 pb-2">
+            
+            <div class="grid grid-cols-2 gap-4 items-center">
+              
+              <!-- Left Stack: 2 polaroids -->
+              <div class="space-y-4">
+                <div class="polaroid transform -rotate-3">
+                  <div class="aspect-[4/3] overflow-hidden bg-[#e0d6c8]">
+                    <img 
+                      src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=600&auto=format&fit=crop" 
+                      alt="Travel together" 
+                      class="w-full h-full object-cover filter sepia-[0.1]"
+                      onerror="this.src='https://placehold.co/400x300/ded3c5/573d62?text=Travels'"
+                    />
+                  </div>
+                  <p class="font-hand text-xs text-center text-[#7a6a5d] mt-1.5">our roadtrips</p>
+                </div>
+
+                <div class="polaroid transform rotate-2">
+                  <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+                    <img 
+                      src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600&auto=format&fit=crop" 
+                      alt="Warm embrace" 
+                      class="w-full h-full object-cover filter sepia-[0.1]"
+                      onerror="this.src='https://placehold.co/400x400/ded3c5/573d62?text=Laughs'"
+                    />
+                  </div>
+                  <p class="font-hand text-xs text-center text-[#7a6a5d] mt-1.5">laughter &amp; tea</p>
+                </div>
+              </div>
+
+              <!-- Right: Vintage Photo Booth Strip -->
+              <div class="bg-white p-2.5 pb-6 shadow-xl border border-[#ece4d8] rounded-xs space-y-2 transform rotate-2">
+                <div class="w-full aspect-[4/3] bg-[#e3dad0] overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=400&auto=format&fit=crop" 
+                    alt="Strip 1" 
+                    class="w-full h-full object-cover filter sepia-[0.15]"
+                    onerror="this.src='https://placehold.co/300x200/ded3c5/573d62?text=Moments'"
+                  />
+                </div>
+                <div class="w-full aspect-[4/3] bg-[#e3dad0] overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=400&auto=format&fit=crop" 
+                    alt="Strip 2" 
+                    class="w-full h-full object-cover filter sepia-[0.15]"
+                    onerror="this.src='https://placehold.co/300x200/ded3c5/573d62?text=Strip+2'"
+                  />
+                </div>
+                <div class="w-full aspect-[4/3] bg-[#e3dad0] overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" 
+                    alt="Strip 3" 
+                    class="w-full h-full object-cover filter sepia-[0.15]"
+                    onerror="this.src='https://placehold.co/300x200/ded3c5/573d62?text=Strip+3'"
+                  />
+                </div>
+                <p class="text-center font-hand text-[11px] text-[#867669] pt-1">04.09.28 • forever</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="text-center sm:text-left pt-2">
+            <button onclick="openGalleryModal()" class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#b294c2] text-[#694279] hover:bg-[#865e97] hover:text-white font-clean text-xs uppercase tracking-widest transition-all">
+              <span>View More</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: RSVP Section -->
+        <div class="lg:col-span-6 flex flex-col items-center text-center p-6 sm:p-10 bg-[#faf6f0] border border-[#e4d8c9] rounded-sm shadow-sm relative">
+          
+          <!-- Botanical sprig SVG -->
+          <div class="text-[#a484b6] mb-3">
+            <svg class="w-8 h-8 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22v-8m0 0C12 8 8 4 2 4c0 6 4 10 10 10zm0 0c0-6 4-10 10-10 0 6-4 10-10 10z"/>
+            </svg>
+          </div>
+
+          <h2 class="font-brush text-6xl sm:text-7xl text-[#463148] leading-none">
+            RSVP
+          </h2>
+
+          <p class="font-serif-vintage italic text-xl sm:text-2xl text-[#624b3c] mt-4">
+            Kindly let us know if you can join us.
+          </p>
+
+          <p class="font-serif-vintage text-sm text-[#7a6b5e] mt-2 max-w-sm">
+            We look forward to celebrating this beautiful day with those who mean the most to us. Please reply on or before July 31, 2028.
+          </p>
+
+          <!-- Interactive Button: Confirm Attendance -->
+          <div class="mt-8">
+            <button onclick="openRsvpModal()" class="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#825c93] hover:bg-[#6c487c] text-white font-clean text-xs sm:text-sm uppercase tracking-[0.22em] font-medium transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5">
+              <span>Confirm Attendance</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-[#e8ded0] w-full max-w-xs">
+            <p class="font-brush text-2xl sm:text-3xl text-[#684774]">
+              Let’s make this chapter complete together.
+            </p>
+            <div class="font-hand text-3xl text-[#9069a1] mt-1">♡</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="py-8 text-center text-[#7b6b5c] font-serif-vintage text-sm border-t border-[#ded3c2] bg-[#f7f2ea]/80">
+    <div class="flex items-center justify-center gap-2">
+      <span class="w-10 h-[0.5px] bg-[#d3c4b0]"></span>
+      <span class="tracking-widest uppercase font-clean text-xs text-[#6e557b]">Andy &amp; Lance</span>
+      <span>•</span>
+      <span class="italic">September 4, 2028</span>
+      <span class="w-10 h-[0.5px] bg-[#d3c4b0]"></span>
+    </div>
+    <p class="text-[11px] font-clean text-[#99897b] mt-2 tracking-wider">
+      San Agustin Church, Manila &amp; Taal Vista Hotel, Tagaytay
+    </p>
+  </footer>
+
+
+  <!-- ========================================================
+       RSVP MODAL POPUP
+       ======================================================== -->
+  <div id="rsvp-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div class="deckle-card max-w-lg w-full p-6 sm:p-10 rounded-lg relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      
+      <!-- Close button -->
+      <button onclick="closeRsvpModal()" class="absolute top-4 right-4 text-[#796758] hover:text-[#382340] p-1.5 rounded-full hover:bg-black/5 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <span class="font-clean text-[11px] uppercase tracking-[0.25em] text-[#865d96]">Wedding Attendance</span>
+        <h3 class="font-brush text-4xl sm:text-5xl text-[#463148] mt-1">R S V P</h3>
+        <p class="font-serif-vintage italic text-sm text-[#736355]">Andy &amp; Lance • September 4, 2028</p>
+      </div>
+
+      <!-- Form -->
+      <form id="rsvp-form" onsubmit="handleRsvpSubmit(event)" class="space-y-4 font-serif-vintage text-base text-[#4d4034]">
+        
+        <div>
+          <label class="block text-sm font-clean uppercase tracking-wider text-[#635345] mb-1">Your Full Name *</label>
+          <input type="text" required placeholder="e.g. Maria Santos" class="w-full px-4 py-2.5 rounded bg-[#fdfbf8] border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025]">
+        </div>
+
+        <div>
+          <label class="block text-sm font-clean uppercase tracking-wider text-[#635345] mb-1">Email / Phone *</label>
+          <input type="text" required placeholder="e.g. maria@example.com" class="w-full px-4 py-2.5 rounded bg-[#fdfbf8] border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025]">
+        </div>
+
+        <div>
+          <label class="block text-sm font-clean uppercase tracking-wider text-[#635345] mb-2">Will you be celebrating with us? *</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            <label class="flex items-center gap-2.5 p-3 rounded border border-[#d8ccbe] bg-[#fbf8f2] cursor-pointer hover:border-[#8e659f]">
+              <input type="radio" name="attendance" value="accept" checked class="accent-[#8e659f]">
+              <span>Joyfully Accept ♡</span>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded border border-[#d8ccbe] bg-[#fbf8f2] cursor-pointer hover:border-[#8e659f]">
+              <input type="radio" name="attendance" value="decline" class="accent-[#8e659f]">
+              <span>Regretfully Decline</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-clean uppercase tracking-wider text-[#635345] mb-1">Number of Guests</label>
+          <select class="w-full px-4 py-2.5 rounded bg-[#fdfbf8] border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025]">
+            <option value="1">1 Person (Just me)</option>
+            <option value="2">2 Persons</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-clean uppercase tracking-wider text-[#635345] mb-1">Dietary Preferences / Message for the Couple</label>
+          <textarea rows="3" placeholder="Leave your heartfelt wishes or dietary restrictions here..." class="w-full px-4 py-2 rounded bg-[#fdfbf8] border border-[#d8ccbe] focus:outline-none focus:border-[#8e659f] text-[#3e3025] resize-none"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-3">
+          <button type="submit" class="w-full py-3 rounded-full bg-[#825c93] hover:bg-[#6c487c] text-white font-clean text-xs uppercase tracking-[0.22em] font-medium transition-all shadow-md">
+            Send Response
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Feedback Banner inside modal -->
+      <div id="rsvp-success" class="hidden text-center py-8 space-y-3">
+        <div class="w-12 h-12 rounded-full bg-[#8e659f]/20 text-[#8e659f] flex items-center justify-center mx-auto">
+          <i data-lucide="check" class="w-6 h-6"></i>
+        </div>
+        <h4 class="font-brush text-4xl text-[#463148]">Thank you!</h4>
+        <p class="font-serif-vintage text-lg text-[#554538]">
+          Your RSVP has been lovingly received. We can’t wait to celebrate together!
+        </p>
+        <button onclick="closeRsvpModal()" class="mt-4 px-6 py-2 rounded-full border border-[#8e659f] text-[#8e659f] hover:bg-[#8e659f] hover:text-white font-clean text-xs uppercase tracking-widest transition-all">
+          Close
+        </button>
+      </div>
+
+    </div>
   </div>
 
-  <!-- Chart Configuration Script -->
-  <script>
-    // InTouch Palette Definitions
-    const colors = {
-      darkMoss: '#001705',
-      softGrey: '#F3F1E5',
-      hotGreen: '#4CE467',
-      summerYellow: '#FFC844',
-      lavender: '#766DFA',
-      danger: '#FF5A5F'
-    };
 
-    // 1. Core Volume Donut Chart
-    const ctxVolume = document.getElementById('volumeChart').getContext('2d');
-    new Chart(ctxVolume, {
-      type: 'doughnut',
-      data: {
-        labels: ['Voice (75)', 'Chat (14)', 'Email (4)'],
-        datasets: [{
-          data: [75, 14, 4],
-          backgroundColor: [colors.darkMoss, colors.lavender, colors.summerYellow],
-          borderWidth: 2,
-          borderColor: '#FFFFFF'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              boxWidth: 12,
-              font: { family: 'Poppins', size: 11 }
-            }
-          }
-        },
-        cutout: '68%'
-      }
+  <!-- ========================================================
+       PHOTO GALLERY MODAL (View More)
+       ======================================================== -->
+  <div id="gallery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-[#faf5ed] max-w-4xl w-full p-6 sm:p-8 rounded-lg relative shadow-2xl max-h-[90vh] overflow-y-auto border border-[#ded0bf]">
+      
+      <button onclick="closeGalleryModal()" class="absolute top-4 right-4 text-[#796758] hover:text-[#382340] p-1.5 rounded-full hover:bg-black/5 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <h3 class="font-brush text-4xl sm:text-5xl text-[#463148]">Our Captured Memories</h3>
+        <p class="font-serif-vintage italic text-sm text-[#736355]">A decade of stolen moments, travels, and laughs</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <div class="polaroid">
+          <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Sunset">
+          </div>
+          <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">Tagaytay sunset</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Nightlights">
+          </div>
+          <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">Intramuros stroll</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+            <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Beach">
+          </div>
+          <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">weekend getaway</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Ring">
+          </div>
+          <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">she said yes</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Coffee">
+          </div>
+          <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">favorite coffee shop</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="aspect-square overflow-hidden bg-[#e0d6c8]">
+            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Portrait">
+          </div>
+          <p class="font-hand text-xs text-center text-[#7a6a5d] mt-2">forever to go ♡</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       JAVASCRIPT LOGIC
+       ======================================================== -->
+  <script>
+    // Initialize Lucide Icons on load
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
     });
 
-    // 2. Channel Performance Comparative Bar Chart
-    const ctxPerf = document.getElementById('channelPerfChart').getContext('2d');
-    new Chart(ctxPerf, {
-      type: 'bar',
-      data: {
-        labels: ['Kensington Voice', 'Kensington Chat', 'Kensington Email'],
-        datasets: [
-          {
-            label: 'CSAT %',
-            data: [50.9, 60.7, 27.5],
-            backgroundColor: colors.hotGreen,
-            borderRadius: 4
-          },
-          {
-            label: 'Resolution Rate %',
-            data: [28.0, 57.1, 0.0],
-            backgroundColor: colors.lavender,
-            borderRadius: 4
-          },
-          {
-            label: 'QA Score %',
-            data: [63.6, 57.7, 65.3],
-            backgroundColor: colors.darkMoss,
-            borderRadius: 4
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-              callback: value => value + '%',
-              font: { family: 'Poppins', size: 10 }
-            },
-            grid: { color: '#E2DFD2' }
-          },
-          x: {
-            ticks: { font: { family: 'Poppins', size: 11, weight: '500' } },
-            grid: { display: false }
-          }
-        },
-        plugins: {
-          legend: {
-            position: 'top',
-            labels: {
-              boxWidth: 12,
-              font: { family: 'Poppins', size: 10 }
-            }
-          }
-        }
+    // RSVP Modal Controllers
+    function openRsvpModal() {
+      const modal = document.getElementById('rsvp-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeRsvpModal() {
+      const modal = document.getElementById('rsvp-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        // Reset form view
+        document.getElementById('rsvp-form').reset();
+        document.getElementById('rsvp-form').classList.remove('hidden');
+        document.getElementById('rsvp-success').classList.add('hidden');
+      }, 300);
+    }
+
+    // Gallery Modal Controllers
+    function openGalleryModal() {
+      const modal = document.getElementById('gallery-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeGalleryModal() {
+      const modal = document.getElementById('gallery-modal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    // Handle RSVP Form Submission
+    function handleRsvpSubmit(e) {
+      e.preventDefault();
+      document.getElementById('rsvp-form').classList.add('hidden');
+      const successDiv = document.getElementById('rsvp-success');
+      successDiv.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    // Close on backdrop click or Escape key
+    window.addEventListener('click', (e) => {
+      const rModal = document.getElementById('rsvp-modal');
+      const gModal = document.getElementById('gallery-modal');
+      if (e.target === rModal) closeRsvpModal();
+      if (e.target === gModal) closeGalleryModal();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeRsvpModal();
+        closeGalleryModal();
       }
     });
   </script>
+
 </body>
 </html>
