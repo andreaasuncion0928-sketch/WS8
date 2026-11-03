@@ -8,7 +8,7 @@
   <!-- Typography matching the vintage journal -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after {
@@ -25,7 +25,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Centers the canvas on any screen */
+    /* Centers the canvas on any screen without horizontal stretching */
     .journal-stage {
       width: 100vw;
       min-height: 100vh;
@@ -35,7 +35,7 @@
       background-color: #1f1b1d;
     }
 
-    /* Fixed ratio canvas: coordinates never stretch or drift */
+    /* Fixed 16:9 canvas: coordinates and angles lock directly to image artwork */
     .page-sheet {
       position: relative;
       width: 100vw;
@@ -71,104 +71,106 @@
     }
 
     /* ========================================================
-       PAGE 1: COVER LAYOUT & REALISTIC JOURNAL SLANT
+       PAGE 1: COVER LAYOUT & NATURAL JOURNAL SLANT
        ======================================================== */
 
-    /* Cream Paper Label Area: Shifted to the right of the flowers & ribbon */
-    .p1-journal-label {
+    /* Cream Paper Label: All title text is grouped here inside the white paper */
+    .p1-parchment-label {
       position: absolute;
-      top: 20%;
-      left: 51.5%;
-      width: 32.5%;
-      height: 48%;
+      top: 19%;
+      left: 47%;
+      width: 37%;
+      height: 49%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      /* Slant matching the journal's perspective */
-      transform: rotate(-6.8deg);
+      /* Rotated to precisely match the diagonal angle of the torn paper */
+      transform: rotate(-12.8deg);
       transform-origin: center center;
-      /* Ink blend effect to look naturally written into paper fibers */
+      /* Natural ink blend into paper fibers */
       mix-blend-mode: multiply;
       pointer-events: none;
     }
 
-    /* Couple's Names: Slanted Calligraphy */
+    /* Couple's Names Calligraphy */
     .p1-names-wrap {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(40px, 5.1vw, 84px);
+      font-size: clamp(38px, 5.2vw, 86px);
       line-height: 0.98;
-      color: #3b282c;
+      color: #382428;
       font-weight: 400;
       letter-spacing: 0.01em;
-      filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1));
+      filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.12));
       user-select: none;
     }
 
-    .p1-names-wrap .scramble-line-1 {
+    .scramble-char {
       display: inline-block;
+      min-width: 0.35em;
+    }
+
+    .p1-names-wrap .scramble-line-1 {
+      display: block;
       white-space: nowrap;
     }
 
     .p1-names-wrap .scramble-line-2 {
       display: block;
-      margin-top: -0.1em;
-      margin-left: 0.55em;
+      margin-top: -0.05em;
+      margin-left: 0.8em;
       white-space: nowrap;
     }
 
-    /* "OUR WEDDING JOURNAL" in refined, spaced serif */
+    /* "OUR WEDDING JOURNAL" directly underneath in the white paper */
     .p1-label-subhead {
-      margin-top: 1.5vw;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(9px, 0.92vw, 15px);
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: #534247;
-      opacity: 0.92;
-    }
-
-    /* "SEPTEMBER 4, 2028" */
-    .p1-label-date {
-      margin-top: 0.4vw;
+      margin-top: 1.8vw;
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(9px, 0.95vw, 15px);
       font-weight: 600;
-      letter-spacing: 0.26em;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: #534247;
-      opacity: 0.92;
+      color: #4a363c;
     }
 
-    /* Lower Quote on Purple Velvet/Linen Fabric */
+    /* "SEPTEMBER 4, 2028" underneath */
+    .p1-label-date {
+      margin-top: 0.45vw;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(9px, 0.98vw, 15px);
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #4a363c;
+    }
+
+    /* Lower Quote on Purple Book Fabric: parallel -12.8deg slant */
     .p1-lower-quote {
       position: absolute;
-      top: 73.5%;
-      left: 54.5%;
-      width: 27%;
+      top: 74.5%;
+      left: 54%;
+      width: 30%;
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(7.5px, 0.68vw, 11px);
       font-weight: 400;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       line-height: 1.75;
       text-transform: uppercase;
       color: #e5d6eb;
-      /* Slanted with the book cover */
-      transform: rotate(-6.8deg);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      transform: rotate(-12.8deg);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     }
 
     /* "OPEN JOURNAL ──→" */
     .p1-open-action {
       position: absolute;
-      top: 89%;
-      left: 54.5%;
-      width: 27%;
+      top: 90.5%;
+      left: 54%;
+      width: 30%;
       text-align: center;
-      transform: rotate(-6.8deg);
+      transform: rotate(-12.8deg);
     }
 
     .p1-open-action a {
@@ -197,12 +199,12 @@
        MOBILE ADJUSTMENTS (9:16 Portrait Canvas)
        ---------------------------------------------------- */
     @media (max-width: 768px) {
-      .p1-journal-label {
-        top: 25%;
-        left: 22%;
-        width: 58%;
-        height: 38%;
-        transform: rotate(-5.5deg);
+      .p1-parchment-label {
+        top: 24%;
+        left: 20%;
+        width: 62%;
+        height: 40%;
+        transform: rotate(-10deg);
       }
       .p1-names-wrap { font-size: 11.5vw; }
       .p1-label-subhead { font-size: 2.3vw; margin-top: 3vw; }
@@ -212,13 +214,13 @@
         left: 15%;
         width: 70%;
         font-size: 2vw;
-        transform: rotate(-5.5deg);
+        transform: rotate(-10deg);
       }
       .p1-open-action {
-        top: 82%;
+        top: 83%;
         left: 15%;
         width: 70%;
-        transform: rotate(-5.5deg);
+        transform: rotate(-10deg);
       }
       .p1-open-action a { font-size: 2.2vw; }
 
@@ -483,7 +485,7 @@
       width: 90%;
       max-width: 440px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
     .modal-card input, .modal-card select {
       width: 100%;
@@ -513,17 +515,17 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-1">
       
-      <!-- Bounded squarely inside the cream paper label with authentic tilt -->
-      <div class="p1-journal-label">
+      <!-- Grouped cleanly inside the white/cream paper label -->
+      <div class="p1-parchment-label">
         <div class="p1-names-wrap" aria-label="Andy & Lance">
-          <span class="scramble-line-1" id="scramble1">Andy &amp;</span>
-          <span class="scramble-line-2" id="scramble2">Lance</span>
+          <span class="scramble-line-1" id="line1">Andy &amp;</span>
+          <span class="scramble-line-2" id="line2">Lance</span>
         </div>
         <div class="p1-label-subhead">Our Wedding Journal</div>
         <div class="p1-label-date">September 4, 2028</div>
       </div>
 
-      <!-- Tagline on lower cover, tilted along with the journal -->
+      <!-- Lower Quote on purple cover texture -->
       <div class="p1-lower-quote">
         A journey of unexpected timing,<br>and a love that stayed.
       </div>
@@ -739,56 +741,62 @@
     </div>
   </div>
 
-  <!-- Scrambler & Modal Script -->
+  <!-- Script: Slow, Measured Letter Switching & Modal -->
   <script>
-    // Letter-morphing scramble animation that resolves into the couple's names
-    function runScrambleAnimation() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&♡';
-      
-      function scramble(elementId, targetText, delay = 0, duration = 1600) {
-        const el = document.getElementById(elementId);
-        if (!el) return;
-        
-        const length = targetText.length;
-        let start = null;
+    // Scrambler that switches only 3-4 times per letter at a deliberate, readable pace
+    function initGentleScramble() {
+      const glyphs = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-        setTimeout(() => {
-          function frame(now) {
-            if (!start) start = now;
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Number of characters resolved from left to right
-            const resolvedCount = Math.floor(progress * length);
-            
-            let output = '';
-            for (let i = 0; i < length; i++) {
-              if (targetText[i] === ' ') {
-                output += ' ';
-              } else if (i < resolvedCount) {
-                output += targetText[i];
-              } else {
-                output += chars[Math.floor(Math.random() * chars.length)];
-              }
-            }
-            
-            el.textContent = output;
-            
-            if (progress < 1) {
-              requestAnimationFrame(frame);
-            } else {
-              el.textContent = targetText;
-            }
+      function animateLine(elementId, finalText, startDelay) {
+        const container = document.getElementById(elementId);
+        if (!container) return;
+
+        // Build individual character span elements
+        container.innerHTML = '';
+        const charSpans = [];
+
+        for (let i = 0; i < finalText.length; i++) {
+          const span = document.createElement('span');
+          span.className = 'scramble-char';
+          span.textContent = finalText[i] === ' ' ? '\u00A0' : glyphs[Math.floor(Math.random() * glyphs.length)];
+          container.appendChild(span);
+          charSpans.push(span);
+        }
+
+        // Each letter cycles through 3-4 random changes spaced 110ms apart
+        charSpans.forEach((span, charIdx) => {
+          const targetChar = finalText[charIdx];
+          if (targetChar === ' ') {
+            span.textContent = '\u00A0';
+            return;
           }
-          requestAnimationFrame(frame);
-        }, delay);
+
+          const totalCycles = 3 + (charIdx % 2); // exactly 3 or 4 letter switches
+          const cycleInterval = 110; // deliberate, visible step speed (in ms)
+          const charStartDelay = startDelay + (charIdx * 75); // slight left-to-right cascade
+
+          for (let step = 1; step <= totalCycles; step++) {
+            setTimeout(() => {
+              if (step === totalCycles) {
+                // Final reveal of real letter
+                span.textContent = targetChar;
+              } else {
+                // Switch to a new random letter
+                span.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+              }
+            }, charStartDelay + (step * cycleInterval));
+          }
+        });
       }
 
-      scramble('scramble1', 'Andy &', 200, 1500);
-      scramble('scramble2', 'Lance', 600, 1600);
+      // Trigger line 1 ("Andy &") then line 2 ("Lance")
+      setTimeout(() => {
+        animateLine('line1', 'Andy &', 150);
+        animateLine('line2', 'Lance', 500);
+      }, 300);
     }
 
-    window.addEventListener('DOMContentLoaded', runScrambleAnimation);
+    window.addEventListener('DOMContentLoaded', initGentleScramble);
 
     // RSVP modal handlers
     function openRSVP() {
