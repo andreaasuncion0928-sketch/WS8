@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Andy & Lance — Our Wedding Journal</title>
 
-  <!-- Typography matching the original scrapbook calligraphy & serif print -->
+  <!-- Typography matching the scrapbook calligraphy & serif print -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     }
 
     body {
-      background-color: #1f1b1d;
+      background-color: #1a1618;
       color: #382c2a;
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
@@ -32,7 +32,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #1f1b1d;
+      background-color: #1a1618;
       position: relative;
     }
 
@@ -137,31 +137,33 @@
     }
 
     /* ========================================================
-       PAGE 1: COVER (RESTORED TO ORIGINAL SIZING & POSITIONING)
+       PAGE 1: EXACT MATCH TO REFERENCE IMAGE
        ======================================================== */
+    /* Center parchment card */
     .p1-parchment-label {
       position: absolute;
-      top: 17%;
-      left: 53.5%;
-      width: 32%;
-      height: 54%;
+      top: 15%;
+      left: 36%;
+      width: 44%;
+      height: 57%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 1.5vw;
+      padding: 0 2vw;
       transform: rotate(-12.8deg);
       transform-origin: center center;
       mix-blend-mode: multiply;
+      pointer-events: none;
       z-index: 10;
     }
 
     .p1-names-wrap {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(36px, 4.8vw, 80px);
-      line-height: 0.98;
-      color: #382428;
+      font-size: clamp(44px, 5.2vw, 86px);
+      line-height: 1.02;
+      color: #322026;
       font-weight: 400;
       letter-spacing: 0.01em;
       filter: drop-shadow(0.5px 0.5px 0.5px rgba(0, 0, 0, 0.12));
@@ -188,99 +190,137 @@
     .p1-names-wrap .line-1 {
       display: block;
       white-space: nowrap;
-      margin-right: 0.4em;
+      margin-right: 0.3em;
     }
 
     .p1-names-wrap .line-2 {
       display: block;
-      margin-top: -0.05em;
-      margin-left: 0.4em;
+      margin-top: -0.08em;
+      margin-left: 0.5em;
       white-space: nowrap;
     }
 
     .p1-label-subhead {
-      margin-top: 1.3vw;
+      margin-top: 1.8vw;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(8.5px, 0.88vw, 14.5px);
+      font-size: clamp(10px, 0.98vw, 16px);
       font-weight: 600;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: #4a363c;
+      color: #433238;
       width: 100%;
     }
 
     .p1-label-date {
-      margin-top: 0.35vw;
+      margin-top: 0.4vw;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(8.5px, 0.9vw, 14.5px);
+      font-size: clamp(9.5px, 0.92vw, 15px);
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      color: #4a363c;
+      color: #433238;
       width: 100%;
     }
 
-    .p1-inner-quote {
-      margin-top: 0.9vw;
+    /* Below the parchment label, written directly onto the purple book cloth */
+    .p1-purple-details {
+      position: absolute;
+      top: 73.5%;
+      left: 54.5%;
+      width: 32%;
+      text-align: center;
+      transform: rotate(-12.8deg);
+      transform-origin: center center;
+      z-index: 15;
+    }
+
+    .p1-purple-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(8.5px, 0.84vw, 13.5px);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      line-height: 1.45;
-      color: #5a444b;
-      width: 100%;
-      max-width: 90%;
+      font-size: clamp(9px, 0.88vw, 14.5px);
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      line-height: 1.55;
+      text-transform: uppercase;
+      color: #d8cbd6;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
       opacity: 0;
-      transition: opacity 2.2s ease;
+      transition: opacity 2s ease;
     }
 
-    .p1-inner-quote.revealed {
-      opacity: 0.95;
+    .p1-purple-quote.revealed {
+      opacity: 0.92;
     }
 
-    /* Small, discreet but noticeable button placed just below the quote */
-    .p1-small-open-btn {
-      margin-top: 0.85vw;
+    /* OPEN JOURNAL action with arrow line */
+    .p1-open-action {
+      margin-top: 1.2vw;
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.35vw;
-      text-decoration: none;
       background: none;
       border: none;
       cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(7px, 0.58vw, 9.5px);
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: #432a32;
-      padding-bottom: 2px;
-      border-bottom: 1px solid rgba(67, 42, 50, 0.45);
-      opacity: 0.85;
-      transition: all 0.25s ease;
-      pointer-events: auto;
+      text-decoration: none;
+      outline: none;
+      transition: all 0.3s ease;
     }
 
-    .p1-small-open-btn:hover {
-      opacity: 1;
+    .p1-open-action:hover {
+      transform: translateY(-2px);
+    }
+
+    .p1-open-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(9px, 0.82vw, 13.5px);
+      font-weight: 600;
       letter-spacing: 0.28em;
-      border-bottom-color: #432a32;
-      transform: translateY(-1px);
+      text-transform: uppercase;
+      color: #ede2eb;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+      transition: color 0.2s;
+    }
+
+    .p1-open-action:hover .p1-open-text {
+      color: #ffffff;
+    }
+
+    .p1-arrow-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(110px, 11vw, 170px);
+      margin-top: 0.2vw;
+      position: relative;
+    }
+
+    .p1-arrow-line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 8px;
+      height: 1px;
+      background: rgba(237, 226, 235, 0.7);
+    }
+
+    .p1-arrow-line::after {
+      content: '→';
+      position: absolute;
+      right: -2px;
+      font-size: clamp(10px, 0.9vw, 15px);
+      color: rgba(237, 226, 235, 0.85);
+      line-height: 1;
+      transform: translateY(-0.5px);
     }
 
     /* ========================================================
-       PAGE 2: CALIBRATED NATURAL JOURNAL SHEET
-       Shifted rightward, generous 5x paragraph indentation & line spacing
+       PAGE 2: CALIBRATED SCRAPBOOK JOURNAL SPREAD
        ======================================================== */
     .p2-journal-sheet {
       position: absolute;
       top: 21%;
-      /* Moved further right to clear left-side flowers */
       left: 27%;
       width: 25.5%;
       text-align: left;
-      /* Aligned to the notebook plane */
       transform: rotate(-4.2deg);
       transform-origin: top left;
       mix-blend-mode: multiply;
@@ -303,7 +343,6 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(12.5px, 1.1vw, 17px);
       font-weight: 500;
-      /* Ample generous line spacing */
       line-height: 1.8;
       color: #423238;
       letter-spacing: 0.02em;
@@ -311,7 +350,6 @@
 
     .p2-journal-body p {
       margin-bottom: 1.4vw;
-      /* 5x indent relative to standard character width */
       text-indent: 3.2em;
     }
 
@@ -652,18 +690,26 @@
       .journal-nav-bar a.home-icon { font-size: 3.5vw; }
 
       .p1-parchment-label {
-        top: 23%;
-        left: 23%;
-        width: 56%;
-        height: 44%;
-        padding: 0 2vw;
+        top: 18%;
+        left: 18%;
+        width: 68%;
+        height: 48%;
         transform: rotate(-10deg);
       }
       .p1-names-wrap { font-size: 10.5vw; }
-      .p1-label-subhead { font-size: 2.2vw; margin-top: 2.5vw; }
+      .p1-label-subhead { font-size: 2.3vw; margin-top: 2.5vw; }
       .p1-label-date { font-size: 2.3vw; margin-top: 0.6vw; }
-      .p1-inner-quote { font-size: 2.1vw; margin-top: 1.6vw; max-width: 95%; }
-      .p1-small-open-btn { font-size: 2.2vw; margin-top: 2.2vw; }
+
+      .p1-purple-details {
+        top: 72%;
+        left: 15%;
+        width: 70%;
+        transform: rotate(-10deg);
+      }
+      .p1-purple-quote { font-size: 2.3vw; }
+      .p1-open-action { margin-top: 3vw; }
+      .p1-open-text { font-size: 2.2vw; }
+      .p1-arrow-line { width: 140px; }
 
       .p2-journal-sheet {
         top: 14%;
@@ -706,6 +752,7 @@
   <div class="journal-stage">
     <div class="page-sheet" id="page-1">
       
+      <!-- Inside the parchment tag -->
       <div class="p1-parchment-label">
         <div class="p1-names-wrap" aria-label="Andy & Lance">
           <span class="line-1" id="line1">Andy &amp;</span>
@@ -713,14 +760,19 @@
         </div>
         <div class="p1-label-subhead">Our Wedding Journal</div>
         <div class="p1-label-date">September 4, 2028</div>
-        
-        <div class="p1-inner-quote" id="innerQuote">
-          A journey of unexpected timing,<br>and a love that stayed.
+      </div>
+
+      <!-- Written directly onto the purple cover cloth -->
+      <div class="p1-purple-details">
+        <div class="p1-purple-quote" id="purpleQuote">
+          A JOURNEY OF<br>
+          UNEXPECTED TIMING,<br>
+          AND A LOVE THAT STAYED.
         </div>
 
-        <!-- Small, delicate but noticeable "Open Our Story" prompt -->
-        <button class="p1-small-open-btn" onclick="openJournalStory(event)">
-          <span>Open Our Story &rarr;</span>
+        <button class="p1-open-action" onclick="openJournalStory(event)" aria-label="Open Journal">
+          <span class="p1-open-text">OPEN JOURNAL</span>
+          <div class="p1-arrow-line"></div>
         </button>
       </div>
 
@@ -956,7 +1008,7 @@
     function setupSlowFadingNames() {
       const line1 = document.getElementById('line1');
       const line2 = document.getElementById('line2');
-      const quote = document.getElementById('innerQuote');
+      const quote = document.getElementById('purpleQuote');
       if (!line1 || !line2) return;
 
       const text1 = "Andy &";
