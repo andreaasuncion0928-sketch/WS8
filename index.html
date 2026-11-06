@@ -137,23 +137,41 @@
     }
 
     /* ========================================================
-       PAGE 1: COVER – text sits ON the white parchment
+       PAGE 1: COVER – real artwork ratios, text written on the parchment
        ======================================================== */
-    /* Centered on the parchment card; tilt matches the card (~ -7deg) */
+
+    /* Stage fills the screen; the artwork is scaled to cover it (cropped, never stretched) */
+    #stage-1 {
+      height: 100vh;
+      height: 100dvh;
+      min-height: 0;
+      overflow: hidden;
+    }
+    #page-1.page-sheet {
+      aspect-ratio: 1024 / 434;                         /* intro b.jpg */
+      width: max(100vw, calc(100vh * 1024 / 434));
+      width: max(100vw, calc(100dvh * 1024 / 434));
+      max-width: none;
+      flex-shrink: 0;
+    }
+
+    /* Title block – centered on the parchment card, tilted to match it */
     .p1-white-parchment {
       position: absolute;
-      top: 44.5%;
-      left: 60.4%;
-      width: 40%;
-      transform: translate(-50%, -50%) rotate(-7deg);
+      top: 43.4%;
+      left: 69.4%;
+      width: 17.5%;
+      transform: translate(-50%, -50%) rotate(-15deg);
       transform-origin: center center;
-      container-type: inline-size;          /* lets children size with cqw */
+      container-type: inline-size;        /* children size with cqw = relative to the card */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      mix-blend-mode: multiply;             /* ink soaks into the paper */
+      mix-blend-mode: multiply;           /* ink soaks into the paper texture */
+      filter: url(#inkRough);             /* slightly uneven, hand-inked edges */
+      opacity: 0.92;
       pointer-events: none;
       z-index: 10;
     }
@@ -162,9 +180,10 @@
       font-family: 'Alex Brush', cursive;
       font-size: 28cqw;
       line-height: 0.92;
-      color: #4a3240;
+      color: #3f2b38;
       font-weight: 400;
       letter-spacing: 0.01em;
+      text-shadow: 0 0 1px rgba(63, 43, 56, 0.35);   /* faint ink bleed */
       user-select: none;
       width: 100%;
     }
@@ -178,46 +197,35 @@
                   filter 1.8s cubic-bezier(0.25, 1, 0.5, 1),
                   transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
     }
-
     .fade-char.revealed {
       opacity: 1;
       filter: blur(0);
       transform: translateY(0) scale(1);
     }
 
-    .p1-names-wrap .line-1 {
-      display: block;
-      white-space: nowrap;
-      margin-right: 0.1em;
-    }
-
-    .p1-names-wrap .line-2 {
-      display: block;
-      white-space: nowrap;
-      margin-top: -0.04em;
-      margin-left: 0.12em;
-    }
+    .p1-names-wrap .line-1 { display: block; white-space: nowrap; margin-right: 0.1em; }
+    .p1-names-wrap .line-2 { display: block; white-space: nowrap; margin-top: -0.04em; margin-left: 0.12em; }
 
     .p1-label-subhead,
     .p1-label-date {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #5a4150;
+      letter-spacing: 0.16em;
+      color: #4d3647;
       white-space: nowrap;
       width: 100%;
     }
-    .p1-label-subhead { margin-top: 6cqw; font-size: 4.2cqw; }
-    .p1-label-date    { margin-top: 2.4cqw; font-size: 4.2cqw; }
+    .p1-label-subhead { margin-top: 6cqw;   font-size: 4.8cqw; }
+    .p1-label-date    { margin-top: 2.4cqw; font-size: 4.8cqw; }
 
-    /* Tagline + OPEN JOURNAL live in the purple linen area, same tilt */
+    /* Tagline + OPEN JOURNAL – on the purple cover, below the card, same tilt as its edge */
     .p1-purple-open-zone {
       position: absolute;
-      top: 87%;
-      left: 70%;
-      width: 28%;
-      transform: translate(-50%, -50%) rotate(-7deg);
+      top: 76%;
+      left: 79.5%;
+      width: 19%;
+      transform: translate(-50%, -50%) rotate(-16deg);
       transform-origin: center center;
       container-type: inline-size;
       display: flex;
@@ -229,18 +237,18 @@
 
     .p1-inner-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 4.7cqw;
+      font-size: 5cqw;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.14em;
       line-height: 1.75;
-      color: #e9deea;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+      color: #efe6f0;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
       opacity: 0;
       transition: opacity 2.2s ease;
       white-space: nowrap;
     }
-    .p1-inner-quote.revealed { opacity: 0.9; }
+    .p1-inner-quote.revealed { opacity: 0.92; }
 
     .p1-open-action {
       margin-top: 14cqw;
@@ -257,22 +265,21 @@
 
     .p1-open-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 5cqw;
+      font-size: 5.4cqw;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #f3eaf3;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+      color: #f6eef6;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
       white-space: nowrap;
     }
     .p1-open-action:hover .p1-open-text { color: #ffffff; }
 
-    /* plain thin underline like the reference */
     .p1-arrow-line {
       width: 100cqw;
       height: 1px;
       margin-top: 2.4cqw;
-      background: rgba(240, 230, 240, 0.8);
+      background: rgba(244, 234, 244, 0.85);
     }
 
     /* ========================================================
@@ -637,7 +644,7 @@
     }
 
     /* ----------------------------------------------------
-       MOBILE ADJUSTMENTS (9:16 Portrait Canvas)
+       MOBILE ADJUSTMENTS (portrait)
        ---------------------------------------------------- */
     @media (max-width: 768px) {
       .journal-nav-bar {
@@ -652,21 +659,28 @@
       }
       .journal-nav-bar a.home-icon { font-size: 3.5vw; }
 
-      /* Page 1 cover */
-      .p1-white-parchment {
-        top: 38%;
-        left: 50%;
-        width: 62%;
-        transform: translate(-50%, -50%) rotate(-7deg);
+      /* Page 1 – intro p.jpg (434 x 1024) */
+      #page-1.page-sheet {
+        aspect-ratio: 434 / 1024;
+        width: max(100vw, calc(100vh * 434 / 1024));
+        width: max(100vw, calc(100dvh * 434 / 1024));
       }
-      .p1-names-wrap { font-size: 25cqw; }
+      .p1-white-parchment {
+        top: 47.3%;
+        left: 64.5%;
+        width: 58%;
+        transform: translate(-50%, -50%) rotate(-8deg);
+      }
+      .p1-label-subhead, .p1-label-date { font-size: 4.6cqw; letter-spacing: 0.14em; }
 
       .p1-purple-open-zone {
-        top: 77%;
-        left: 50%;
-        width: 62%;
+        top: 68%;
+        left: 71%;
+        width: 48%;
         transform: translate(-50%, -50%) rotate(-7deg);
       }
+      .p1-inner-quote { font-size: 5.4cqw; letter-spacing: 0.12em; }
+      .p1-open-text   { font-size: 5.6cqw; letter-spacing: 0.14em; }
 
       .p2-journal-sheet {
         top: 14%;
@@ -702,11 +716,20 @@
 </head>
 <body>
 
+  <!-- Ink filter: gives the cover lettering slightly uneven, hand-inked edges -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="inkRough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feGaussianBlur in="rough" stdDeviation="0.25"/>
+    </filter>
+  </svg>
+
   <!-- Fullscreen Nostalgic Transition Wash -->
   <div class="vintage-flip-overlay" id="vintageTransition"></div>
 
   <!-- ======================== PAGE 1: COVER ======================== -->
-  <div class="journal-stage">
+  <div class="journal-stage" id="stage-1">
     <div class="page-sheet" id="page-1">
 
       <!-- Title, written on the white parchment -->
