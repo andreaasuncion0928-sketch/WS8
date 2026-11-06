@@ -137,36 +137,34 @@
     }
 
     /* ========================================================
-       PAGE 1: CALIBRATED TO WHITE PARCHMENT SECTION
+       PAGE 1: COVER – text sits ON the white parchment
        ======================================================== */
-    /* Exact bounded parchment area on the cover */
+    /* Centered on the parchment card; tilt matches the card (~ -7deg) */
     .p1-white-parchment {
       position: absolute;
-      top: 9.5%;
-      left: 31%;
-      width: 44.5%;
-      height: 60.5%;
+      top: 44.5%;
+      left: 60.4%;
+      width: 40%;
+      transform: translate(-50%, -50%) rotate(-7deg);
+      transform-origin: center center;
+      container-type: inline-size;          /* lets children size with cqw */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2.5% 4%;
-      transform: rotate(-13.5deg);
-      transform-origin: center center;
-      mix-blend-mode: multiply;
+      mix-blend-mode: multiply;             /* ink soaks into the paper */
       pointer-events: none;
       z-index: 10;
     }
 
     .p1-names-wrap {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(38px, 4.4vw, 74px);
-      line-height: 0.98;
-      color: #38242a;
+      font-size: 28cqw;
+      line-height: 0.92;
+      color: #4a3240;
       font-weight: 400;
-      letter-spacing: 0.015em;
-      filter: drop-shadow(0.5px 0.5px 0.4px rgba(0, 0, 0, 0.12));
+      letter-spacing: 0.01em;
       user-select: none;
       width: 100%;
     }
@@ -183,136 +181,98 @@
 
     .fade-char.revealed {
       opacity: 1;
-      filter: blur(0px);
+      filter: blur(0);
       transform: translateY(0) scale(1);
     }
 
     .p1-names-wrap .line-1 {
       display: block;
       white-space: nowrap;
-      margin-right: 0.35em;
+      margin-right: 0.1em;
     }
 
     .p1-names-wrap .line-2 {
       display: block;
-      margin-top: -0.06em;
-      margin-left: 0.45em;
       white-space: nowrap;
+      margin-top: -0.04em;
+      margin-left: 0.12em;
     }
 
-    .p1-label-subhead {
-      margin-top: 1.1vw;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(8.5px, 0.82vw, 13.5px);
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: #46343a;
-      width: 100%;
-    }
-
+    .p1-label-subhead,
     .p1-label-date {
-      margin-top: 0.3vw;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(8.5px, 0.78vw, 13px);
       font-weight: 600;
-      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: #46343a;
+      letter-spacing: 0.18em;
+      color: #5a4150;
+      white-space: nowrap;
       width: 100%;
     }
+    .p1-label-subhead { margin-top: 6cqw; font-size: 4.2cqw; }
+    .p1-label-date    { margin-top: 2.4cqw; font-size: 4.2cqw; }
 
-    /* "A journey of unexpected timing..." inside the white parchment */
-    .p1-inner-quote {
-      margin-top: 0.8vw;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(8.5px, 0.76vw, 12.5px);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      line-height: 1.45;
-      color: #533e46;
-      width: 100%;
-      max-width: 88%;
-      opacity: 0;
-      transition: opacity 2.2s ease;
-    }
-
-    .p1-inner-quote.revealed {
-      opacity: 0.95;
-    }
-
-    /* OPEN JOURNAL action in the purple linen section, aligned with the parchment axis */
+    /* Tagline + OPEN JOURNAL live in the purple linen area, same tilt */
     .p1-purple-open-zone {
       position: absolute;
-      top: 76.5%;
-      left: 31%;
-      width: 44.5%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: rotate(-13.5deg);
+      top: 87%;
+      left: 70%;
+      width: 28%;
+      transform: translate(-50%, -50%) rotate(-7deg);
       transform-origin: center center;
+      container-type: inline-size;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       z-index: 15;
     }
 
+    .p1-inner-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.7cqw;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      line-height: 1.75;
+      color: #e9deea;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      transition: opacity 2.2s ease;
+      white-space: nowrap;
+    }
+    .p1-inner-quote.revealed { opacity: 0.9; }
+
     .p1-open-action {
+      margin-top: 14cqw;
       display: inline-flex;
       flex-direction: column;
       align-items: center;
       background: none;
       border: none;
       cursor: pointer;
-      text-decoration: none;
       outline: none;
       transition: transform 0.3s ease;
     }
-
-    .p1-open-action:hover {
-      transform: translateY(-2px);
-    }
+    .p1-open-action:hover { transform: translateY(-2px); }
 
     .p1-open-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(8.5px, 0.78vw, 12.5px);
+      font-size: 5cqw;
       font-weight: 600;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #ece0eb;
+      color: #f3eaf3;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-      transition: color 0.2s;
+      white-space: nowrap;
     }
+    .p1-open-action:hover .p1-open-text { color: #ffffff; }
 
-    .p1-open-action:hover .p1-open-text {
-      color: #ffffff;
-    }
-
+    /* plain thin underline like the reference */
     .p1-arrow-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: clamp(100px, 10vw, 150px);
-      margin-top: 0.25vw;
-      position: relative;
-    }
-
-    .p1-arrow-line::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 8px;
+      width: 100cqw;
       height: 1px;
-      background: rgba(236, 224, 235, 0.7);
-    }
-
-    .p1-arrow-line::after {
-      content: '→';
-      position: absolute;
-      right: -2px;
-      font-size: clamp(10px, 0.9vw, 14px);
-      color: rgba(236, 224, 235, 0.85);
-      line-height: 1;
-      transform: translateY(-0.5px);
+      margin-top: 2.4cqw;
+      background: rgba(240, 230, 240, 0.8);
     }
 
     /* ========================================================
@@ -692,26 +652,21 @@
       }
       .journal-nav-bar a.home-icon { font-size: 3.5vw; }
 
+      /* Page 1 cover */
       .p1-white-parchment {
-        top: 14%;
-        left: 15%;
-        width: 70%;
-        height: 52%;
-        transform: rotate(-10deg);
+        top: 38%;
+        left: 50%;
+        width: 62%;
+        transform: translate(-50%, -50%) rotate(-7deg);
       }
-      .p1-names-wrap { font-size: 9.5vw; }
-      .p1-label-subhead { font-size: 2.2vw; margin-top: 2vw; }
-      .p1-label-date { font-size: 2.2vw; margin-top: 0.5vw; }
-      .p1-inner-quote { font-size: 2vw; margin-top: 1.4vw; max-width: 95%; }
+      .p1-names-wrap { font-size: 25cqw; }
 
       .p1-purple-open-zone {
-        top: 72%;
-        left: 15%;
-        width: 70%;
-        transform: rotate(-10deg);
+        top: 77%;
+        left: 50%;
+        width: 62%;
+        transform: translate(-50%, -50%) rotate(-7deg);
       }
-      .p1-open-text { font-size: 2.2vw; }
-      .p1-arrow-line { width: 140px; }
 
       .p2-journal-sheet {
         top: 14%;
@@ -753,8 +708,8 @@
   <!-- ======================== PAGE 1: COVER ======================== -->
   <div class="journal-stage">
     <div class="page-sheet" id="page-1">
-      
-      <!-- ALL TEXT IN THE WHITE PARCHMENT PAGE OF THE JOURNAL -->
+
+      <!-- Title, written on the white parchment -->
       <div class="p1-white-parchment">
         <div class="p1-names-wrap" aria-label="Andy & Lance">
           <span class="line-1" id="line1">Andy &amp;</span>
@@ -762,16 +717,15 @@
         </div>
         <div class="p1-label-subhead">Our Wedding Journal</div>
         <div class="p1-label-date">September 4, 2028</div>
-        
-        <div class="p1-inner-quote" id="innerQuote">
-          A journey of unexpected timing,<br>and a love that stayed.
-        </div>
       </div>
 
-      <!-- OPEN JOURNAL ON THE PURPLE SECTION (ALIGNED WITH TEXT AXIS) -->
+      <!-- Tagline + Open Journal, on the purple cover -->
       <div class="p1-purple-open-zone">
+        <div class="p1-inner-quote" id="innerQuote">
+          A journey of<br>unexpected timing,<br>and a love that stayed.
+        </div>
         <button class="p1-open-action" onclick="openJournalStory(event)" aria-label="Open Journal">
-          <span class="p1-open-text">OPEN JOURNAL</span>
+          <span class="p1-open-text">Open Journal</span>
           <div class="p1-arrow-line"></div>
         </button>
       </div>
