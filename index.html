@@ -55,8 +55,7 @@
       pointer-events: auto;
     }
 
-    /* Page canvas: always fully visible (fits the screen), 16:9 on desktop.
-       container-type lets text use cqw = relative to the page, not the browser window */
+    /* Page canvas: always fully visible (fits the screen), 16:9 on desktop */
     .page-sheet {
       position: relative;
       width: min(100vw, 1600px, calc(100vh * 16 / 9));
@@ -159,18 +158,15 @@
     }
 
     /* ========================================================
-       PAGE 1: COVER – real artwork ratios, text written on the parchment
+       PAGE 1: COVER
        ======================================================== */
-
-    /* The cover artwork is scaled to COVER the screen (cropped, never stretched) */
     #page-1.page-sheet {
-      aspect-ratio: 1024 / 434;                         /* intro b.jpg */
+      aspect-ratio: 1024 / 434;
       width: max(100vw, calc(100vh * 1024 / 434));
       width: max(100vw, calc(100dvh * 1024 / 434));
       max-width: none;
     }
 
-    /* Title block – centered on the parchment card, tilted to match it */
     .p1-white-parchment {
       position: absolute;
       top: 43.4%;
@@ -178,14 +174,14 @@
       width: 17.5%;
       transform: translate(-50%, -50%) rotate(-15deg);
       transform-origin: center center;
-      container-type: inline-size;        /* children size with cqw = relative to the card */
+      container-type: inline-size;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      mix-blend-mode: multiply;           /* ink soaks into the paper texture */
-      filter: url(#inkRough);             /* slightly uneven, hand-inked edges */
+      mix-blend-mode: multiply;
+      filter: url(#inkRough);
       opacity: 0.92;
       pointer-events: none;
       z-index: 10;
@@ -198,7 +194,7 @@
       color: #3f2b38;
       font-weight: 400;
       letter-spacing: 0.01em;
-      text-shadow: 0 0 1px rgba(63, 43, 56, 0.35);   /* faint ink bleed */
+      text-shadow: 0 0 1px rgba(63, 43, 56, 0.35);
       user-select: none;
       width: 100%;
     }
@@ -234,7 +230,6 @@
     .p1-label-subhead { margin-top: 6cqw;   font-size: 4.8cqw; }
     .p1-label-date    { margin-top: 2.4cqw; font-size: 4.8cqw; }
 
-    /* Tagline + OPEN JOURNAL – on the purple cover, below the card, same tilt as its edge */
     .p1-purple-open-zone {
       position: absolute;
       top: 76%;
@@ -302,9 +297,9 @@
        ======================================================== */
     .p2-journal-sheet {
       position: absolute;
-      top: 21%;
-      left: 27%;
-      width: 25.5%;
+      top: 18%;
+      left: 25%;
+      width: 27%;
       text-align: left;
       transform: rotate(-4.2deg);
       transform-origin: top left;
@@ -315,40 +310,40 @@
 
     .p2-journal-title {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(26px, 2.7cqw, 46px);
+      font-size: clamp(30px, 3.2cqw, 54px);
       color: #422d37;
       font-weight: 400;
       line-height: 1.2;
-      margin-bottom: 1.5cqw;
+      margin-bottom: 1.2cqw;
       letter-spacing: 0.01em;
       opacity: 0.96;
     }
 
     .p2-journal-body {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(12.5px, 1.1cqw, 17px);
-      font-weight: 500;
-      line-height: 1.8;
-      color: #423238;
+      font-size: clamp(14px, 1.28cqw, 20px);
+      font-weight: 600;
+      line-height: 1.75;
+      color: #3d2a30;
       letter-spacing: 0.02em;
     }
 
     .p2-journal-body p {
-      margin-bottom: 1.4cqw;
-      text-indent: 3.2em;
+      margin-bottom: 1.2cqw;
+      text-indent: 2.8em;
     }
 
     .p2-journal-sign-row {
       display: inline-flex;
       align-items: baseline;
       gap: 0.6cqw;
-      margin-top: 1.2cqw;
-      padding-left: 3.2em;
+      margin-top: 1cqw;
+      padding-left: 2.8em;
     }
 
     .p2-journal-names {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(26px, 2.8cqw, 46px);
+      font-size: clamp(30px, 3.2cqw, 52px);
       color: #422d37;
       font-weight: 400;
       letter-spacing: 0.02em;
@@ -356,20 +351,19 @@
 
     .p2-journal-heart {
       font-family: 'Caveat', cursive;
-      font-size: clamp(24px, 2.4cqw, 38px);
+      font-size: clamp(26px, 2.6cqw, 42px);
       color: #422d37;
       font-weight: 600;
       transform: rotate(6deg) translateY(0.15cqw);
       display: inline-block;
     }
 
-    /* "Continue to our story" – small handwritten-style link under the signature */
     .p2-continue-row {
-      padding-left: 3.2em;
-      margin-top: 1.1cqw;
+      padding-left: 2.8em;
+      margin-top: 1.2cqw;
     }
     .p2-continue {
-      pointer-events: auto;               /* the journal sheet itself ignores clicks; this doesn't */
+      pointer-events: auto;
       display: inline-flex;
       align-items: center;
       gap: 0.55em;
@@ -380,10 +374,10 @@
       cursor: pointer;
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-weight: 600;
-      font-size: clamp(11px, 0.95cqw, 15px);
+      font-weight: 700;
+      font-size: clamp(13px, 1.15cqw, 18px);
       letter-spacing: 0.08em;
-      color: #5a4150;
+      color: #4b3141;
       transition: color 0.3s ease, border-color 0.3s ease;
     }
     .p2-continue .arrow {
@@ -397,7 +391,7 @@
     }
     .p2-continue:hover .arrow { transform: translateX(4px); }
 
-    /* Polaroid frame on the right notebook spread */
+    /* Polaroid frame on the right notebook spread (Desktop) */
     .p2-polaroid-wrap {
       position: absolute;
       top: 14%;
@@ -471,7 +465,7 @@
     .polaroid-frame img {
       width: 100%;
       display: block;
-      aspect-ratio: 1 / 1;          /* keeps all three frames the same size – change to 4 / 5 for taller photos */
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       object-position: center 30%;
     }
@@ -489,8 +483,8 @@
       mix-blend-mode: multiply;
     }
     .p3-story-box p {
-      font-size: clamp(12px, 1.15cqw, 18px);
-      line-height: 1.58;
+      font-size: clamp(13px, 1.25cqw, 20px);
+      line-height: 1.62;
       color: #46383b;
       margin-bottom: 0.9cqw;
     }
@@ -505,43 +499,96 @@
     }
     .script-heading {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(32px, 3.8cqw, 60px);
+      font-size: clamp(34px, 4cqw, 64px);
       color: #3b282c;
       margin-bottom: 1.2cqw;
     }
 
     /* ========================================================
-       PAGE 4: THE DETAILS
+       PAGE 4: THE DETAILS (Updated: shifted right, bigger text, venue photos & directions)
        ======================================================== */
     .p4-container {
       position: absolute;
-      top: 14%;
-      left: 16%;
-      width: 56%;
+      top: 11%;
+      left: 20%; /* Shifted right for browser view */
+      width: 58%;
       text-align: center;
       mix-blend-mode: multiply;
     }
     .p4-columns {
       display: flex;
       justify-content: space-between;
-      margin-top: 2cqw;
+      gap: 2.5cqw;
+      margin-top: 1.6cqw;
     }
-    .p4-col { width: 47%; text-align: center; }
+    .p4-col {
+      width: 48%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     .venue-name {
-      font-size: clamp(14px, 1.4cqw, 22px);
-      font-weight: 600;
+      font-size: clamp(17px, 1.8cqw, 28px);
+      font-weight: 700;
       font-style: italic;
-      color: #38252a;
-      margin: 0.4cqw 0 0.2cqw 0;
+      color: #321e24;
+      margin: 0.3cqw 0 0.2cqw 0;
     }
-    .venue-loc { font-size: clamp(12px, 1.1cqw, 17px); color: #554449; margin-bottom: 0.6cqw; }
-    .venue-time { font-size: clamp(11px, 0.95cqw, 15px); color: #6a575d; }
+    .venue-loc {
+      font-size: clamp(14px, 1.35cqw, 20px);
+      font-weight: 600;
+      color: #4c373e;
+      margin-bottom: 0.4cqw;
+    }
+    .venue-time {
+      font-size: clamp(13px, 1.18cqw, 18px);
+      font-weight: 500;
+      color: #5d464f;
+      line-height: 1.45;
+    }
+
+    /* Venue Image Cards */
+    .venue-card-img {
+      width: 82%;
+      max-width: 250px;
+      margin-top: 1.1cqw;
+      border: 3px solid #ffffff;
+      box-shadow: 2px 4px 12px rgba(45, 25, 35, 0.18);
+      border-radius: 2px;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Venue Directions Link */
+    .venue-direction-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      margin-top: 0.8cqw;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(10px, 0.88cqw, 13px);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #643248;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(100, 50, 72, 0.5);
+      padding-bottom: 2px;
+      transition: all 0.3s ease;
+    }
+    .venue-direction-link:hover {
+      color: #8c3b52;
+      border-bottom-color: #8c3b52;
+      transform: translateY(-1px);
+    }
 
     .p4-attire-tag {
       position: absolute;
-      top: 18%;
-      right: 9%;
-      width: 14%;
+      top: 17%;
+      right: 6%;
+      width: 13.5%;
       background: #fdfaf5;
       padding: 1.8cqw 1.2cqw;
       text-align: center;
@@ -725,7 +772,7 @@
       }
       .journal-nav-bar a.home-icon { font-size: 3.5cqw; }
 
-      /* Page 1 – intro p.jpg (434 x 1024) */
+      /* Page 1 */
       #page-1.page-sheet {
         aspect-ratio: 434 / 1024;
         width: max(100vw, calc(100vh * 434 / 1024));
@@ -748,35 +795,83 @@
       .p1-inner-quote { font-size: 5.4cqw; letter-spacing: 0.12em; }
       .p1-open-text   { font-size: 5.6cqw; letter-spacing: 0.14em; }
 
+      /* Page 2: Centered large readable text, no photos */
       .p2-journal-sheet {
-        top: 14%;
+        top: 22%;
         left: 12%;
         width: 76%;
-        transform: rotate(-3deg);
+        transform: rotate(-1.5deg);
       }
-      .p2-journal-title { font-size: 7.5cqw; margin-bottom: 2cqw; }
-      .p2-journal-body { font-size: 3.2cqw; line-height: 1.6; }
-      .p2-journal-body p { text-indent: 1.8em; margin-bottom: 2cqw; }
-      .p2-journal-sign-row { padding-left: 1.8em; margin-top: 1.5cqw; }
-      .p2-journal-names { font-size: 7cqw; }
-      .p2-journal-heart { font-size: 6cqw; }
-      .p2-continue-row { padding-left: 1.8em; margin-top: 2.5cqw; }
-      .p2-continue { font-size: 3.2cqw; }
+      .p2-journal-title {
+        font-size: 8.8cqw;
+        margin-bottom: 3cqw;
+        text-align: center;
+      }
+      .p2-journal-body {
+        font-size: 4.4cqw;
+        line-height: 1.8;
+      }
+      .p2-journal-body p {
+        text-indent: 1.6em;
+        margin-bottom: 3cqw;
+      }
+      .p2-journal-sign-row {
+        padding-left: 0;
+        margin-top: 3.5cqw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .p2-journal-names { font-size: 8.5cqw; }
+      .p2-journal-heart { font-size: 7cqw; }
+      .p2-continue-row {
+        padding-left: 0;
+        margin-top: 4cqw;
+        text-align: center;
+      }
+      .p2-continue {
+        font-size: 4.2cqw;
+      }
 
+      /* Hide polaroid photo completely on mobile */
       .p2-polaroid-wrap {
-        position: relative;
-        top: auto;
-        left: auto;
-        width: 72%;
-        margin: 4cqw auto 0 auto;
-        transform: rotate(2deg);
+        display: none !important;
       }
 
+      /* Page 3 */
       .p3-photos { display: none; }
       .p3-story-box { top: 16%; left: 10%; width: 80%; }
       .p3-heart { font-size: 8cqw; }
-      .p4-container { top: 14%; left: 8%; width: 84%; }
+
+      /* Page 4: Mobile Adjustments */
+      .p4-container {
+        top: 13%;
+        left: 6%;
+        width: 88%;
+      }
+      .p4-columns {
+        flex-direction: column;
+        gap: 3.5cqw;
+        margin-top: 2cqw;
+      }
+      .p4-col {
+        width: 100%;
+      }
+      .venue-name { font-size: 5.6cqw; }
+      .venue-loc { font-size: 4.2cqw; }
+      .venue-time { font-size: 3.8cqw; }
+      .venue-card-img {
+        width: 60%;
+        max-width: 220px;
+        margin-top: 2cqw;
+      }
+      .venue-direction-link {
+        font-size: 3.4cqw;
+        margin-top: 1.5cqw;
+      }
       .p4-attire-tag { display: none; }
+
+      /* Page 5 & 6 */
       .p5-container { top: 14%; left: 8%; width: 84%; }
       .p6-gallery-side { display: none; }
       .p6-rsvp-side { top: 22%; left: 10%; width: 80%; }
@@ -830,8 +925,6 @@
   <div class="journal-stage" id="stage-2">
     <div class="page-sheet" id="page-2">
 
-      <!-- (No menu on this page – the link below is the way forward) -->
-
       <!-- Written seamlessly on the actual journal paper -->
       <div class="p2-journal-sheet">
         <h2 class="p2-journal-title">To our favorite people,</h2>
@@ -858,7 +951,7 @@
         </div>
       </div>
 
-      <!-- Tilted Polaroid Frame displaying 8th.jpeg with Washi Tape -->
+      <!-- Tilted Polaroid Frame (Desktop view only; hidden in mobile view) -->
       <div class="p2-polaroid-wrap">
         <div class="p2-tape-top"></div>
         <div class="p2-polaroid-frame">
@@ -897,7 +990,7 @@
 
       <div class="p3-story-box">
         <h2 class="script-heading">Our Story</h2>
-        <div style="font-style: italic; font-size: clamp(13px, 1.2cqw, 19px); color: #5b4a4f; margin-bottom: 1.5cqw;">
+        <div style="font-style: italic; font-size: clamp(14px, 1.35cqw, 20px); color: #5b4a4f; margin-bottom: 1.5cqw;">
           A love story that began in the most unexpected time.
         </div>
         <p>It all started with a simple day, just hanging around, not expecting any love, not even a thought of falling in love. But then, <strong>it happened.</strong></p>
@@ -924,27 +1017,42 @@
 
       <div class="p4-container">
         <h2 class="script-heading">The Wedding Details</h2>
-        <p style="font-style: italic; font-size: clamp(12px, 1.1cqw, 17px); color: #554449;">Here's everything you need to know for our big day.</p>
+        <p style="font-style: italic; font-size: clamp(14px, 1.3cqw, 20px); color: #554449; margin-bottom: 0.5cqw;">Here's everything you need to know for our big day.</p>
         
         <div class="p4-columns">
+          <!-- Ceremony Column -->
           <div class="p4-col">
-            <h3 style="font-family: 'Alex Brush', cursive; font-size: clamp(24px, 2.3cqw, 36px); color: #3b282c;">Ceremony</h3>
+            <h3 style="font-family: 'Alex Brush', cursive; font-size: clamp(28px, 2.7cqw, 42px); color: #3b282c;">Ceremony</h3>
             <div class="venue-name">San Agustin Church</div>
             <div class="venue-loc">San Agustin, Manila</div>
             <div class="venue-time">&#9962; September 4, 2028<br>Monday &bull; 3:00 PM</div>
+            
+            <!-- San Agustin Image & Direction -->
+            <img class="venue-card-img" src="san agustin.jpg" alt="San Agustin Church">
+            <a class="venue-direction-link" href="https://maps.google.com/?q=San+Agustin+Church+Manila" target="_blank" rel="noopener noreferrer">
+              Get Directions &rarr;
+            </a>
           </div>
+
+          <!-- Reception Column -->
           <div class="p4-col">
-            <h3 style="font-family: 'Alex Brush', cursive; font-size: clamp(24px, 2.3cqw, 36px); color: #3b282c;">Reception</h3>
+            <h3 style="font-family: 'Alex Brush', cursive; font-size: clamp(28px, 2.7cqw, 42px); color: #3b282c;">Reception</h3>
             <div class="venue-name">Taal Vista Hotel</div>
             <div class="venue-loc">Tagaytay City</div>
             <div class="venue-time">&#127976; September 4, 2028<br>Monday &bull; 6:00 PM</div>
+            
+            <!-- Reception Image & Direction -->
+            <img class="venue-card-img" src="reception.jpg" alt="Taal Vista Hotel Reception">
+            <a class="venue-direction-link" href="https://maps.google.com/?q=Taal+Vista+Hotel+Tagaytay" target="_blank" rel="noopener noreferrer">
+              Get Directions &rarr;
+            </a>
           </div>
         </div>
       </div>
 
       <div class="p4-attire-tag">
-        <div style="font-family: 'Alex Brush', cursive; font-size: clamp(18px, 1.8cqw, 26px); color: #3b282c;">Attire</div>
-        <div style="font-style: italic; font-size: clamp(10px, 0.9cqw, 13px); color: #6b5561;">Shades of Purple</div>
+        <div style="font-family: 'Alex Brush', cursive; font-size: clamp(20px, 2cqw, 28px); color: #3b282c;">Attire</div>
+        <div style="font-style: italic; font-size: clamp(11px, 1cqw, 14px); color: #6b5561;">Shades of Purple</div>
         <div class="swatches">
           <span class="swatch" style="background:#bca0bc;"></span>
           <span class="swatch" style="background:#a58ca8;"></span>
@@ -952,8 +1060,8 @@
           <span class="swatch" style="background:#5c3e5e;"></span>
           <span class="swatch" style="background:#3e2441;"></span>
         </div>
-        <div style="font-style: italic; font-size: clamp(11px, 0.95cqw, 14px); margin-top: 0.6cqw;">Dress Code</div>
-        <div style="font-size: clamp(10px, 0.85cqw, 13px); text-transform: uppercase; letter-spacing: 0.1em;">Formal</div>
+        <div style="font-style: italic; font-size: clamp(12px, 1.05cqw, 15px); margin-top: 0.6cqw;">Dress Code</div>
+        <div style="font-size: clamp(11px, 0.95cqw, 14px); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">Formal</div>
       </div>
     </div>
   </div>
@@ -975,7 +1083,7 @@
         <h2 class="script-heading">Our Entourage</h2>
         
         <div class="role-head">Principal Sponsors</div>
-        <div style="margin-bottom: 0.8cqw;">
+        <div style="margin-bottom: 0.8cqw; font-size: clamp(12px, 1.15cqw, 17px);">
           Mr. and Mrs. Juan Dela Cruz &emsp;&bull;&emsp; Mr. and Mrs. Paolo Garcia<br>
           Mr. and Mrs. Miguel Santos &emsp;&bull;&emsp; Mr. and Mrs. David Lim<br>
           Mr. and Mrs. Ramon Reyes &emsp;&bull;&emsp; Mr. and Mrs. Carlo Mendoza
@@ -1027,9 +1135,9 @@
 
       <div class="p6-rsvp-side">
         <div class="rsvp-large-title">RSVP</div>
-        <p style="font-size: clamp(14px, 1.2cqw, 19px); color: #43333d;">Kindly let us know if you can join us.</p>
+        <p style="font-size: clamp(15px, 1.3cqw, 20px); color: #43333d;">Kindly let us know if you can join us.</p>
         <button class="confirm-attendance-btn" onclick="openRSVP()">CONFIRM ATTENDANCE &rarr;</button>
-        <div style="font-family: 'Alex Brush', cursive; font-size: clamp(20px, 2.2cqw, 34px); color: #3b282c;">
+        <div style="font-family: 'Alex Brush', cursive; font-size: clamp(22px, 2.4cqw, 36px); color: #3b282c;">
           Let's make this chapter complete together. ♡
         </div>
       </div>
@@ -1113,7 +1221,7 @@
       return document.getElementById('stage-' + pageId.replace('page-', ''));
     }
 
-    // Nostalgic page-turn: soft vintage wash covers the screen, the page swaps underneath, wash lifts
+    // Nostalgic page-turn transition
     function goToPage(pageId, e) {
       if (e) e.preventDefault();
       if (pageTurning || pageId === currentPage) return;
@@ -1138,12 +1246,10 @@
       }, 700);
     }
 
-    // Cover button → page 2
     function openJournalStory(e) {
       goToPage('page-2', e);
     }
 
-    // Menu links (pages 3–6) use the same transition instead of scrolling
     document.addEventListener('click', function (e) {
       const link = e.target.closest('.journal-nav-bar a[href^="#page-"]');
       if (!link) return;
