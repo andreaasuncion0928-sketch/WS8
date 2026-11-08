@@ -293,13 +293,14 @@
     }
 
     /* ========================================================
-       PAGE 2: CALIBRATED SCRAPBOOK JOURNAL SPREAD
+       PAGE 2: CALIBRATED SCRAPBOOK JOURNAL SPREAD (Refined Browser View)
        ======================================================== */
     .p2-journal-sheet {
       position: absolute;
       top: 18%;
-      left: 25%;
-      width: 27%;
+      left: 24.5%;
+      width: clamp(400px, 26.5cqw, 420px); /* 400-420px wide container */
+      max-width: 420px;
       text-align: left;
       transform: rotate(-4.2deg);
       transform-origin: top left;
@@ -310,42 +311,44 @@
 
     .p2-journal-title {
       font-family: 'Alex Brush', cursive;
-      font-size: clamp(30px, 3.2cqw, 54px);
-      color: #422d37;
+      font-size: clamp(30px, 3.1cqw, 52px);
+      color: #3b282c;
       font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 1.2cqw;
+      line-height: 1.25;
+      margin-bottom: 20px; /* Consistent editorial spacing */
       letter-spacing: 0.01em;
       opacity: 0.96;
     }
 
     .p2-journal-body {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(14px, 1.28cqw, 20px);
+      font-size: clamp(14px, 1.25cqw, 19.5px);
       font-weight: 600;
-      line-height: 2; /* Increased line-height */
-      color: #3d2a30;
-      letter-spacing: 0.02em;
+      line-height: 1.7; /* Natural, journal-like spacing */
+      color: #3a282f;
+      letter-spacing: 0.015em;
       text-align: justify;
+      text-justify: inter-word;
+      text-align-last: left; /* Last line remains left-aligned */
     }
 
     .p2-journal-body p {
-      margin-bottom: 1.4cqw;
-      text-indent: 2.8em;
+      margin-bottom: 20px; /* Around 20px paragraph spacing */
+      text-indent: clamp(24px, 1.5em, 28px); /* First-line indentation of ~26px (1.5em) */
     }
 
     .p2-journal-sign-row {
       display: inline-flex;
       align-items: baseline;
       gap: 0.6cqw;
-      margin-top: 1.2cqw;
-      padding-left: 2.8em;
+      margin-top: 16px;
+      padding-left: clamp(24px, 1.5em, 28px);
     }
 
     .p2-journal-names {
       font-family: 'Alex Brush', cursive;
       font-size: clamp(30px, 3.2cqw, 52px);
-      color: #422d37;
+      color: #3b282c;
       font-weight: 400;
       letter-spacing: 0.02em;
     }
@@ -353,15 +356,15 @@
     .p2-journal-heart {
       font-family: 'Caveat', cursive;
       font-size: clamp(26px, 2.6cqw, 42px);
-      color: #422d37;
+      color: #3b282c;
       font-weight: 600;
       transform: rotate(6deg) translateY(0.15cqw);
       display: inline-block;
     }
 
     .p2-continue-row {
-      padding-left: 2.8em;
-      margin-top: 1.3cqw;
+      padding-left: clamp(24px, 1.5em, 28px);
+      margin-top: 18px;
     }
     .p2-continue {
       pointer-events: auto;
@@ -448,7 +451,7 @@
     }
 
     /* ========================================================
-       PAGE 3: OUR STORY (Browser View: larger text, increased line spacing)
+       PAGE 3: OUR STORY
        ======================================================== */
     .p3-photos {
       position: absolute;
@@ -484,8 +487,8 @@
       mix-blend-mode: multiply;
     }
     .p3-story-box p {
-      font-size: clamp(15px, 1.48cqw, 23px); /* Bigger text on browser view */
-      line-height: 1.95;                     /* Increased spacing between lines */
+      font-size: clamp(15px, 1.48cqw, 23px);
+      line-height: 1.95;
       color: #46383b;
       margin-bottom: 1.1cqw;
     }
@@ -794,56 +797,75 @@
       .p1-inner-quote { font-size: 5.4cqw; letter-spacing: 0.12em; }
       .p1-open-text   { font-size: 5.6cqw; letter-spacing: 0.14em; }
 
-      /* Page 2 Mobile: Shifted & indented to the left, justified text, increased line-spacing */
+      /* Page 2 Mobile */
       .p2-journal-sheet {
-        top: 20%;
-        left: 6%;            /* Shifted more to the left */
-        width: 82%;
-        transform: rotate(-1.5deg);
+        top: 24.5%;
+        left: 33%;
+        width: 59%;
+        max-width: none;
+        transform: rotate(-1deg);
+        transform-origin: top left;
+        mix-blend-mode: multiply;
       }
       .p2-journal-title {
-        font-size: 9cqw;
-        margin-bottom: 3.5cqw;
-        text-align: left;    /* Left aligned heading */
-        padding-left: 0.5em;
+        font-size: 7.8cqw;
+        line-height: 1.1;
+        margin-bottom: 2.4cqw;
+        text-align: left;
+        color: #3b282c;
       }
       .p2-journal-body {
-        font-size: 4.4cqw;
-        line-height: 2.2;    /* Increased line spacing */
-        text-align: justify; /* Justified text */
+        font-size: 3.65cqw;
+        line-height: 1.65;
+        color: #38282f;
+        text-align: justify;
         text-justify: inter-word;
+        text-align-last: left;
+        letter-spacing: 0.01em;
       }
       .p2-journal-body p {
-        text-indent: 2em;    /* Indented left */
-        margin-bottom: 3.5cqw;
+        text-indent: 1.4em;
+        margin-bottom: 2.2cqw;
       }
       .p2-journal-sign-row {
-        padding-left: 2em;   /* Left indented signature */
-        margin-top: 3cqw;
+        padding-left: 0;
+        margin-top: 1.8cqw;
         display: flex;
         justify-content: flex-start;
         align-items: baseline;
+        gap: 0.4cqw;
       }
-      .p2-journal-names { font-size: 8.5cqw; }
-      .p2-journal-heart { font-size: 7cqw; }
+      .p2-journal-names {
+        font-size: 7.4cqw;
+        color: #3b282c;
+      }
+      .p2-journal-heart {
+        font-size: 5.5cqw;
+        color: #3b282c;
+        transform: rotate(4deg) translateY(0.1cqw);
+      }
       .p2-continue-row {
-        padding-left: 2em;   /* Left indented button link */
-        margin-top: 4cqw;
+        padding-left: 0;
+        margin-top: 2.4cqw;
         text-align: left;
       }
       .p2-continue {
-        font-size: 4.2cqw;
+        font-size: 3.4cqw;
+        font-weight: 600;
+        color: #523746;
+        border-bottom: 1px solid rgba(82, 55, 70, 0.4);
+        padding-bottom: 1px;
       }
       .p2-polaroid-wrap {
         display: none !important;
       }
 
-      /* Page 3 Mobile: Moved heavily to the right, justified, increased line spacing */
+      /* Page 3 Mobile */
       .p3-photos { display: none; }
       .p3-story-box {
         top: 17%;
-        left: 24%;           /* Heavily adjusted to the right */
-        width: 71%;          /* Sized to comfortably sit on the right page area */
+        left: 24%;
+        width: 71%;
         transform: rotate(-0.5deg);
       }
       .p3-story-box .script-heading {
@@ -853,8 +875,8 @@
       }
       .p3-story-box p {
         font-size: 4.1cqw;
-        line-height: 2.15;   /* Increased spacing between each line */
-        text-align: justify; /* Justified text */
+        line-height: 2.15;
+        text-align: justify;
         text-justify: inter-word;
         margin-bottom: 2.8cqw;
       }
@@ -864,7 +886,7 @@
         margin-top: 2cqw;
       }
 
-      /* Page 4: Mobile Details */
+      /* Page 4 Mobile */
       .p4-container {
         top: 13%;
         left: 6%;
@@ -892,7 +914,7 @@
       }
       .p4-attire-tag { display: none; }
 
-      /* Page 5 & 6 */
+      /* Page 5 & 6 Mobile */
       .p5-container { top: 14%; left: 8%; width: 84%; }
       .p6-gallery-side { display: none; }
       .p6-rsvp-side { top: 22%; left: 10%; width: 80%; }
@@ -951,12 +973,8 @@
         <h2 class="p2-journal-title">To our favorite people,</h2>
         
         <div class="p2-journal-body">
-          <p>
-            We're so glad you're here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here &mdash; to this very moment.
-          </p>
-          <p>
-            Thank you for being part of our forever.
-          </p>
+          <p>We're so glad you're here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here &mdash; to this very moment.</p>
+          <p>Thank you for being part of our forever.</p>
         </div>
 
         <div class="p2-journal-sign-row">
