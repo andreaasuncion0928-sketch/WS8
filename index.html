@@ -193,6 +193,15 @@ p{font-size:1.3em;line-height:1.5}
 .mem-pg.on .mem .pol{animation:settle 1s ease .15s both}
 .mem-pg.on .mem-cap{animation:settle 1s ease .6s both}
 
+/* phone layout for memory + RSVP pages (placed after the base rules so it wins) */
+@media (max-aspect-ratio:1/1){
+  .mem-photo{--avail:min(calc(var(--mhh)*.6cqh - 4em),calc(100dvh - 17rem));flex:0 0 auto;width:100%}
+  .rsvp h2.script{font-size:5em}
+  .rsvp .sub{margin-bottom:1em}
+  .rsvp .qrbox img,.rsvp .qrbox.missing::before{width:10em;height:10em}
+  .rsvp .note{font-size:2.5em;margin-top:.7em}
+}
+
 /* ---------- chrome ---------- */
 .nav{position:fixed;top:max(1.4vh,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:clamp(.8rem,2.6vw,2.6rem);
   padding:.55rem 1.6rem;background:#e8d9c1;border:1px solid #cdb99d;border-radius:2px;box-shadow:0 2px 10px rgba(70,45,60,.12);backdrop-filter:blur(3px);transition:opacity .5s}
