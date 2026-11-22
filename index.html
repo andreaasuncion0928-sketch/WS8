@@ -97,6 +97,8 @@ p{font-size:1.3em;line-height:1.5}
 .story-text b{font-weight:600}
 .collage{position:absolute;left:var(--l);top:var(--t);width:var(--w);height:var(--h)}
 .collage .pol{position:absolute}
+.pol.bare{background:none;padding:0;box-shadow:none}
+.pol.bare::before{display:none}
 
 /* ---------- details ---------- */
 .venues{display:grid;grid-template-columns:1fr 1px 1fr;gap:2.4em;align-items:start;margin-top:1.6em}
@@ -196,6 +198,13 @@ p{font-size:1.3em;line-height:1.5}
 /* phone layout for memory + RSVP pages (placed after the base rules so it wins) */
 @media (max-aspect-ratio:1/1){
   .mem-photo{--avail:min(calc(var(--mhh)*.6cqh - 4em),calc(100dvh - 17rem));flex:0 0 auto;width:100%}
+  .letter{justify-content:flex-start}.letter>:first-child{margin-top:0}.letter>:last-child{margin-bottom:0}
+  .letter h2.script{font-size:3.4em;margin-bottom:.25em}
+  .letter .sign{font-size:3.6em}
+  .collage{left:var(--ml,var(--l));top:var(--mt,var(--t));width:var(--mw,var(--w));height:var(--mh,var(--h))}
+  .collage .pol:nth-child(1){left:0!important;top:0!important;width:72%!important}
+  .collage .pol:nth-child(2){left:26%!important;top:27%!important;width:72%!important}
+  .collage .pol:nth-child(3){left:2%!important;top:55%!important;width:72%!important}
   .rsvp h2.script{font-size:5em}
   .rsvp .sub{margin-bottom:1em}
   .rsvp .qrbox img,.rsvp .qrbox.missing::before{width:10em;height:10em}
@@ -287,14 +296,14 @@ dialog.wide{width:min(94vw,56rem)}
 
 <!-- ============ 2 · LETTER ============ -->
 <section class="page" id="letter" aria-label="A letter to our guests">
- <div class="stage"><div class="content" style="--fs:.8;--fsm:3.3">
-  <div class="box letter" style="--l:31.5%;--t:12%;--w:28%;--h:74%;--ml:35%;--mt:18%;--mw:62%;--mh:60%">
+ <div class="stage"><div class="content" style="--fs:.8;--fsm:2.9">
+  <div class="box letter" style="--l:31.5%;--t:12%;--w:28%;--h:74%;--ml:35%;--mt:18%;--mw:62%;--mh:42%">
     <h2 class="script">To our favorite people,</h2>
     <p>We’re so glad you’re here to be part of our story. This is a journal of how we found each other, even when we least expected it, and how it all led us here – to this very moment.</p>
     <p>Thank you for being part of our forever.</p>
     <div class="script sign">Andy &amp; Lance <svg class="heart" viewBox="0 0 24 24"><path d="M12 20c-5-3.6-8-6.6-8-10a4.2 4.2 0 0 1 8-1.7A4.2 4.2 0 0 1 20 10c0 3.400-3 6.400-8 10z"/></svg></div>
   </div>
-  <div class="box photo" style="--l:61%;--t:9%;--w:19.5%;--h:72%;--ml:42%;--mt:60%;--mw:54%;--mh:20%">
+  <div class="box photo" style="--l:61%;--t:9%;--w:19.5%;--h:72%;--ml:58%;--mt:60%;--mw:36%;--mh:21%">
     <div class="pol" style="transform:rotate(3deg);width:100%"><div class="ph empty" data-photo="letter" style="--ar:3/4"></div></div>
   </div>
  </div></div>
@@ -303,10 +312,10 @@ dialog.wide{width:min(94vw,56rem)}
 <!-- ============ 3 · OUR STORY ============ -->
 <section class="page" id="story" aria-label="Our story">
  <div class="stage"><div class="content" style="--fs:1.02;--fsm:3.3">
-  <div class="collage" style="--l:8%;--t:11%;--w:35%;--h:78%" id="storyCollage">
+  <div class="collage" style="--l:8%;--t:11%;--w:35%;--h:78%;--ml:2%;--mt:17%;--mw:31%;--mh:62%" id="storyCollage">
     <div class="pol" style="left:2%;top:2%;width:50%;transform:rotate(-5deg)"><div class="ph empty" data-photo="story-0" style="--ar:3/4"></div></div>
     <div class="pol" style="left:34%;top:20%;width:54%;transform:rotate(3deg);z-index:2"><div class="ph empty" data-photo="story-1" style="--ar:1/1"></div></div>
-    <div class="pol" style="left:6%;top:54%;width:52%;transform:rotate(-2deg);z-index:3"><div class="ph empty" data-photo="story-2" style="--ar:4/3"></div></div>
+    <div class="pol bare" style="left:6%;top:54%;width:52%;transform:rotate(-2deg);z-index:3"><div class="ph empty" data-photo="story-2" style="--ar:4/3"></div></div>
   </div>
   <div class="box story-text" style="--l:47%;--t:11%;--w:42%;--h:78%;--ml:33%;--mt:17%;--mw:65%;--mh:62%">
     <h1 class="script" style="text-align:left;font-size:4.8em">Our Story</h1>
